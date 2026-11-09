@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { X, CloudUpload, ShieldCheck, FileText, Trash2, Smartphone, CheckCircle2, Loader2, Mail } from 'lucide-react';
-import { FormaliteKey, MomoProvider } from '../types';
+import { X, CloudUpload, ShieldCheck, FileText, Trash2, CheckCircle2, Loader2, Mail, Phone, User, Send } from 'lucide-react';
+import { FormaliteKey } from '../types';
 import { FORMALITES_DATA } from '../data/formalites';
 import { realtimeSync } from '../services/realtimeSync';
 
@@ -22,13 +22,13 @@ export const KyanotModal: React.FC<KyanotModalProps> = ({
   onShowToast
 }) => {
   const [formalite, setFormalite] = useState<FormaliteKey>(defaultFormaliteKey);
-  const [clientName, setClientName] = useState('M. Kouassi Jean');
-  const [clientEmail, setClientEmail] = useState('client.etude@gmail.com');
-  const [clientPhone, setClientPhone] = useState('+225 07 09 34 13 41');
-  const [momoProvider, setMomoProvider] = useState<MomoProvider>('Wave');
+  const [clientName, setClientName] = useState('');
+  const [clientEmail, setClientEmail] = useState('');
+  const [clientPhone, setClientPhone] = useState('');
+  const [clientMessage, setClientMessage] = useState('');
   const [files, setFiles] = useState<File[]>([]);
-  const [isProcessingPayment, setIsProcessingPayment] = useState(false);
-  const [paymentStep, setPaymentStep] = useState<'form' | 'momo_prompt' | 'success'>('form');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
     if (defaultFormaliteKey) {
@@ -56,18 +56,18 @@ export const KyanotModal: React.FC<KyanotModalProps> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsProcessingPayment(true);
-    setPaymentStep('momo_prompt');
+    setIsSubmitting(true);
 
-    // Transmission to Formspree
+    // Transmission directe à l'endpoint Formspree
     try {
       const formData = new FormData();
       formData.append('email', clientEmail);
       formData.append('Nom_Demandeur', clientName);
       formData.append('Telephone_WhatsApp', clientPhone);
       formData.append('Formalite_Choisie', formaliteInfo.title);
-      formData.append('Operateur_Mobile_Money', momoProvider);
-      formData.append('Frais_Pre_Instruction', `${formaliteInfo.feeAmount} FCFA`);
+      if (clientMessage) {
+        formData.append('Précisions_Demandeur', clientMessage);
+      }
 
       if (prefillData?.immoLocation) {
         formData.append('Localisation_Bien', prefillData.immoLocation);
@@ -79,7 +79,7 @@ export const KyanotModal: React.FC<KyanotModalProps> = ({
         formData.append('Prix_Transaction_Estime', prefillData.immoPrice);
       }
 
-      // Attach file(s) under 'upload' as requested
+      // Attacher les fichiers téléversés
       if (files.length > 0) {
         files.forEach((file, index) => {
           formData.append(index === 0 ? 'upload' : `upload_${index + 1}`, file, file.name);
@@ -94,73 +94,46 @@ export const KyanotModal: React.FC<KyanotModalProps> = ({
         }
       });
     } catch (err) {
-      console.warn('Formspree notification sent with local fallback', err);
+      console.warn('Formspree notification sent with local registration', err);
     }
 
-    // Simulate authentic Mobile Money push confirmation / prompt
+    const fileNames = files.map((f) => f.name);
+
+    const newDossier = realtimeSync.createDossier({
+      formaliteKey: formalite,
+      clientName,
+      clientPhone,
+      clientEmail,
+      fileNames,
+      details: {
+        ...(prefillData || {}),
+        notes: clientMessage
+      }
+    });
+
+    setIsSubmitting(false);
+    setIsSuccess(true);
+    onShowToast(`Dossier ${newDossier.id} transmis avec succès au greffe de l'Étude de Me KOFFI !`);
+
     setTimeout(() => {
-      setIsProcessingPayment(false);
-      setPaymentStep('success');
-
-      const fileNames =
-        files.length > 0
-          ? files.map((f) => f.name)
-          : [
-              formalite === 'immobilier' ? 'Arrete_ACD_2023_Foncier.pdf' : 'Pieces_Identite_Requete.pdf',
-              'CNI_Demandeur.pdf'
-            ];
-
-      const newDossier = realtimeSync.createDossier({
-        formaliteKey: formalite,
-        clientName,
-        clientPhone,
-        clientEmail,
-        momoProvider,
-        fileNames,
-        details: prefillData || {}
-      });
-
-      onShowToast(
-        `Dossier KYANOT ${newDossier.id} transmis avec succès à l'Étude de Me Koffi & Formspree !`
-      );
-
-      setTimeout(() => {
-        onDossierCreated(newDossier.id);
-        onClose();
-        setPaymentStep('form');
-        setFiles([]);
-      }, 1500);
+      onDossierCreated(newDossier.id);
+      onClose();
+      setIsSuccess(false);
+      setFiles([]);
     }, 2200);
   };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fadeIn">
-      <div className="kyanot-card stitched-border-emerald rounded-2xl max-w-xl w-full p-6 sm:p-8 relative max-h-[92vh] overflow-y-auto shadow-2xl">
+      <div className="luxury-card stitched-border rounded-2xl max-w-xl w-full p-6 sm:p-8 relative max-h-[92vh] overflow-y-auto shadow-2xl">
         <button
-          className="absolute top-5 right-5 text-slate-400 hover:text-emerald-300 p-1 rounded-lg transition-colors cursor-pointer"
+          className="absolute top-5 right-5 text-slate-400 hover:text-gold-300 p-1 rounded-lg transition-colors cursor-pointer"
           onClick={onClose}
         >
           <X className="w-6 h-6" />
         </button>
 
-        {paymentStep === 'momo_prompt' ? (
-          <div className="py-10 text-center space-y-4 animate-fadeIn">
-            <div className="w-16 h-16 mx-auto rounded-full bg-emerald-500/20 border border-emerald-400/50 flex items-center justify-center text-emerald-300">
-              <Loader2 className="w-8 h-8 animate-spin" />
-            </div>
-            <h3 className="font-serif text-2xl text-white font-semibold">
-              Envoi du dossier &amp; validation Mobile Money...
-            </h3>
-            <p className="text-slate-300 text-sm max-w-md mx-auto leading-relaxed">
-              Vos pièces et informations sont transmises à l'Étude de Me Koffi. Une demande de règlement de{' '}
-              <strong className="text-gold-300">{formaliteInfo.feeAmount.toLocaleString('fr-FR')} FCFA</strong>{' '}
-              a été adressée à votre numéro <strong>{momoProvider}</strong> ({clientPhone}).
-            </p>
-            <div className="p-3 rounded-lg bg-navy-950 border border-white/10 text-xs text-slate-400 inline-block">
-              Veuillez saisir votre code secret sur votre téléphone pour finaliser.
-            </div>
-          </div>
-        ) : paymentStep === 'success' ? (
+        {isSuccess ? (
           <div className="py-10 text-center space-y-4 animate-fadeIn">
             <div className="w-16 h-16 mx-auto rounded-full bg-emerald-500/20 border border-emerald-400 flex items-center justify-center text-emerald-300">
               <CheckCircle2 className="w-10 h-10 text-emerald-400" />
@@ -168,9 +141,9 @@ export const KyanotModal: React.FC<KyanotModalProps> = ({
             <h3 className="font-serif text-2xl text-white font-semibold">
               Dossier &amp; Pièces Transmis !
             </h3>
-            <p className="text-slate-300 text-sm max-w-md mx-auto">
-              Votre dossier et vos justificatifs ont bien été envoyés au greffe de l'Étude notariale.
-              Une confirmation a été adressée à <strong>{clientEmail}</strong>.
+            <p className="text-slate-300 text-sm max-w-md mx-auto leading-relaxed">
+              Vos documents et pièces justificatives ont bien été expédiés au greffe de l'Étude de Maître KOFFI Yassoua Alain.
+              Un clerc prendra contact avec vous à l'adresse <strong>{clientEmail}</strong> ou par téléphone au <strong>{clientPhone}</strong>.
             </p>
           </div>
         ) : (
@@ -179,15 +152,15 @@ export const KyanotModal: React.FC<KyanotModalProps> = ({
               <div className="flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
                 <span className="text-xs uppercase tracking-widest text-emerald-300 font-semibold">
-                  Portail KYANOT • Constitution de dossier
+                  Étude Me KOFFI Yassoua Alain • Dépôt de dossier en ligne
                 </span>
               </div>
               <h3 className="font-serif text-2xl text-white font-semibold">
-                Téléversez vos pièces &amp; transmettez votre dossier
+                Transmettre vos pièces justificatives
               </h3>
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                Nos clercs examinent la régularité de vos documents sous 24 à 48h. Vos pièces sont transmises
-                en toute sécurité à notre cabinet.
+                Déposez vos documents en toute confidentialité. Nos clercs examinent la conformité de votre dossier sous 24h à 48h
+                pour préparer la minute de l'acte authentique.
               </p>
             </div>
 
@@ -200,77 +173,83 @@ export const KyanotModal: React.FC<KyanotModalProps> = ({
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs uppercase tracking-wider text-emerald-300 mb-1">
+                  <label className="block text-xs uppercase tracking-wider text-gold-300 mb-1">
                     Nom &amp; Prénoms du demandeur
                   </label>
-                  <input
-                    name="clientName"
-                    className="w-full px-4 py-2.5 rounded-lg bg-navy-950 border border-emerald-500/30 text-white text-sm focus:outline-none focus:border-emerald-400"
-                    placeholder="M. / Mme ..."
-                    required
-                    type="text"
-                    value={clientName}
-                    onChange={(e) => setClientName(e.target.value)}
-                  />
+                  <div className="relative">
+                    <input
+                      name="clientName"
+                      className="w-full pl-9 pr-3 py-2.5 rounded-lg bg-navy-950 border border-gold-500/30 text-white text-sm focus:outline-none focus:border-gold-400"
+                      placeholder="M. / Mme ..."
+                      required
+                      type="text"
+                      value={clientName}
+                      onChange={(e) => setClientName(e.target.value)}
+                    />
+                    <User className="w-4 h-4 text-gold-400/70 absolute left-3 top-3" />
+                  </div>
                 </div>
                 <div>
-                  <label className="block text-xs uppercase tracking-wider text-emerald-300 mb-1">
-                    Numéro Mobile Money / WhatsApp
+                  <label className="block text-xs uppercase tracking-wider text-gold-300 mb-1">
+                    Téléphone / WhatsApp
                   </label>
-                  <input
-                    name="clientPhone"
-                    className="w-full px-4 py-2.5 rounded-lg bg-navy-950 border border-emerald-500/30 text-white text-sm focus:outline-none focus:border-emerald-400 font-mono"
-                    placeholder="+225 07..."
-                    required
-                    type="tel"
-                    value={clientPhone}
-                    onChange={(e) => setClientPhone(e.target.value)}
-                  />
+                  <div className="relative">
+                    <input
+                      name="clientPhone"
+                      className="w-full pl-9 pr-3 py-2.5 rounded-lg bg-navy-950 border border-gold-500/30 text-white text-sm focus:outline-none focus:border-gold-400 font-mono"
+                      placeholder="+225 07..."
+                      required
+                      type="tel"
+                      value={clientPhone}
+                      onChange={(e) => setClientPhone(e.target.value)}
+                    />
+                    <Phone className="w-4 h-4 text-gold-400/70 absolute left-3 top-3" />
+                  </div>
                 </div>
               </div>
 
               {/* Email field as required by Formspree */}
               <div>
-                <label className="block text-xs uppercase tracking-wider text-emerald-300 mb-1">
-                  Votre adresse e-mail (pour la notification &amp; le suivi d'instruction)
+                <label className="block text-xs uppercase tracking-wider text-gold-300 mb-1">
+                  Votre adresse e-mail (Your email)
                 </label>
                 <div className="relative">
                   <input
                     name="email"
                     type="email"
                     required
-                    className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-navy-950 border border-emerald-500/30 text-white text-sm focus:outline-none focus:border-emerald-400"
+                    className="w-full pl-9 pr-3 py-2.5 rounded-lg bg-navy-950 border border-gold-500/30 text-white text-sm focus:outline-none focus:border-gold-400"
                     placeholder="votre.email@exemple.com"
                     value={clientEmail}
                     onChange={(e) => setClientEmail(e.target.value)}
                   />
-                  <Mail className="w-4 h-4 text-emerald-400 absolute left-3.5 top-3" />
+                  <Mail className="w-4 h-4 text-gold-400/70 absolute left-3 top-3" />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs uppercase tracking-wider text-emerald-300 mb-1">
-                  Formalité choisie
+                <label className="block text-xs uppercase tracking-wider text-gold-300 mb-1">
+                  Formalité notariale concernée
                 </label>
                 <select
                   name="formalite"
-                  className="w-full px-3 py-2.5 rounded-lg bg-navy-950 border border-emerald-500/30 text-white text-sm focus:outline-none focus:border-emerald-400"
+                  className="w-full px-3 py-2.5 rounded-lg bg-navy-950 border border-gold-500/30 text-white text-sm focus:outline-none focus:border-gold-400"
                   value={formalite}
                   onChange={(e) => setFormalite(e.target.value as FormaliteKey)}
                 >
-                  <option value="immobilier">🏡 Vente Immobilière &amp; Sécurisation ACD (Contrôle Foncier)</option>
+                  <option value="immobilier">🏡 Vente Immobilière &amp; Sécurisation Titre ACD (Contrôle Foncier)</option>
                   <option value="societe">🏢 Constitution de société (SARL / SAS / SA)</option>
                   <option value="procuration">✍️ Procuration authentique notariée</option>
                   <option value="succession">📜 Succession &amp; Partage légal</option>
                   <option value="donation">🎁 Donation entre vifs</option>
                   <option value="famille">👪 Contrat de mariage / Acte de famille</option>
-                  <option value="autre">📑 Autre formalité</option>
+                  <option value="autre">📑 Autre acte ou formalité</option>
                 </select>
               </div>
 
-              <div className="p-3 rounded-lg bg-navy-950/80 border border-emerald-500/30 space-y-2">
-                <p className="text-xs font-semibold text-emerald-200">
-                  Pièces requises pour la formalité {formaliteInfo.title} :
+              <div className="p-3 rounded-lg bg-navy-950/80 border border-gold-500/30 space-y-2">
+                <p className="text-xs font-semibold text-gold-200">
+                  Pièces requises pour la démarche {formaliteInfo.title} :
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-[11px] text-slate-300">
                   {formaliteInfo.requiredDocs.map((doc, idx) => (
@@ -283,13 +262,13 @@ export const KyanotModal: React.FC<KyanotModalProps> = ({
 
               {/* Upload section with Formspree name="upload" */}
               <div>
-                <label className="block text-xs uppercase tracking-wider text-emerald-300 mb-1">
-                  Téléversement des pièces justificatives (ACD, Pièces d'identité, Plans)
+                <label className="block text-xs uppercase tracking-wider text-gold-300 mb-1">
+                  Téléversement des pièces justificatives (ACD, Pièces d'identité, Statuts)
                 </label>
-                <label className="border-2 border-dashed border-emerald-500/40 rounded-xl p-5 text-center bg-navy-950/70 hover:border-emerald-300 transition-colors cursor-pointer block">
-                  <CloudUpload className="w-8 h-8 text-emerald-400 mx-auto mb-2" />
+                <label className="border-2 border-dashed border-gold-500/40 rounded-xl p-5 text-center bg-navy-950/70 hover:border-gold-300 transition-colors cursor-pointer block">
+                  <CloudUpload className="w-8 h-8 text-gold-400 mx-auto mb-2" />
                   <p className="text-xs text-slate-200 font-medium">
-                    Cliquez pour téléverser vos fichiers (name="upload")
+                    Cliquez pour téléverser vos fichiers justificatifs (name="upload")
                   </p>
                   <p className="text-[11px] text-slate-400 mt-1">
                     Formats acceptés : PDF, JPG, PNG (Max 15 Mo par fichier)
@@ -305,17 +284,17 @@ export const KyanotModal: React.FC<KyanotModalProps> = ({
                 </label>
 
                 {files.length > 0 && (
-                  <div className="mt-2 space-y-1.5 text-xs text-emerald-300 max-h-32 overflow-y-auto">
+                  <div className="mt-2 space-y-1.5 text-xs text-gold-300 max-h-32 overflow-y-auto">
                     <p className="font-semibold text-slate-200">
                       {files.length} document(s) prêt(s) à être expédié(s) :
                     </p>
                     {files.map((file, i) => (
                       <div
                         key={i}
-                        className="flex items-center justify-between px-3 py-1.5 rounded bg-emerald-500/10 border border-emerald-400/20"
+                        className="flex items-center justify-between px-3 py-1.5 rounded bg-gold-500/10 border border-gold-400/20"
                       >
                         <span className="truncate max-w-[340px] flex items-center gap-1.5 text-slate-200">
-                          <FileText className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                          <FileText className="w-3.5 h-3.5 text-gold-400 shrink-0" />
                           {file.name} ({(file.size / 1024 / 1024).toFixed(2)} Mo)
                         </span>
                         <button
@@ -331,56 +310,36 @@ export const KyanotModal: React.FC<KyanotModalProps> = ({
                 )}
               </div>
 
-              {/* Mobile Money selector */}
               <div>
-                <label className="block text-xs uppercase tracking-wider text-emerald-300 mb-1.5">
-                  Règlement des frais de recherche et de pré-instruction foncière
+                <label className="block text-xs uppercase tracking-wider text-gold-300 mb-1">
+                  Précisions complémentaires / Message pour l'Étude (optionnel)
                 </label>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                  {(['Orange', 'Wave', 'MTN', 'Moov'] as MomoProvider[]).map((prov) => (
-                    <label
-                      key={prov}
-                      className={`flex items-center gap-2 p-2.5 rounded-lg border cursor-pointer text-xs transition-all ${
-                        momoProvider === prov
-                          ? 'bg-emerald-500/20 border-emerald-400 text-white font-semibold ring-1 ring-emerald-400/50'
-                          : 'bg-navy-950 border-emerald-500/30 text-slate-300 hover:border-emerald-400'
-                      }`}
-                    >
-                      <input
-                        checked={momoProvider === prov}
-                        className="text-emerald-500"
-                        name="momo_provider"
-                        type="radio"
-                        value={prov}
-                        onChange={() => setMomoProvider(prov)}
-                      />
-                      <span>{prov === 'Wave' ? 'Wave CI' : prov === 'MTN' ? 'MTN MoMo' : prov === 'Moov' ? 'Moov Money' : 'Orange'}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              {/* Fee card */}
-              <div className="p-3 rounded-lg bg-navy-950/80 border border-gold-500/20 text-xs flex items-center justify-between text-slate-300">
-                <div>
-                  <span className="font-medium text-white">
-                    Frais de pré-instruction &amp; recherche domaniale :
-                  </span>
-                  <p className="text-[11px] text-slate-400">
-                    Vérification anti-double vente &amp; Livre Foncier incluse
-                  </p>
-                </div>
-                <span className="font-serif font-bold text-gold-300 text-sm whitespace-nowrap ml-2">
-                  {formaliteInfo.feeAmount.toLocaleString('fr-FR')} FCFA
-                </span>
+                <textarea
+                  name="message"
+                  className="w-full px-3 py-2 rounded-lg bg-navy-950 border border-gold-500/30 text-white text-sm focus:outline-none focus:border-gold-400"
+                  placeholder="Informations sur les parties, localisation précise, délais souhaités..."
+                  rows={2}
+                  value={clientMessage}
+                  onChange={(e) => setClientMessage(e.target.value)}
+                />
               </div>
 
               <button
-                className="w-full kyanot-btn font-semibold py-3.5 rounded-lg text-sm uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-lg"
+                className="w-full py-3.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs tracking-wider uppercase flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-emerald-950/40 transition-all hover:scale-[1.02] disabled:opacity-50"
                 type="submit"
+                disabled={isSubmitting}
               >
-                <ShieldCheck className="w-4 h-4 text-emerald-300" />
-                <span>Valider &amp; Transmettre le dossier à l'Étude</span>
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin text-white" />
+                    <span>Transmission en cours au greffe...</span>
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-4 h-4 text-emerald-100" />
+                    <span>Transmettre mon dossier à l'Étude de Me KOFFI</span>
+                  </>
+                )}
               </button>
             </form>
           </>

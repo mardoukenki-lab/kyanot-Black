@@ -88,8 +88,7 @@ export const ClercBackofficeModal: React.FC<ClercBackofficeModalProps> = ({
           </h3>
           <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
             Cette interface interne permet aux clercs et à Maître Koffi de qualifier les actes, de
-            valider les contrôles fonciers (ACD) et de notifier instantanément les clients via le
-            portail KYANOT.
+            valider les contrôles fonciers (ACD) et d'informer instantanément les clients.
           </p>
         </div>
 
@@ -163,9 +162,9 @@ export const ClercBackofficeModal: React.FC<ClercBackofficeModalProps> = ({
                     <strong className="font-mono">{currentDossier.clientPhone}</strong>
                   </div>
                   <div>
-                    <span className="text-slate-400">Frais réglés :</span>{' '}
-                    <strong className="text-gold-300">
-                      {currentDossier.fee.toLocaleString('fr-FR')} FCFA ({currentDossier.momoProvider})
+                    <span className="text-slate-400">Statut :</span>{' '}
+                    <strong className="text-emerald-300">
+                      En cours d'instruction
                     </strong>
                   </div>
                   <div>
@@ -185,7 +184,7 @@ export const ClercBackofficeModal: React.FC<ClercBackofficeModalProps> = ({
                     onClick={() =>
                       handleAdvance(
                         0,
-                        'Réception des pièces confirmée. Dossier en attente de validation comptable.'
+                        'Réception des pièces confirmée. Dossier en cours de vérification documentaire.'
                       )
                     }
                     className="p-2.5 rounded-lg bg-navy-900 border border-white/10 hover:border-gold-400 text-left transition-colors cursor-pointer"
@@ -198,13 +197,13 @@ export const ClercBackofficeModal: React.FC<ClercBackofficeModalProps> = ({
                     onClick={() =>
                       handleAdvance(
                         1,
-                        `Paiement Mobile Money de ${currentDossier.fee.toLocaleString('fr-FR')} FCFA certifié et rapproché.`
+                        `Dossier validé et pris en charge pour instruction notariale approfondie.`
                       )
                     }
                     className="p-2.5 rounded-lg bg-navy-900 border border-white/10 hover:border-gold-400 text-left transition-colors cursor-pointer"
                   >
-                    <span className="font-semibold text-white block">2. Frais validés</span>
-                    <span className="text-[10px] text-slate-400">Quittance Mobile Money</span>
+                    <span className="font-semibold text-white block">2. Dossier recevable</span>
+                    <span className="text-[10px] text-slate-400">Contrôle préliminaire</span>
                   </button>
 
                   <button
@@ -238,7 +237,7 @@ export const ClercBackofficeModal: React.FC<ClercBackofficeModalProps> = ({
               {/* Add clerc note form */}
               <form onSubmit={handleSendClercObservation} className="space-y-2">
                 <span className="text-xs font-semibold text-gold-300 uppercase tracking-wider block">
-                  Notifier le client en direct (WhatsApp / SMS / Espace KYANOT) :
+                  Notifier le client en direct (WhatsApp / SMS / Suivi en ligne) :
                 </span>
                 <div className="flex gap-2">
                   <input

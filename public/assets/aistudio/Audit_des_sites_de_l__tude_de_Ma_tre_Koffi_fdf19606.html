@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Audit des sites de l’Étude de Maître Koffi</title>
+<style>
+:root{--bg:#f5f6f4;--surface:#fff;--ink:#1a2a2e;--muted:#5b6b6f;--line:#d9dfdc;--brand:#0f5c5a;--crit:#a83a22;--imp:#9a6a00;--min:#3b6b8a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#12191b;--surface:#1a2427;--ink:#e6ecea;--muted:#9fb0b2;--line:#2c3a3d;--brand:#5fc2bd;--crit:#ff8a70;--imp:#e8b84a;--min:#7fb6d9}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#12191b;--surface:#1a2427;--ink:#e6ecea;--muted:#9fb0b2;--line:#2c3a3d;--brand:#5fc2bd;--crit:#ff8a70;--imp:#e8b84a;--min:#7fb6d9}
+*,*:before,*:after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Iowan Old Style","Palatino Linotype",Georgia,serif}
+main{max-width:860px;margin:0 auto;padding:40px 20px 64px}
+h1{font-size:clamp(1.9rem,5vw,2.8rem);line-height:1.15;margin:0 0 12px;letter-spacing:-.01em}
+h2{font-size:1.45rem;margin:48px 0 12px;padding-top:20px;border-top:2px solid var(--brand)}
+h3{font-size:1.1rem;margin:0 0 6px}
+p{margin:0 0 12px;max-width:70ch}
+.lead{font-size:1.15rem;color:var(--muted)}
+.sans{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.meta{font:14px/1.5 system-ui,sans-serif;color:var(--muted)}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:560px;font:15px/1.5 system-ui,sans-serif;background:var(--surface)}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;border-bottom:2px solid var(--ink)}
+.f{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--min);padding:16px 18px;margin:0 0 14px;border-radius:4px}
+.f.crit{border-left-color:var(--crit)}.f.imp{border-left-color:var(--imp)}
+.tag{display:inline-block;font:600 13px/1 system-ui,sans-serif;padding:4px 8px;border-radius:3px;margin-bottom:8px;color:#fff;background:var(--min)}
+.crit .tag{background:var(--crit)}.imp .tag{background:var(--imp)}
+@media (prefers-color-scheme:dark){.tag{color:#10181a}}
+.src{font:13px/1.4 ui-monospace,Menlo,Consolas,monospace;color:var(--muted);word-break:break-word}
+ol.plan{padding-left:22px}ol.plan li{margin-bottom:10px}
+.note{background:var(--surface);border:1px dashed var(--line);padding:14px 16px;border-radius:4px;font-size:.95rem}
+:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+</style>
+</head>
+<body>
+<main>
+<p class="meta">Audit technique et commercial · 9 novembre 2026</p>
+<h1>Deux sites pour l’Étude de Maître Koffi Yassoua Alain : où ils en sont, et ce qu’il faut faire avant de les présenter</h1>
+<p class="lead">Ce document s’appuie uniquement sur la lecture du code source des deux archives fournies. Les sites n’ont pas été mis en ligne ni testés sur de vrais appareils : ce point reste à vérifier.</p>
+
+<h2>En bref</h2>
+<p>Les deux projets sont des maquettes React/Vite générées avec Google AI Studio. Visuellement et fonctionnellement, ils montrent bien ce que serait un site d’étude moderne. En revanche, aucune des fonctions « métier » (suivi de dossier, dépôt de pièces, rendez-vous) ne fonctionne encore avec un vrai serveur. Il faut donc les présenter comme une <strong>démonstration</strong>, et non comme un produit prêt à recevoir des clients.</p>
+
+<h2>Comparatif des deux versions</h2>
+<div class="scroll"><table>
+<thead><tr><th></th><th>Portail KYANOT (archive 1)</th><th>KYANOT, étude digitale &amp; humaine (archive 2)</th></tr></thead>
+<tbody>
+<tr><td>Contenu</td><td>Hero, expertises, parcours, comparatif, manifeste, FAQ, pied de page détaillé</td><td>Hero, expertises, vision, étapes, accès et contact</td></tr>
+<tr><td>Dépôt de dossier</td><td>Oui, enregistré dans le navigateur</td><td>Oui, seuls les noms et tailles de fichiers sont envoyés</td></tr>
+<tr><td>Suivi de dossier</td><td>Oui, simulé (tiroir de suivi en direct)</td><td>Non</td></tr>
+<tr><td>Back-office clerc</td><td>Oui, sans connexion</td><td>Non</td></tr>
+<tr><td>Rendez-vous</td><td>Oui, avec envoi Formspree</td><td>Oui, sans envoi réseau trouvé dans la fonction de validation</td></tr>
+<tr><td>Taille du code</td><td>Environ 3 900 lignes</td><td>Environ 1 900 lignes</td></tr>
+<tr><td>Rôle conseillé</td><td>Vitrine de démonstration « ambitieuse »</td><td>Base la plus simple à mettre en production</td></tr>
+</tbody></table></div>
+
+<h2>Constats</h2>
+
+<div class="f crit"><span class="tag">Critique</span>
+<h3>Le suivi de dossier et le back-office sont une simulation</h3>
+<p>Les dossiers sont stockés dans le <code>localStorage</code> du navigateur et synchronisés entre onglets par <code>BroadcastChannel</code>. Un client ne verra jamais une mise à jour faite par un clerc depuis un autre appareil. Le back-office clerc n’a aucune authentification. Le dossier « M. Kouassi » est une donnée de démonstration écrite dans le code.</p>
+<p class="src">archive 1 · src/services/realtimeSync.ts, src/components/ClercBackofficeModal.tsx</p></div>
+
+<div class="f crit"><span class="tag">Critique</span>
+<h3>Les pièces justificatives ne sont pas transmises</h3>
+<p>Le formulaire de dépôt envoie seulement le nom, le téléphone, l’e-mail et la liste « nom du fichier (taille) ». Les fichiers eux-mêmes ne partent nulle part. Un client pourrait croire avoir déposé ses documents alors que l’étude ne les reçoit pas.</p>
+<p class="src">archive 2 · src/components/DepositModal.tsx (fonction handleSubmit)</p></div>
+
+<div class="f crit"><span class="tag">Critique</span>
+<h3>Un seul formulaire Formspree, dont le propriétaire est inconnu</h3>
+<p>Les deux sites envoient toutes les demandes (contact, rendez-vous, dossiers) vers le même identifiant Formspree. Je ne peux pas confirmer à qui appartient ce compte. Des données de clients d’un notaire ne doivent pas arriver sur un compte autre que celui de l’étude.</p>
+<p class="src">archive 1 · Footer, RdvModal, KyanotModal · archive 2 · DepositModal, AccessContact</p></div>
+
+<div class="f imp"><span class="tag">Important</span>
+<h3>Coordonnées factices ou contradictoires</h3>
+<p>Le numéro WhatsApp est un espace réservé (+225 07 00 00 00 00). L’archive 1 affiche l’adresse etudemaitrekoffi@gmail.com, l’archive 2 affiche contact@etudekoffi-notaire.ci. Le nom de domaine correspondant n’a pas été vérifié.</p>
+<p class="src">archive 2 · AccessContact.tsx, DepositModal.tsx · archive 1 · Footer.tsx</p></div>
+
+<div class="f imp"><span class="tag">Important</span>
+<h3>Numéros de dossier et références générés au hasard</h3>
+<p>Les références (ACT-2026-xxxx, RDV-2026-xxxx) sont tirées au hasard côté navigateur. Elles ne sont ni uniques ni liées à un registre de l’étude.</p>
+<p class="src">archive 2 · DepositModal.tsx, AppointmentModal.tsx</p></div>
+
+<div class="f imp"><span class="tag">Important</span>
+<h3>Mentions et promesses à faire valider par le notaire</h3>
+<p>Les textes parlent de « sécurisation d’actes authentiques », d’« actes dématérialisés » et de comparaisons avec d’autres pratiques. Je ne peux pas confirmer ce que la réglementation ivoirienne et la Chambre des notaires autorisent en matière de publicité, d’actes à distance et d’hébergement de données. À vérifier avant toute mise en ligne.</p></div>
+
+<div class="f"><span class="tag">Mineur</span>
+<h3>Éléments techniques inutiles</h3>
+<p>La dépendance <code>@google/genai</code> et la variable <code>GEMINI_API_KEY</code> sont déclarées, mais je n’ai trouvé aucun appel à Gemini dans le code source. Les README sont ceux du modèle AI Studio. Les noms de projet sont génériques (<code>react-example</code>).</p></div>
+
+<div class="f"><span class="tag">Mineur</span>
+<h3>Fichiers d’appoint dans le dossier public</h3>
+<p>Des captures d’écran, un PDF « verso vectorisé » et une page HTML de cube 3D sont inclus dans <code>public/assets</code>. Ils alourdissent le site et ne doivent pas tous être publiés. L’accessibilité (contrastes, navigation clavier) et les performances sur réseau mobile n’ont pas été mesurées.</p></div>
+
+<h2>Recommandations</h2>
+<ol class="plan">
+<li><strong>Choisir une base.</strong> Je recommande l’archive 2 comme socle de production, et de reprendre de l’archive 1 uniquement la FAQ et la présentation du parcours, qui rassurent le client sans exiger de back-office.</li>
+<li><strong>Présenter honnêtement la démo.</strong> Dire au notaire que le suivi en direct est une maquette. Le proposer comme une seconde phase, chiffrée à part.</li>
+<li><strong>Créer un compte de réception au nom de l’étude.</strong> Remplacer l’identifiant Formspree partagé par une boîte e-mail professionnelle de l’étude, ou par un service dont l’étude est propriétaire.</li>
+<li><strong>Recevoir réellement les pièces.</strong> Soit un stockage sécurisé avec accès protégé, soit, en première version, retirer le champ « téléverser » et indiquer clairement d’envoyer les pièces par e-mail ou WhatsApp.</li>
+<li><strong>Renseigner les vraies coordonnées</strong> (téléphone, WhatsApp, e-mail, adresse, horaires) et supprimer toutes les valeurs d’exemple.</li>
+<li><strong>Faire relire les contenus par le notaire</strong> et vérifier les règles de la profession ainsi que celles sur les données personnelles (autorité ivoirienne de protection des données, à confirmer).</li>
+<li><strong>Nettoyer le projet</strong> : retirer Gemini, renommer le projet, supprimer les fichiers de test, et mesurer la vitesse sur téléphone en 3G/4G.</li>
+<li><strong>Prévoir l’hébergement et la maintenance</strong> : nom de domaine au nom de l’étude, sauvegardes, qui répond en cas de panne.</li>
+</ol>
+
+<h2>Plan proposé</h2>
+<div class="scroll"><table>
+<thead><tr><th>Phase</th><th>Contenu</th><th>Résultat</th></tr></thead>
+<tbody>
+<tr><td>1. Site vitrine</td><td>Présentation, expertises, contact, rendez-vous par e-mail/WhatsApp, vraies coordonnées</td><td>Site publiable après validation du notaire</td></tr>
+<tr><td>2. Pré-dossier en ligne</td><td>Formulaire par type de formalité, liste des pièces, réception sécurisée</td><td>Gain de temps pour les clercs</td></tr>
+<tr><td>3. Suivi client</td><td>Comptes clients, authentification, statuts de dossier mis à jour par l’étude</td><td>Remplace la simulation actuelle</td></tr>
+</tbody></table></div>
+<p class="note" style="margin-top:16px">Prix, délais et conditions de maintenance ne figurent pas dans ce document : ils dépendent de votre offre. Je n’ai pas de source pour fixer un tarif de marché à Abidjan, donc je ne l’invente pas.</p>
+</main>
+</body>
+</html>

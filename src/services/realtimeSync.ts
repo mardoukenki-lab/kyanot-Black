@@ -1,31 +1,27 @@
-import { DossierRecord, AppointmentRecord, RealtimeSyncEvent, MomoProvider, FormaliteKey, ClercNote } from '../types';
+import { DossierRecord, AppointmentRecord, RealtimeSyncEvent, FormaliteKey, ClercNote } from '../types';
 import { FORMALITES_DATA } from '../data/formalites';
 
-const DOSSIERS_STORAGE_KEY = 'kyanot_dossiers_v1';
-const ACTIVE_DOSSIER_ID_KEY = 'kyanot_active_dossier_id';
-const APPOINTMENTS_STORAGE_KEY = 'kyanot_appointments_v1';
-const CHANNEL_NAME = 'kyanot_realtime_network';
+const DOSSIERS_STORAGE_KEY = 'etude_koffi_dossiers_v2';
+const ACTIVE_DOSSIER_ID_KEY = 'etude_koffi_active_dossier_id';
+const APPOINTMENTS_STORAGE_KEY = 'etude_koffi_appointments_v2';
+const CHANNEL_NAME = 'etude_koffi_realtime_network';
 
-// Default initial showcase dossier so the live tracker widget is immediately alive
+// Showcase initial dossier for the notary office
 const INITIAL_DOSSIER: DossierRecord = {
-  id: 'KYA-2026-8942',
+  id: 'ETU-2026-8942',
   formaliteKey: 'immobilier',
   formaliteTitle: 'Immobilier & Foncier (Vente / Acquisition / ACD)',
   clientName: 'M. Kouassi Jean-Philippe',
   clientPhone: '+225 07 09 88 44 21',
   clientEmail: 'kouassi.jp@invest.ci',
-  fee: 35000,
-  momoProvider: 'Wave',
-  momoTransactionRef: 'WAVE-CI-99428-TX',
-  momoPaid: true,
   status: 'instruction_en_cours',
-  currentStepIndex: 2, // 0: Pièces déposées, 1: Frais Mobile Money, 2: Examen clercs, 3: Signature solennelle
+  currentStepIndex: 1, // 0: Pièces déposées, 1: Examen clercs, 2: Rédaction minute, 3: Signature solennelle
   details: {
     immoOperationType: "Sécurisation d'acquisition de terrain avec ACD définitif",
     immoLocation: 'Cocody Angré 8ème Tranche, Abidjan',
     immoRefAcd: 'ACD N° 2023-04812 / TF N° 204.119',
     immoPrice: '45 000 000 FCFA',
-    notes: "Vérification domaniale urgente avant signature de l'acte authentique."
+    notes: "Vérification domaniale avant signature de l'acte authentique."
   },
   documents: [
     {
@@ -56,26 +52,18 @@ const INITIAL_DOSSIER: DossierRecord = {
   timeline: [
     {
       id: 'note-1',
-      author: 'Plateforme KYANOT',
-      role: 'Système Automatisé',
+      author: 'Secrétariat de l’Étude',
+      role: 'Greffe Notarial',
       timestamp: 'Aujourd’hui à 08:30',
-      message: 'Dossier foncier enregistré avec succès. 3 documents téléversés dans le coffre-fort sécurisé.',
+      message: 'Dossier foncier enregistré avec succès. 3 documents téléversés et transmis aux clercs.',
       stageBadge: 'Dépôt validé'
     },
     {
       id: 'note-2',
-      author: 'Passerelle Wave CI',
-      role: 'Mobile Money',
-      timestamp: 'Aujourd’hui à 08:32',
-      message: 'Règlement des frais de pré-instruction (35 000 FCFA) validé sans réserve. Réf: WAVE-CI-99428-TX.',
-      stageBadge: 'Paiement acquitté'
-    },
-    {
-      id: 'note-3',
       author: 'Me Alain KOFFI & Clercs',
       role: 'Étude Notariale',
       timestamp: 'Aujourd’hui à 10:15',
-      message: 'Instruction juridique en cours. Réquisitions transmises à la Conservation Foncière du Livre Foncier pour contrôle anti-double vente.',
+      message: 'Instruction juridique en cours. Réquisitions transmises à la Conservation Foncière pour contrôle anti-double vente.',
       stageBadge: 'Instruction active'
     }
   ],
@@ -183,7 +171,6 @@ class RealtimeSyncManager {
     clientName: string;
     clientPhone: string;
     clientEmail?: string;
-    momoProvider: MomoProvider;
     fileNames?: string[];
     details?: {
       immoOperationType?: string;
@@ -196,7 +183,7 @@ class RealtimeSyncManager {
     const list = this.getDossiers();
     const formaliteInfo = FORMALITES_DATA[params.formaliteKey] || FORMALITES_DATA.immobilier;
     const randomSuffix = Math.floor(1000 + Math.random() * 9000);
-    const id = `KYA-${new Date().getFullYear()}-${randomSuffix}`;
+    const id = `ETU-${new Date().getFullYear()}-${randomSuffix}`;
     const nowStr = 'À l’instant';
 
     const uploadedDocs: DossierRecord['documents'] = (params.fileNames && params.fileNames.length > 0
@@ -215,33 +202,29 @@ class RealtimeSyncManager {
       id,
       formaliteKey: params.formaliteKey,
       formaliteTitle: formaliteInfo.title,
-      clientName: params.clientName || 'Demandeur KYANOT',
+      clientName: params.clientName || 'Demandeur',
       clientPhone: params.clientPhone || '+225 07 ...',
-      clientEmail: params.clientEmail || 'client@kyanot.ci',
-      fee: formaliteInfo.feeAmount,
-      momoProvider: params.momoProvider,
-      momoTransactionRef: `${params.momoProvider.toUpperCase()}-CI-${Math.floor(10000 + Math.random() * 90000)}`,
-      momoPaid: true,
-      status: 'frais_valides',
-      currentStepIndex: 1, // 0: pieces deposees, 1: frais valides, 2: examen clercs, 3: signature
+      clientEmail: params.clientEmail || 'client@etude-koffi.ci',
+      status: 'instruction_en_cours',
+      currentStepIndex: 1, // 0: pieces deposees, 1: instruction clercs, 2: redaction minute, 3: signature
       details: params.details || {},
       documents: uploadedDocs,
       timeline: [
         {
           id: `note-${Date.now()}-1`,
-          author: 'Plateforme KYANOT',
-          role: 'Guichet Numérique',
+          author: 'Secrétariat de l’Étude',
+          role: 'Greffe Notarial',
           timestamp: new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }),
-          message: `Dossier créé avec succès pour ${formaliteInfo.title}. ${uploadedDocs.length} document(s) téléversé(s).`,
+          message: `Dossier créé avec succès pour ${formaliteInfo.title}. ${uploadedDocs.length} document(s) téléversé(s) pour instruction.`,
           stageBadge: 'Dossier créé'
         },
         {
           id: `note-${Date.now()}-2`,
-          author: `Paiement ${params.momoProvider} Money`,
-          role: 'Télé-règlement',
+          author: 'Me Alain KOFFI & Clercs',
+          role: 'Étude Notariale',
           timestamp: new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }),
-          message: `Frais de pré-instruction de ${formaliteInfo.feeAmount.toLocaleString('fr-FR')} FCFA acquittés.`,
-          stageBadge: 'Paiement certifié'
+          message: `Dossier affecté pour qualification juridique et vérification des pièces.`,
+          stageBadge: 'Instruction en cours'
         }
       ],
       createdAt: new Date().toISOString(),
@@ -272,22 +255,22 @@ class RealtimeSyncManager {
 
     const stepStatusMap: Record<number, DossierRecord['status']> = {
       0: 'pieces_deposees',
-      1: 'frais_valides',
-      2: 'instruction_en_cours',
+      1: 'instruction_en_cours',
+      2: 'minute_prete',
       3: 'pret_pour_signature'
     };
 
     const defaultMessages: Record<number, string> = {
-      0: 'Pièces initiales transmises et vérifiées par la réception numérique.',
-      1: 'Frais de pré-instruction validés via Mobile Money.',
-      2: 'Contrôle domanial et juridique achevé par le Clerc notaire. Minute approuvée par Me Alain KOFFI.',
+      0: 'Pièces initiales transmises et enregistrées par le secrétariat.',
+      1: 'Examen de conformité et réquisitions juridiques en cours par le Clerc notaire.',
+      2: 'Contrôle domanial et juridique achevé par le Clerc. Minute approuvée par Me Alain KOFFI.',
       3: 'Minute finalisée avec timbre notarié officiel. Convocations envoyées pour signature solennelle à l’Étude (Bd. VGE).'
     };
 
     const stageBadges: Record<number, string> = {
       0: 'Pièces reçues',
-      1: 'Frais réglés',
-      2: 'Instruction validée',
+      1: 'Examen en cours',
+      2: 'Minute approuvée',
       3: 'Prêt pour signature'
     };
 

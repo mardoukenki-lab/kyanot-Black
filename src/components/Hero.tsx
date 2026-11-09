@@ -21,7 +21,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenKyanotModal, onOpenRdvModal })
               <ShieldCheck className="w-4 h-4 text-gold-400" />
               <span>Officier Public &amp; Ministériel • Abidjan, Côte d'Ivoire</span>
               <span className="text-gold-500">•</span>
-              <span className="text-emerald-300 font-semibold">Service Digital KYANOT Inclus</span>
+              <span className="text-emerald-300 font-semibold">Dépôt &amp; Instruction en ligne</span>
             </div>
 
             <div className="space-y-2">
@@ -33,7 +33,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenKyanotModal, onOpenRdvModal })
               </h1>
             </div>
 
-            {/* Phrase pivot KYANOT : préparez en ligne, ne venez que pour signer */}
+            {/* Phrase pivot : préparez en ligne, ne venez que pour signer */}
             <div className="p-4 sm:p-5 rounded-xl bg-gradient-to-r from-emerald-950/60 to-navy-900/80 border border-emerald-500/30 text-left shadow-lg">
               <div className="flex items-start gap-3">
                 <div className="w-9 h-9 rounded-lg bg-emerald-500/20 text-emerald-300 flex items-center justify-center shrink-0 mt-0.5 border border-emerald-400/30">
@@ -41,7 +41,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenKyanotModal, onOpenRdvModal })
                 </div>
                 <div>
                   <p className="text-emerald-200 text-xs font-semibold uppercase tracking-wider">
-                    Innovation de l'Étude — Portail KYANOT
+                    Service de l'Étude — Préparation &amp; Dépôt en ligne
                   </p>
                   <p className="text-white text-base sm:text-lg font-medium leading-snug mt-0.5">
                     Préparez votre dossier en ligne.{' '}
@@ -50,9 +50,8 @@ export const Hero: React.FC<HeroProps> = ({ onOpenKyanotModal, onOpenRdvModal })
                     </span>
                   </p>
                   <p className="text-slate-300 text-xs sm:text-sm mt-1 leading-relaxed">
-                    Téléversez vos pièces justificatives, payez les frais de pré-instruction par Mobile
-                    Money (Orange, Wave, MTN, Moov). Nos clercs qualifient l'acte avant votre venue
-                    solennelle.
+                    Téléversez vos pièces justificatives en toute sécurité. Nos clercs qualifient et vérifient la
+                    régularité de vos documents pour rédiger l'acte authentique avant votre venue solennelle au cabinet.
                   </p>
                 </div>
               </div>
@@ -60,15 +59,15 @@ export const Hero: React.FC<HeroProps> = ({ onOpenKyanotModal, onOpenRdvModal })
 
             {/* Alignement Boutons CTA */}
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-              <a
-                className="w-full sm:w-auto kyanot-btn font-semibold px-6 py-4 rounded-lg text-sm sm:text-base flex items-center justify-center gap-2 cursor-pointer shadow-lg"
-                href="#kyanot"
-              >
-                <FolderCheck className="w-5 h-5 text-emerald-300" />
-                <span>Lancer ma formalité en ligne (KYANOT)</span>
-              </a>
               <button
-                className="w-full sm:w-auto gold-btn font-semibold px-6 py-4 rounded-lg text-sm sm:text-base whitespace-nowrap flex items-center justify-center gap-2 cursor-pointer shadow-lg"
+                className="w-full sm:w-auto px-6 py-3.5 rounded-full bg-emerald-600 hover:bg-emerald-500 font-semibold text-white text-sm sm:text-base flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-emerald-950/40 transition-all hover:scale-105"
+                onClick={onOpenKyanotModal}
+              >
+                <FolderCheck className="w-5 h-5 text-emerald-100" />
+                <span>Déposer mon dossier en ligne</span>
+              </button>
+              <button
+                className="w-full sm:w-auto px-6 py-3.5 rounded-full bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-400 hover:to-amber-500 font-semibold text-white text-sm sm:text-base whitespace-nowrap flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-orange-950/40 transition-all hover:scale-105"
                 onClick={onOpenRdvModal}
               >
                 <span>Prendre RDV classique</span>
@@ -76,14 +75,14 @@ export const Hero: React.FC<HeroProps> = ({ onOpenKyanotModal, onOpenRdvModal })
               </button>
             </div>
 
-            {/* Indicateurs de réassurance rapide avec KYANOT */}
+            {/* Indicateurs de réassurance */}
             <div className="pt-6 grid grid-cols-3 gap-4 border-t border-gold-500/20 max-w-xl mx-auto lg:mx-0 text-left">
               <div>
                 <p className="text-gold-400 font-cinzel font-bold text-xl sm:text-2xl">100%</p>
                 <p className="text-xs text-slate-400">Force probante &amp; authenticité d'État</p>
               </div>
               <div>
-                <p className="text-emerald-300 font-cinzel font-bold text-xl sm:text-2xl">0 Visite</p>
+                <p className="text-emerald-300 font-cinzel font-bold text-xl sm:text-2xl">0 Trajet</p>
                 <p className="text-xs text-slate-400">Pré-instruction &amp; dépôt des pièces à distance</p>
               </div>
               <div>

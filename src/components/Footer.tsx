@@ -21,11 +21,11 @@ export const Footer: React.FC<FooterProps> = ({ onShowToast }) => {
       'TITLE:Notaire Officier Public et Ministériel',
       'TEL;TYPE=CELL,VOICE:+2250709341341',
       'TEL;TYPE=WORK,VOICE:+22521243724',
-      'EMAIL;TYPE=PREF,INTERNET:kyanot@aviso.ci',
-      'EMAIL;TYPE=INTERNET:kyanot.etudemaitrekoffi@gmail.com',
+      'EMAIL;TYPE=PREF,INTERNET:kyanot.etudedemaitrekoffi@gmail.com',
+      'EMAIL;TYPE=INTERNET:etudekoffi@aviso.ci',
       'ADR;TYPE=WORK:;;Bd. VGE - Immeuble Balance (face Solibra) - 30 B.P. 524;Abidjan;;30;Côte d\'Ivoire',
-      'URL:https://kyanot.notaire.ci',
-      'NOTE:Portail KYANOT - Pré-instruction en ligne & Actes Authentiques',
+      'URL:https://notaire-koffi.ci',
+      'NOTE:Étude de Me KOFFI Yassoua Alain - Actes Authentiques & Pré-instruction en ligne',
       'END:VCARD'
     ].join('\n');
 
@@ -33,7 +33,7 @@ export const Footer: React.FC<FooterProps> = ({ onShowToast }) => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'Me_KOFFI_Yassoua_Alain_Notaire_KYANOT.vcf';
+    a.download = 'Me_KOFFI_Yassoua_Alain_Notaire_Abidjan.vcf';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -304,7 +304,7 @@ export const Footer: React.FC<FooterProps> = ({ onShowToast }) => {
           <div className="lg:col-span-6 text-center lg:text-right space-y-3">
             <div className="inline-flex items-center gap-2 text-xs text-emerald-400 font-semibold mb-1">
               <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-              <span>Plateforme KYANOT intégrée à l'Étude</span>
+              <span>Dépôt &amp; Instruction de dossier en ligne</span>
             </div>
 
             <h4 className="font-serif text-xl gold-gradient-text font-semibold">
@@ -334,17 +334,17 @@ export const Footer: React.FC<FooterProps> = ({ onShowToast }) => {
 
               <a
                 className="text-gold-300 hover:text-gold-200 transition-colors flex items-center gap-2"
-                href="mailto:kyanot@aviso.ci"
+                href="mailto:kyanot.etudedemaitrekoffi@gmail.com"
               >
                 <Mail className="w-4 h-4 text-gold-400" />
-                <span>kyanot@aviso.ci</span>
+                <span>kyanot.etudedemaitrekoffi@gmail.com</span>
               </a>
             </div>
 
             <div className="pt-3 flex flex-wrap justify-center lg:justify-end gap-3">
               <button
                 className="px-3.5 py-1.5 rounded-md bg-navy-800 border border-gold-500/30 text-xs text-slate-200 hover:border-gold-400 flex items-center gap-1.5 cursor-pointer transition-all"
-                onClick={() => copyContact('kyanot@aviso.ci', 'Adresse e-mail copiée !')}
+                onClick={() => copyContact('kyanot.etudedemaitrekoffi@gmail.com', 'Adresse e-mail copiée !')}
               >
                 <Copy className="w-3.5 h-3.5 text-gold-400" />
                 <span>Copier l'e-mail</span>
@@ -362,7 +362,7 @@ export const Footer: React.FC<FooterProps> = ({ onShowToast }) => {
 
         {/* Bas de page légal */}
         <div className="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
-          <p>© 2026 Étude de Maître KOFFI Yassoua Alain – Notaire à Abidjan &amp; Portail KYANOT. Tous droits réservés.</p>
+          <p>© 2026 Étude de Maître KOFFI Yassoua Alain – Notaire à Abidjan. Tous droits réservés.</p>
           <p className="text-gold-400/80">Chambre des Notaires de Côte d'Ivoire • Confidentialité &amp; Secret Professionnel</p>
         </div>
       </div>

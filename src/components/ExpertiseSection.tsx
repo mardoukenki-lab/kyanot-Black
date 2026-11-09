@@ -19,7 +19,7 @@ export const ExpertiseSection: React.FC<ExpertiseSectionProps> = ({
     setSelectedService(key);
   };
 
-  const handlePrefillKyanot = () => {
+  const handlePrefillDossier = () => {
     if (selectedService === 'immobilier') {
       onSelectFormalite('immobilier');
     } else if (selectedService === 'affaires') {
@@ -27,7 +27,7 @@ export const ExpertiseSection: React.FC<ExpertiseSectionProps> = ({
     } else if (selectedService === 'famille') {
       onSelectFormalite('famille');
     }
-    const el = document.getElementById('kyanot');
+    const el = document.getElementById('depot') || document.getElementById('kyanot');
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
     }
@@ -64,7 +64,7 @@ export const ExpertiseSection: React.FC<ExpertiseSectionProps> = ({
               paix familiale.
             </p>
             <span className="mt-3 text-xs text-gold-400 flex items-center gap-1 opacity-80 group-hover:opacity-100 font-medium">
-              Préparer via KYANOT <ChevronRight className="w-3.5 h-3.5" />
+              Préparer mon dossier en ligne <ChevronRight className="w-3.5 h-3.5" />
             </span>
           </div>
 
@@ -94,7 +94,7 @@ export const ExpertiseSection: React.FC<ExpertiseSectionProps> = ({
               gestion patrimoniale.
             </p>
             <span className="mt-3 text-xs text-gold-400 flex items-center gap-1 opacity-80 group-hover:opacity-100 font-medium">
-              Préparer via KYANOT <ChevronRight className="w-3.5 h-3.5" />
+              Préparer mon dossier en ligne <ChevronRight className="w-3.5 h-3.5" />
             </span>
           </div>
 
@@ -124,7 +124,7 @@ export const ExpertiseSection: React.FC<ExpertiseSectionProps> = ({
               baux commerciaux.
             </p>
             <span className="mt-3 text-xs text-gold-400 flex items-center gap-1 opacity-80 group-hover:opacity-100 font-medium">
-              Préparer via KYANOT <ChevronRight className="w-3.5 h-3.5" />
+              Préparer mon dossier en ligne <ChevronRight className="w-3.5 h-3.5" />
             </span>
           </div>
         </div>
@@ -144,7 +144,7 @@ export const ExpertiseSection: React.FC<ExpertiseSectionProps> = ({
               <div className="flex items-center gap-2 shrink-0">
                 <button
                   className="px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs font-semibold whitespace-nowrap hover:bg-emerald-500/30 transition-all cursor-pointer"
-                  onClick={handlePrefillKyanot}
+                  onClick={handlePrefillDossier}
                 >
                   Pré-instruire en ligne
                 </button>

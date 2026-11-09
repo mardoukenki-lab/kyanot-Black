@@ -124,7 +124,7 @@ export default function App() {
 
         <ManifesteSection
           onOpenKyanot={() => {
-            const el = document.getElementById('kyanot');
+            const el = document.getElementById('depot') || document.getElementById('kyanot');
             if (el) el.scrollIntoView({ behavior: 'smooth' });
           }}
         />

@@ -3,7 +3,7 @@ import {
   GlobeLock,
   ShieldAlert,
   Rocket,
-  Smartphone,
+  CheckCircle,
   ArrowRight
 } from 'lucide-react';
 
@@ -26,9 +26,9 @@ export const ManifesteSection: React.FC<ManifesteSectionProps> = ({ onOpenKyanot
             Mais seule l'authenticité protège durablement.
           </h2>
           <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
-            Un contrat téléchargé sur le web ou un accord conclu sur les réseaux sociaux ne remplacera
+            Un contrat téléchargé sur le web ou un accord informel ne remplacera
             jamais la sécurité du sceau de l'État. L'Étude de <strong>Me KOFFI Yassoua Alain</strong> jette
-            un pont solide entre les générations.
+            un pont solide entre modernité digitale et rigueur juridique.
           </p>
         </div>
 
@@ -38,49 +38,45 @@ export const ManifesteSection: React.FC<ManifesteSectionProps> = ({ onOpenKyanot
             <div className="space-y-6">
               <div className="flex items-center justify-between">
                 <span className="px-3.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 text-xs font-medium tracking-wider uppercase">
-                  Nouvelle Génération, Entrepreneurs &amp; Diaspora
+                  Entrepreneurs, Particuliers &amp; Diaspora
                 </span>
                 <GlobeLock className="w-8 h-8 text-emerald-400" />
               </div>
 
               <h3 className="font-serif text-2xl sm:text-3xl text-white leading-snug">
-                À l'ère des faux profils et des arnaques en ligne, KYANOT est votre pare-feu juridique.
+                À l'ère des faux profils et des litiges fonciers, l'acte authentique est votre pare-feu juridique.
               </h3>
 
               <p className="text-slate-300 leading-relaxed text-sm sm:text-base">
-                Sur Internet, tout semble instantané : on achète un terrain via une annonce Facebook, on
-                télécharge des statuts gratuits, on conclut un partenariat WhatsApp. Mais{' '}
+                Sur Internet, tout semble instantané : annonces immobilières en ligne, modèles de statuts gratuits, accords informels. Mais{' '}
                 <strong>le virtuel comporte d'immenses pièges</strong> : doubles ventes foncières, faux
-                documents, associés fantômes ou contrats sans valeur.
+                titres, associés fantômes ou contrats nuls en justice.
               </p>
 
               <p className="text-slate-300 leading-relaxed text-sm sm:text-base">
-                Avec KYANOT et l'authentification notariale, ce n'est pas ralentir vos projets : c'est les{' '}
+                Avec l'Étude de Maître KOFFI Yassoua Alain, sécuriser vos actes ce n'est pas ralentir vos projets : c'est les{' '}
                 <strong>blinder juridiquement</strong>. Nous vérifions l'origine exacte des titres
-                fonciers (ACD), certifions l'identité réelle des signataires et donnons force exécutoire à
-                vos contrats d'affaires, avec la réactivité connectée de votre quotidien.
+                fonciers (ACD), certifions l'identité réelle des parties et conférons la force probante et exécutoire de l'État à
+                vos conventions.
               </p>
 
               <ul className="space-y-3 pt-2 text-sm text-slate-200">
                 <li className="flex items-start gap-3">
                   <ShieldAlert className="w-5 h-5 text-gold-400 shrink-0 mt-0.5" />
                   <span>
-                    <strong>Zéro arnaque foncière :</strong> vérification stricte au Livre Foncier et au
-                    Ministère avant le moindre versement.
+                    <strong>Zéro litige foncier :</strong> réquisition au Livre Foncier et vérification de la chaîne des titres avant tout engagement.
                   </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <Rocket className="w-5 h-5 text-gold-400 shrink-0 mt-0.5" />
                   <span>
-                    <strong>Startups &amp; PME solides :</strong> des statuts sur mesure qui rassurent vos
-                    banques et investisseurs internationaux.
+                    <strong>Sociétés &amp; Investissements sécurisés :</strong> statuts et pactes rédigés selon le droit OHADA pour rassurer banques et partenaires.
                   </span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Smartphone className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
                   <span>
-                    <strong>Pré-étude digitale KYANOT :</strong> téléversez vos pièces, payez par Mobile
-                    Money et suivez tout à distance.
+                    <strong>Pré-instruction digitale :</strong> téléversez vos pièces à distance en toute confidentialité et ne venez au cabinet que pour la signature solennelle.
                   </span>
                 </li>
               </ul>
@@ -88,13 +84,13 @@ export const ManifesteSection: React.FC<ManifesteSectionProps> = ({ onOpenKyanot
 
             <div className="mt-8 pt-6 border-t border-gold-500/20 flex items-center justify-between">
               <span className="font-serif italic text-emerald-300 text-sm">
-                « La vitesse du digital, la certitude de la Loi. »
+                « La réactivité du digital, la certitude de la Loi. »
               </span>
               <button
                 className="text-xs uppercase tracking-wider text-emerald-300 hover:text-white flex items-center gap-1 font-semibold cursor-pointer"
                 onClick={onOpenKyanot}
               >
-                <span>Lancer sur KYANOT</span>
+                <span>Déposer mon dossier en ligne</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>

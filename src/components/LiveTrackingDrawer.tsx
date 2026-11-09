@@ -46,9 +46,9 @@ export const LiveTrackingDrawer: React.FC<LiveTrackingDrawerProps> = ({
     },
     {
       index: 1,
-      title: 'Frais Mobile Money',
-      sub: 'Pré-instruction acquittée',
-      desc: `${dossier.fee.toLocaleString('fr-FR')} FCFA réglés par ${dossier.momoProvider} (Réf: ${dossier.momoTransactionRef}).`
+      title: 'Vérification Préliminaire',
+      sub: 'Instruction & Contrôle de recevabilité',
+      desc: `Dossier recevable et pris en charge par le secrétariat général de l'Étude.`
     },
     {
       index: 2,
@@ -85,7 +85,7 @@ export const LiveTrackingDrawer: React.FC<LiveTrackingDrawerProps> = ({
       <!DOCTYPE html>
       <html>
       <head>
-        <title>Attestation de Dépôt KYANOT - ${dossier.id}</title>
+        <title>Récépissé de Dépôt en Ligne - ${dossier.id}</title>
         <style>
           body { font-family: 'Times New Roman', serif; padding: 40px; color: #111; line-height: 1.5; }
           .header { text-align: center; border-bottom: 2px solid #C99B3B; padding-bottom: 20px; margin-bottom: 30px; }
@@ -104,7 +104,7 @@ export const LiveTrackingDrawer: React.FC<LiveTrackingDrawerProps> = ({
           <p style="font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #AA7C23;">RÉPUBLIQUE DE CÔTE D'IVOIRE &bull; UNION - DISCIPLINE - TRAVAIL</p>
           <div class="title">ÉTUDE DE MAÎTRE KOFFI YASSOUA ALAIN</div>
           <p>Notaire &bull; Bd. VGE – Immeuble Balance (face Solibra) &bull; Abidjan</p>
-          <p style="font-weight: bold; margin-top: 15px;">RÉCÉPISSÉ D'ENREGISTREMENT &amp; ATTESTATION PROVISOIRE KYANOT</p>
+          <p style="font-weight: bold; margin-top: 15px;">RÉCÉPISSÉ D'ENREGISTREMENT &amp; ATTESTATION PROVISOIRE DE DÉPÔT</p>
         </div>
 
         <div class="section">
@@ -112,7 +112,7 @@ export const LiveTrackingDrawer: React.FC<LiveTrackingDrawerProps> = ({
           <div class="field"><strong>Formalité Enregistrée :</strong> ${dossier.formaliteTitle}</div>
           <div class="field"><strong>Demandeur :</strong> ${dossier.clientName}</div>
           <div class="field"><strong>Téléphone de liaison :</strong> ${dossier.clientPhone}</div>
-          <div class="field"><strong>Frais de Pré-instruction :</strong> ${dossier.fee.toLocaleString('fr-FR')} FCFA (Acquittés via ${dossier.momoProvider} - Réf: ${dossier.momoTransactionRef})</div>
+          <div class="field"><strong>Statut instruction :</strong> Pièces transmises pour analyse notariale</div>
           <div class="field"><strong>Date de Dépôt Numérique :</strong> ${new Date(dossier.createdAt).toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</div>
           ${dossier.details.immoRefAcd ? `<div class="field"><strong>Référence Titre / ACD :</strong> ${dossier.details.immoRefAcd}</div>` : ''}
           ${dossier.details.immoLocation ? `<div class="field"><strong>Localisation du Bien :</strong> ${dossier.details.immoLocation}</div>` : ''}
@@ -120,11 +120,11 @@ export const LiveTrackingDrawer: React.FC<LiveTrackingDrawerProps> = ({
 
         <div class="section" style="background: #fbfbfb; padding: 15px; border-left: 4px solid #C99B3B;">
           <h4 style="margin-top: 0;">Mentions d'authenticité :</h4>
-          <p style="font-size: 13px;">Le présent document atteste que le dossier référencé ci-dessus est régulièrement entré au greffe de l'Étude de Maître KOFFI Yassoua Alain via le guichet numérique KYANOT. La minute de l'acte authentique est en cours d'instruction et fera foi publique une fois revêtue des signatures requises.</p>
+          <p style="font-size: 13px;">Le présent document atteste que le dossier référencé ci-dessus est régulièrement entré au greffe de l'Étude de Maître KOFFI Yassoua Alain via la transmission numérique. La minute de l'acte authentique est en cours d'instruction et fera foi publique une fois revêtue des signatures requises.</p>
         </div>
 
         <div class="footer">
-          Chambre des Notaires de Côte d'Ivoire &bull; 30 B.P. 524 Abidjan 30 &bull; Tél: +225 07 09 34 13 41 &bull; Email: kyanot@aviso.ci
+          Chambre des Notaires de Côte d'Ivoire &bull; 30 B.P. 524 Abidjan 30 &bull; Tél: +225 07 09 34 13 41 &bull; Email: kyanot.etudedemaitrekoffi@gmail.com
         </div>
       </body>
       </html>

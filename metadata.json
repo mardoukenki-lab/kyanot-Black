@@ -1,6 +1,6 @@
 {
   "name": "Étude Me KOFFI Yassoua Alain & Portail KYANOT",
-  "description": "Cabinet notarial d'excellence à Abidjan & Portail KYANOT de pré-instruction 100% en ligne synchronisé en temps réel avec paiement Mobile Money.",
+  "description": "Cabinet notarial d'excellence à Abidjan : dépôt et constitution de dossiers en ligne, sécurisation d'actes authentiques et prise de rendez-vous avec Maître Koffi Yassoua Alain.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

@@ -9,9 +9,9 @@ interface RdvModalProps {
 }
 
 export const RdvModal: React.FC<RdvModalProps> = ({ isOpen, onClose, onShowToast }) => {
-  const [name, setName] = useState('M. Kouassi Jean');
-  const [email, setEmail] = useState('client.etude@gmail.com');
-  const [phone, setPhone] = useState('+225 07 09 34 13 41');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [mode, setMode] = useState<'cabinet' | 'visio'>('cabinet');
   const [domaine, setDomaine] = useState('Immobilier, Achat de terrain & Vérification ACD');
   const [summary, setSummary] = useState('');

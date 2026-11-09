@@ -7,11 +7,8 @@ export type FormaliteKey =
   | 'famille'
   | 'autre';
 
-export type MomoProvider = 'Orange' | 'Wave' | 'MTN' | 'Moov';
-
 export type DossierStatus =
   | 'pieces_deposees'
-  | 'frais_valides'
   | 'instruction_en_cours'
   | 'minute_prete'
   | 'pret_pour_signature'
@@ -36,18 +33,15 @@ export interface ClercNote {
 }
 
 export interface DossierRecord {
-  id: string; // e.g. KYA-2026-8942
+  id: string; // e.g. ETU-2026-8942
   formaliteKey: FormaliteKey;
   formaliteTitle: string;
   clientName: string;
   clientPhone: string;
   clientEmail?: string;
-  fee: number;
-  momoProvider: MomoProvider;
-  momoTransactionRef: string;
-  momoPaid: boolean;
+  fee?: number;
   status: DossierStatus;
-  currentStepIndex: number; // 0: Pièces déposées, 1: Frais Mobile Money, 2: Examen clercs, 3: Signature solennelle
+  currentStepIndex: number; // 0: Pièces déposées, 1: Examen clercs, 2: Rédaction minute, 3: Signature solennelle
   details: {
     immoOperationType?: string;
     immoLocation?: string;

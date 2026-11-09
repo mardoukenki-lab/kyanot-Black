@@ -45,46 +45,44 @@ export const KyanotSection: React.FC<KyanotSectionProps> = ({
   return (
     <section
       className="py-16 lg:py-24 relative border-t border-emerald-500/25 bg-gradient-to-b from-navy-950 via-emerald_brand-900/30 to-navy-950"
-      id="kyanot"
+      id="depot"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* En-tête KYANOT */}
+        {/* En-tête Dépôt de Dossier */}
         <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-400/40 text-emerald-300 text-xs uppercase tracking-widest font-semibold shadow-sm">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-            <span>KYANOT — Service Officiel de l'Étude</span>
+            <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span>Service Officiel • Étude Me KOFFI Yassoua Alain</span>
           </div>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-white leading-tight">
-            Votre formalité notariée en <span className="emerald-gradient-text">quelques clics</span>
+            Votre formalité notariée en <span className="emerald-gradient-text">quelques étapes</span>
           </h2>
           <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
-            Grâce à la plateforme KYANOT, l'Étude Maître Koffi Yassoua Alain simplifie vos démarches.
-            Vous transmettez vos justificatifs, réglez vos frais de pré-instruction par Mobile Money,
-            et nous préparons l'acte définitif.
+            L'Étude Maître Koffi Yassoua Alain simplifie vos démarches : transmettez vos pièces justificatives en ligne
+            en toute confidentialité, et nos clercs qualifient votre dossier avant votre signature au cabinet.
           </p>
         </div>
 
         {/* Grille interactive KYANOT : Sélecteur rapide + Grille des 6 démarches */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16">
-          {/* Colonne Gauche : Formulaire de sélection directe (KYANOT) */}
-          <div className="lg:col-span-5 kyanot-card stitched-border-emerald rounded-2xl p-6 sm:p-8 shadow-2xl">
-            <div className="flex items-center justify-between pb-4 border-b border-emerald-500/20 mb-6">
+          {/* Colonne Gauche : Formulaire de sélection directe */}
+          <div className="lg:col-span-5 luxury-card stitched-border rounded-2xl p-6 sm:p-8 shadow-2xl">
+            <div className="flex items-center justify-between pb-4 border-b border-gold-500/20 mb-6">
               <div>
-                <span className="text-xs uppercase tracking-widest text-emerald-300 font-semibold">
-                  Portail Interactif
+                <span className="text-xs uppercase tracking-widest text-gold-300 font-semibold">
+                  Instruction en ligne
                 </span>
                 <h3 className="font-serif text-xl sm:text-2xl text-white font-semibold">
-                  Commencer en 30 secondes
+                  Constituer mon dossier
                 </h3>
               </div>
-              <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 flex items-center justify-center font-serif font-bold text-lg shadow-inner">
-                K
+              <div className="w-10 h-10 rounded-xl bg-gold-500/20 border border-gold-400/30 text-gold-300 flex items-center justify-center font-serif font-bold text-lg shadow-inner">
+                §
               </div>
             </div>
 
             <p className="text-xs text-slate-300 mb-5 leading-relaxed">
-              Indiquez votre démarche juridique pour afficher la liste instantanée des pièces requises
-              et le montant indicatif des frais de pré-instruction :
+              Sélectionnez votre acte pour afficher la liste des pièces justificatives requises par l'Étude :
             </p>
 
             <form className="space-y-4" id="kyanotFastForm" onSubmit={handleSubmit}>
@@ -231,12 +229,12 @@ export const KyanotSection: React.FC<KyanotSectionProps> = ({
               </div>
 
               <div>
-                <label className="block text-xs uppercase tracking-wider text-emerald-300 font-semibold mb-1.5">
-                  Votre numéro WhatsApp / Mobile Money (Côte d'Ivoire ou Diaspora)
+                <label className="block text-xs uppercase tracking-wider text-gold-300 font-semibold mb-1.5">
+                  Votre numéro de téléphone / WhatsApp
                 </label>
                 <input
-                  className="w-full px-4 py-3 rounded-xl bg-navy-950/90 border border-emerald-500/40 text-white text-sm focus:outline-none focus:border-emerald-300 font-mono"
-                  id="kyanotTel"
+                  className="w-full px-4 py-3 rounded-xl bg-navy-950/90 border border-gold-500/40 text-white text-sm focus:outline-none focus:border-gold-300 font-mono"
+                  id="dossierTel"
                   placeholder="+225 07..."
                   type="tel"
                   value={phone}
@@ -247,13 +245,13 @@ export const KyanotSection: React.FC<KyanotSectionProps> = ({
 
               <div className="pt-1">
                 <button
-                  className="w-full kyanot-btn font-semibold py-3.5 rounded-xl text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg cursor-pointer"
+                  className="w-full py-3.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs tracking-wider uppercase flex items-center justify-center gap-2 shadow-lg shadow-emerald-950/40 transition-all hover:scale-[1.02] cursor-pointer"
                   type="submit"
                 >
                   <span>
                     {selectedFormalite === 'immobilier'
-                      ? 'Constituer mon dossier foncier & ACD'
-                      : `Constituer mon dossier ${currentFormaliteInfo.title}`}
+                      ? 'Transmettre mon dossier foncier & ACD'
+                      : `Transmettre mon dossier ${currentFormaliteInfo.title}`}
                   </span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
@@ -262,7 +260,7 @@ export const KyanotSection: React.FC<KyanotSectionProps> = ({
 
           </div>
 
-          {/* Colonne Droite : Grille des 6 Formalités du service KYANOT */}
+          {/* Colonne Droite : Grille des 6 Formalités notariales */}
           <div className="lg:col-span-7 space-y-4">
             <div className="flex items-center justify-between mb-2">
               <h4 className="font-serif text-2xl text-white font-semibold">

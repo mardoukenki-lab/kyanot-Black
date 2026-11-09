@@ -10,17 +10,17 @@ const FAQS: FaqItem[] = [
   {
     question: "Dois-je me déplacer plusieurs fois à l'Étude notariale ?",
     answer:
-      "Non ! C'est tout l'avantage du service KYANOT : vous réalisez le choix de votre démarche, le téléversement de vos pièces d'identité et le règlement des frais de pré-instruction en ligne. Vous ne venez à l'Étude (Boulevard VGE à Abidjan) que pour le rendez-vous solennel de signature lorsque le dossier est entièrement instruit."
+      "Non ! La transmission et l'examen préalable de vos documents s'effectuent directement en ligne. Vous ne vous déplacez à notre cabinet (Boulevard VGE, Immeuble Balance à Abidjan) que pour le rendez-vous solennel de lecture et de signature, une fois votre dossier entièrement qualifié et rédigé."
   },
   {
-    question: "Comment s'effectue le paiement par Mobile Money ?",
+    question: "Comment mes pièces et informations personnelles sont-elles protégées ?",
     answer:
-      "Le paiement se fait directement depuis votre téléphone via les opérateurs de référence en Côte d'Ivoire : Orange Money, Wave CI, MTN Mobile Money et Moov Money. Vous recevez instantanément un justificatif officiel par SMS et e-mail."
+      "Toutes vos pièces justificatives sont traitées sous le sceau strict du secret professionnel notarial et de la déontologie légale de la Chambre des Notaires. Vos données et actes restent strictement confidentiels."
   },
   {
     question: "Quelles sont les pièces requises pour mon dossier ?",
     answer:
-      "La liste exacte dépend de la formalité choisie (ex : pièce d'identité CNI/Passeport, extrait d'acte de naissance, titre foncier ACD ou projet de statuts). Notre formulaire KYANOT vous guide pas à pas pour déposer chaque document au bon format."
+      "La liste exacte dépend de la formalité choisie (ex : pièce d'identité CNI/Passeport, arrêté d'ACD, extrait topographique ou statuts de société). Notre formulaire en ligne vous indique avec précision les documents nécessaires à joindre."
   },
   {
     question: "Qui examine et rédige les actes notariés ?",
