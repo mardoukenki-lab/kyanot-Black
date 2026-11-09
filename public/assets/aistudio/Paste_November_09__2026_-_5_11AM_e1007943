@@ -1,0 +1,1450 @@
+<!DOCTYPE html><html class="scroll-smooth" lang="fr"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Étude de Me KOFFI Yassoua Alain | Notaire à Abidjan &amp; Portail KYANOT</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Google Fonts: Cinzel & Playfair Display pour la tradition, Plus Jakarta Sans pour la modernité -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&amp;family=Playfair+Display:ital,wght@0,500;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            950: '#040914',
+                            900: '#071124',
+                            800: '#0c1b38',
+                            700: '#132852',
+                        },
+                        gold: {
+                            200: '#F9E8B2',
+                            300: '#F0D582',
+                            400: '#DFB75A',
+                            500: '#C99B3B',
+                            600: '#AA7C23',
+                        },
+                        emerald_brand: {
+                            900: '#07241b',
+                            800: '#0d382c',
+                            700: '#114a3a',
+                            600: '#175e4b',
+                            500: '#1e7860',
+                            400: '#2da887',
+                            300: '#5eead4',
+                        }
+                    },
+                    fontFamily: {
+                        cinzel: ['Cinzel', 'serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Effets de texture cuir/papier noble et reflets dorés */
+        body {
+            background-color: #040914;
+            color: #f8fafc;
+            background-image: 
+                radial-gradient(circle at 85% 15%, rgba(201, 155, 59, 0.08) 0%, transparent 45%),
+                radial-gradient(circle at 15% 65%, rgba(19, 40, 82, 0.45) 0%, transparent 50%),
+                linear-gradient(135deg, rgba(255,255,255,0.02) 0%, transparent 40%, rgba(201,155,59,0.03) 100%);
+        }
+
+        /* Texte doré métallique */
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #F9E8B2 0%, #DFB75A 35%, #C99B3B 65%, #F0D582 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .emerald-gradient-text {
+            background: linear-gradient(135deg, #a7f3d0 0%, #34d399 40%, #059669 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Bouton doré avec reflet brillant diagonal */
+        .gold-btn {
+            background: linear-gradient(135deg, #E5C165 0%, #C99B3B 50%, #A67921 100%);
+            color: #050c1a;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(201, 155, 59, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+        }
+        .gold-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(201, 155, 59, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.6);
+        }
+
+        .kyanot-btn {
+            background: linear-gradient(135deg, #175e4b 0%, #0f3b2e 60%, #08261e 100%);
+            border: 1px solid rgba(94, 234, 212, 0.4);
+            color: #e6fffa;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(15, 59, 46, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+        }
+        .kyanot-btn:hover {
+            border-color: #5eead4;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(23, 94, 75, 0.5);
+        }
+
+        /* Bordures et cartes effet cuir/verre avec reflet diagonal */
+        .luxury-card {
+            background: linear-gradient(145deg, rgba(12, 27, 56, 0.85) 0%, rgba(7, 17, 36, 0.95) 100%);
+            border: 1px solid rgba(201, 155, 59, 0.25);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+            position: relative;
+            overflow: hidden;
+        }
+        .luxury-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -75%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.04), transparent);
+            transform: skewX(-25deg);
+            transition: 0.7s;
+            pointer-events: none;
+        }
+        .luxury-card:hover::before {
+            left: 125%;
+        }
+
+        .kyanot-card {
+            background: linear-gradient(145deg, rgba(8, 38, 30, 0.85) 0%, rgba(5, 22, 17, 0.95) 100%);
+            border: 1px solid rgba(94, 234, 212, 0.25);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Effet couture sur les cartes rappelant la carte de visite en cuir */
+        .stitched-border {
+            outline: 1px dashed rgba(201, 155, 59, 0.22);
+            outline-offset: -8px;
+        }
+
+        .stitched-border-emerald {
+            outline: 1px dashed rgba(94, 234, 212, 0.25);
+            outline-offset: -8px;
+        }
+
+        /* Accordion marker styling */
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-gold-500 selection:text-navy-950">
+<!-- BANDEAU KYANOT EN HAUT -->
+<aside aria-label="Portail KYANOT info" class="bg-gradient-to-r from-emerald_brand-900 via-navy-900 to-emerald_brand-900 border-b border-emerald_brand-400/30 py-2.5 px-4 text-xs">
+<div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+<div class="flex items-center gap-2 text-slate-200">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-semibold border border-emerald-400/40 text-[11px]">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5 animate-pulse"></span>
+                    KYANOT Actif
+                </span>
+<span class="">Portail officiel de pré-instruction 100% en ligne • Évitez les déplacements inutiles</span>
+</div>
+<div class="flex items-center gap-4">
+<a class="text-gold-300 hover:text-white font-medium flex items-center gap-1 transition-colors" href="#kyanot">
+<span class="">Démarrer un dossier à distance</span>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-right" aria-hidden="true" class="lucide lucide-arrow-right w-3.5 h-3.5"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+</a>
+<span class="hidden md:inline text-slate-500">|</span>
+<span class="hidden md:inline text-slate-300">Paiement Mobile Money (Orange, Wave, MTN, Moov)</span>
+</div>
+</div>
+</aside>
+<!-- BARRE DE NAVIGATION -->
+<header class="sticky top-0 z-50 backdrop-blur-md bg-navy-950/90 border-b border-gold-500/20">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-24">
+<!-- Liens Gauche (Desktop) -->
+<nav class="hidden lg:flex items-center space-x-7 text-sm font-medium tracking-wide text-slate-200">
+<a class="hover:text-gold-400 transition-colors" href="#vision">L'Étude &amp; Vision</a>
+<a class="hover:text-gold-400 transition-colors" href="#expertise">Expertises</a>
+<!-- KYANOT mis en valeur dans la nav -->
+<a class="inline-flex items-center gap-1.5 text-emerald-300 hover:text-white font-semibold px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-400/30 transition-all" href="#kyanot">
+<span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+<span class="">Portail KYANOT</span>
+</a>
+<a class="hover:text-gold-400 transition-colors" href="#parcours">Comment ça marche</a>
+</nav>
+<!-- Logo Central (Balance Dorée + Nom) -->
+<a class="flex flex-col items-center group mx-auto lg:mx-0" href="#">
+<div class="w-12 h-12 flex items-center justify-center">
+<!-- SVG Balance de la Justice Dorée -->
+<svg class="w-11 h-11 drop-shadow-[0_2px_8px_rgba(201,155,59,0.3)]" fill="none" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="goldGrad" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#F9E8B2"></stop>
+<stop offset="50%" stop-color="#C99B3B"></stop>
+<stop offset="100%" stop-color="#9A6D1B"></stop>
+</linearGradient>
+</defs>
+<path d="M32 8V54M20 54H44M16 58H48" stroke="url(#goldGrad)" stroke-linecap="round" stroke-width="3"></path>
+<path d="M12 20C20 18 26 16 32 16C38 16 44 18 52 20" stroke="url(#goldGrad)" stroke-linecap="round" stroke-width="2.5"></path>
+<circle cx="32" cy="12" fill="url(#goldGrad)" r="3"></circle>
+<!-- Plateau gauche -->
+<path d="M12 20L6 36H18L12 20Z" stroke="url(#goldGrad)" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M5 36C5 39.5 8 42 12 42C16 42 19 39.5 19 36H5Z" fill="url(#goldGrad)"></path>
+<!-- Plateau droit -->
+<path d="M52 20L46 36H58L52 20Z" stroke="url(#goldGrad)" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M45 36C45 39.5 48 42 52 42C56 42 59 39.5 59 36H45Z" fill="url(#goldGrad)"></path>
+</svg>
+</div>
+<span class="font-serif text-xs sm:text-sm tracking-widest gold-gradient-text font-semibold mt-0.5">Me KOFFI Yassoua Alain</span>
+</a>
+<!-- Liens Droite (Desktop) -->
+<div class="hidden lg:flex items-center space-x-6 text-sm font-medium tracking-wide text-slate-200">
+<button class="kyanot-btn font-medium px-4 py-2 rounded-lg text-xs tracking-wider uppercase flex items-center gap-1.5" onclick="openModal('kyanotModal')">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="file-up" aria-hidden="true" class="lucide lucide-file-up w-3.5 h-3.5 text-emerald-300"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"></path><path d="M14 2v5a1 1 0 0 0 1 1h5"></path><path d="M12 12v6"></path><path d="m15 15-3-3-3 3"></path></svg>
+<span class="">Dépôt en ligne</span>
+</button>
+<button class="hover:text-gold-400 transition-colors" onclick="openModal('rdvModal')">Prendre RDV</button>
+<a class="px-4 py-2 rounded-md border border-gold-400/50 text-gold-300 hover:bg-gold-500/10 transition-all" href="#contact">Accès &amp; Contact</a>
+</div>
+<!-- Bouton Menu Mobile -->
+<div class="lg:hidden">
+<button aria-label="Menu mobile" class="p-2 text-gold-400 hover:text-gold-300 focus:outline-none" id="mobileMenuBtn">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="menu" aria-hidden="true" class="lucide lucide-menu w-7 h-7"><path d="M4 5h16"></path><path d="M4 12h16"></path><path d="M4 19h16"></path></svg>
+</button>
+</div>
+</div>
+</div>
+<!-- Menu Mobile Déroulant -->
+<div class="hidden lg:hidden bg-navy-900 border-b border-gold-500/30 px-4 pt-3 pb-6 space-y-3" id="mobileMenu">
+<a class="block py-2 font-semibold text-emerald-300 border-b border-white/5 flex items-center gap-2" href="#kyanot">
+<span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                KYANOT (Pré-instruction en ligne &amp; Mobile Money)
+            </a>
+<a class="block py-2 text-slate-200 hover:text-gold-400 border-b border-white/5" href="#vision">L'Étude &amp; Notre Vision</a>
+<a class="block py-2 text-slate-200 hover:text-gold-400 border-b border-white/5" href="#expertise">Domaines d'Expertise</a>
+<a class="block py-2 text-slate-200 hover:text-gold-400 border-b border-white/5" href="#parcours">Le Parcours en 4 Étapes</a>
+<a class="block py-2 text-slate-200 hover:text-gold-400 border-b border-white/5" href="#faq">Questions Fréquentes</a>
+<a class="block py-2 text-slate-200 hover:text-gold-400" href="#contact">Contact &amp; Coordonnées</a>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2">
+<button class="w-full kyanot-btn font-semibold py-3 rounded-lg text-center text-sm flex items-center justify-center gap-2" onclick="openModal('kyanotModal')">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="upload-cloud" aria-hidden="true" class="lucide lucide-upload-cloud w-4 h-4"><path d="M12 13v8"></path><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path><path d="m8 17 4-4 4 4"></path></svg>
+                    Déposer mon dossier (KYANOT)
+                </button>
+<button class="w-full gold-btn font-semibold py-3 rounded-lg text-center text-sm" onclick="openModal('rdvModal')">
+                    Prendre rendez-vous
+                </button>
+</div>
+</div>
+</header>
+<!-- SECTION HERO : AVEC KYANOT INTÉGRÉ AU CŒUR DE LA PROMESSE -->
+<section class="relative pt-10 pb-16 lg:py-20 overflow-hidden">
+<!-- Reflet diagonal lumineux de fond -->
+<div class="absolute -top-40 -left-40 w-96 h-96 bg-gold-500/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute top-1/2 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+<!-- Colonne Texte & CTA (7 colonnes) -->
+<div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+<div class="inline-flex flex-wrap items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-300 text-xs uppercase tracking-widest">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="shield-check" aria-hidden="true" class="lucide lucide-shield-check w-4 h-4"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg>
+<span class="">Officier Public &amp; Ministériel • Abidjan, Côte d'Ivoire</span>
+<span class="text-gold-500">•</span>
+<span class="text-emerald-300 font-semibold">Service Digital KYANOT Inclus</span>
+</div>
+<div class="space-y-2">
+<h2 class="font-serif text-2xl sm:text-3xl md:text-4xl text-gold-300 font-normal">
+                            Étude de Me KOFFI Yassoua Alain
+                        </h2>
+<h1 class="font-cinzel text-5xl sm:text-6xl md:text-7xl font-bold tracking-wider gold-gradient-text drop-shadow-sm">
+                            NOTAIRE
+                        </h1>
+</div>
+<!-- Phrase pivot KYANOT : préparez en ligne, ne venez que pour signer -->
+<div class="p-4 rounded-xl bg-gradient-to-r from-emerald-950/60 to-navy-900/80 border border-emerald-500/30 text-left">
+<div class="flex items-start gap-3">
+<div class="w-9 h-9 rounded-lg bg-emerald-500/20 text-emerald-300 flex items-center justify-center shrink-0 mt-0.5">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="sparkles" aria-hidden="true" class="lucide lucide-sparkles w-5 h-5"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"></path><path d="M20 2v4"></path><path d="M22 4h-4"></path><circle cx="4" cy="20" r="2"></circle></svg>
+</div>
+<div>
+<p class="text-emerald-200 text-xs font-semibold uppercase tracking-wider">Innovation de l'Étude — Portail KYANOT</p>
+<p class="text-white text-base sm:text-lg font-medium leading-snug mt-0.5">
+                                    Préparez votre dossier en ligne. <span class="text-gold-300 underline decoration-gold-400/50 underline-offset-4">Ne venez à l'Étude que pour signer.</span>
+</p>
+<p class="text-slate-300 text-xs sm:text-sm mt-1">
+                                    Téléversez vos pièces justificatives, payez les frais de pré-instruction par Mobile Money (Orange, Wave, MTN, Moov). Nos clercs qualifient l'acte avant votre venue solennelle.
+                                </p>
+</div>
+</div>
+</div>
+<!-- Alignement Boutons CTA -->
+<div class="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+<a class="w-full sm:w-auto kyanot-btn font-semibold px-6 py-4 rounded-lg text-sm sm:text-base flex items-center justify-center gap-2" href="#kyanot">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="folder-check" aria-hidden="true" class="lucide lucide-folder-check w-5 h-5 text-emerald-300"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"></path><path d="m9 13 2 2 4-4"></path></svg>
+<span class="">Lancer ma formalité en ligne (KYANOT)</span>
+</a>
+<button class="w-full sm:w-auto gold-btn font-semibold px-6 py-4 rounded-lg text-sm sm:text-base whitespace-nowrap flex items-center justify-center gap-2" onclick="openModal('rdvModal')">
+<span class="">Prendre RDV classique</span>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-right" aria-hidden="true" class="lucide lucide-arrow-right w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+</button>
+</div>
+<!-- Indicateurs de réassurance rapide avec KYANOT -->
+<div class="pt-6 grid grid-cols-3 gap-4 border-t border-gold-500/20 max-w-xl mx-auto lg:mx-0 text-left">
+<div>
+<p class="text-gold-400 font-cinzel font-bold text-xl">100%</p>
+<p class="text-xs text-slate-400">Force probante &amp; authenticité d'État</p>
+</div>
+<div>
+<p class="text-emerald-300 font-cinzel font-bold text-xl">0 Visite</p>
+<p class="text-xs text-slate-400">Pré-instruction &amp; dépôt des pièces à distance</p>
+</div>
+<div>
+<p class="text-gold-400 font-cinzel font-bold text-xl">1 Seule</p>
+<p class="text-xs text-slate-400">Signature solennelle à l'Étude (Bd. VGE)</p>
+</div>
+</div>
+</div>
+<!-- Colonne Portrait du Notaire (5 colonnes) -->
+<div class="lg:col-span-5">
+<div class="relative mx-auto max-w-md lg:max-w-none">
+<!-- Cadre doré lumineux autour de la photo -->
+<div class="p-1.5 rounded-2xl bg-gradient-to-br from-gold-300 via-gold-500 to-navy-800 shadow-2xl">
+<div class="relative rounded-xl overflow-hidden bg-navy-900 aspect-[4/3] flex items-end">
+<!-- Illustration / Portrait exécutif dans un bureau boisé classique -->
+<img alt="Maître KOFFI Yassoua Alain dans son étude" class="w-full h-full object-cover object-top filter contrast-105 brightness-95" onerror="this.src='https://placehold.co/800x600/0c1b38/DFB75A?text=Me+KOFFI+Yassoua+Alain'" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg">
+<!-- Superposition dégradée élégante en bas du portrait -->
+<div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/30 to-transparent"></div>
+<div class="relative z-10 p-5 w-full flex items-center justify-between">
+<div>
+<p class="text-xs uppercase tracking-widest text-gold-300 font-semibold">Cabinet Notarial</p>
+<p class="font-serif text-lg text-white">Me KOFFI Yassoua Alain</p>
+</div>
+<span class="px-3 py-1 rounded-full bg-navy-950/80 border border-emerald-400/40 text-emerald-300 text-xs flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                                        Portail KYANOT connecté
+                                    </span>
+</div>
+</div>
+</div>
+<!-- Mini badge flottant Mobile Money -->
+<div class="mt-3 flex items-center justify-between bg-navy-900/90 border border-gold-500/20 rounded-xl px-4 py-2.5 text-xs text-slate-300">
+<span class="flex items-center gap-1.5">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="smartphone" aria-hidden="true" class="lucide lucide-smartphone w-4 h-4 text-emerald-400"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect><path d="M12 18h.01"></path></svg>
+                                Règlement frais de dossier :
+                            </span>
+<span class="text-gold-300 font-semibold">Orange • Wave • MTN • Moov</span>
+</div>
+</div>
+</div>
+</div>
+<!-- BARRE DES 3 DOMAINES D'EXPERTISE -->
+<div class="mt-14 luxury-card stitched-border rounded-2xl p-6 sm:p-8" id="expertise">
+<div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gold-500/25 gap-6 md:gap-0">
+<!-- Domaine 1 -->
+<div class="flex flex-col items-center text-center px-4 py-2 group cursor-pointer" onclick="showServiceDetail('famille')">
+<div class="w-14 h-14 rounded-full bg-gold-500/10 border border-gold-400/30 flex items-center justify-center text-gold-400 group-hover:scale-110 group-hover:bg-gold-500/20 transition-all mb-4">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="users" aria-hidden="true" class="lucide lucide-users w-7 h-7"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><path d="M16 3.128a4 4 0 0 1 0 7.744"></path><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><circle cx="9" cy="7" r="4"></circle></svg>
+</div>
+<h3 class="font-serif text-xl sm:text-2xl gold-gradient-text font-semibold mb-2">
+                            Droit de la Famille &amp;<br>Successions
+                        </h3>
+<p class="text-sm text-slate-300 max-w-xs">
+                            Contrats de mariage, donations, testaments, règlements successoraux et préservation de la paix familiale.
+                        </p>
+<span class="mt-3 text-xs text-gold-400 flex items-center gap-1 opacity-80 group-hover:opacity-100">
+                            Préparer via KYANOT <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-right" aria-hidden="true" class="lucide lucide-chevron-right w-3.5 h-3.5"><path d="m9 18 6-6-6-6"></path></svg>
+</span>
+</div>
+<!-- Domaine 2 -->
+<div class="flex flex-col items-center text-center px-4 pt-6 md:pt-2 py-2 group cursor-pointer" onclick="showServiceDetail('immobilier')">
+<div class="w-14 h-14 rounded-full bg-gold-500/10 border border-gold-400/30 flex items-center justify-center text-gold-400 group-hover:scale-110 group-hover:bg-gold-500/20 transition-all mb-4">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="home" aria-hidden="true" class="lucide lucide-home w-7 h-7"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+</div>
+<h3 class="font-serif text-xl sm:text-2xl gold-gradient-text font-semibold mb-2">
+                            Immobilier &amp;<br>Patrimoine
+                        </h3>
+<p class="text-sm text-slate-300 max-w-xs">
+                            Sécurisation d'achats de terrains (ACD), ventes immobilières, baux, hypothèques et gestion patrimoniale.
+                        </p>
+<span class="mt-3 text-xs text-gold-400 flex items-center gap-1 opacity-80 group-hover:opacity-100">
+                            Préparer via KYANOT <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-right" aria-hidden="true" class="lucide lucide-chevron-right w-3.5 h-3.5"><path d="m9 18 6-6-6-6"></path></svg>
+</span>
+</div>
+<!-- Domaine 3 -->
+<div class="flex flex-col items-center text-center px-4 pt-6 md:pt-2 py-2 group cursor-pointer" onclick="showServiceDetail('affaires')">
+<div class="w-14 h-14 rounded-full bg-gold-500/10 border border-gold-400/30 flex items-center justify-center text-gold-400 group-hover:scale-110 group-hover:bg-gold-500/20 transition-all mb-4">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="scale" aria-hidden="true" class="lucide lucide-scale w-7 h-7"><path d="M12 3v18"></path><path d="m19 8 3 8a5 5 0 0 1-6 0zV7"></path><path d="M3 7h1a17 17 0 0 0 8-2 17 17 0 0 0 8 2h1"></path><path d="m5 8 3 8a5 5 0 0 1-6 0zV7"></path><path d="M7 21h10"></path></svg>
+</div>
+<h3 class="font-serif text-xl sm:text-2xl gold-gradient-text font-semibold mb-2">
+                            Droit des Affaires<br>&amp; Sociétés
+                        </h3>
+<p class="text-sm text-slate-300 max-w-xs">
+                            Création d'entreprises et startups (OHADA), rédaction de statuts, cessions de parts et baux commerciaux.
+                        </p>
+<span class="mt-3 text-xs text-gold-400 flex items-center gap-1 opacity-80 group-hover:opacity-100">
+                            Préparer via KYANOT <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-right" aria-hidden="true" class="lucide lucide-chevron-right w-3.5 h-3.5"><path d="m9 18 6-6-6-6"></path></svg>
+</span>
+</div>
+</div>
+<!-- Zone d'affichage dynamique des détails de service -->
+<div class="mt-6 pt-6 border-t border-gold-500/20 bg-navy-950/60 rounded-xl p-5 hidden" id="serviceDetailBox">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div>
+<h4 class="font-serif text-lg text-gold-300 font-semibold" id="serviceDetailTitle"></h4>
+<p class="text-sm text-slate-300 mt-1" id="serviceDetailText"></p>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs font-semibold whitespace-nowrap hover:bg-emerald-500/30" onclick="prefillKyanot()">
+                                Pré-instruire en ligne
+                            </button>
+<button class="px-4 py-2 rounded-lg bg-gold-500/20 border border-gold-400/40 text-gold-300 text-xs font-semibold whitespace-nowrap hover:bg-gold-500/30" onclick="openModal('rdvModal')">
+                                RDV Cabinet
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION PRINCIPALE INTÉGRÉE : LE PORTAIL KYANOT -->
+<section class="py-16 lg:py-24 relative border-t border-emerald-500/25 bg-gradient-to-b from-navy-950 via-emerald_brand-900/30 to-navy-950" id="kyanot">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<!-- En-tête KYANOT -->
+<div class="text-center max-w-3xl mx-auto mb-14 space-y-4">
+<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-400/40 text-emerald-300 text-xs uppercase tracking-widest font-semibold">
+<span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+<span class="">KYANOT — Service Officiel de l'Étude</span>
+</div>
+<h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl text-white leading-tight">
+                    Votre formalité notariée en <span class="emerald-gradient-text">quelques clics</span>
+</h2>
+<p class="text-slate-300 text-base sm:text-lg leading-relaxed">
+                    Grâce à la plateforme KYANOT, l'Étude Maître Koffi Yassoua Alain simplifie vos démarches. Vous transmettez vos justificatifs, réglez vos frais de pré-instruction par Mobile Money, et nous préparons l'acte définitif.
+                </p>
+</div>
+<!-- Grille interactive KYANOT : Sélecteur rapide + Simulateur de dossier -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16">
+<!-- Colonne Gauche : Formulaire de sélection directe (KYANOT) -->
+<div class="lg:col-span-5 kyanot-card stitched-border-emerald rounded-2xl p-6 sm:p-8">
+<div class="flex items-center justify-between pb-4 border-b border-emerald-500/20 mb-6">
+<div>
+<span class="text-xs uppercase tracking-widest text-emerald-300 font-semibold">Portail Interactif</span>
+<h3 class="font-serif text-xl sm:text-2xl text-white font-semibold">Commencer en 30 secondes</h3>
+</div>
+<div class="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 flex items-center justify-center font-serif font-bold text-lg">
+                            K
+                        </div>
+</div>
+<p class="text-xs text-slate-300 mb-5">
+                        Indiquez votre démarche juridique pour afficher la liste instantanée des pièces requises et le montant indicatif des frais de pré-instruction :
+                    </p>
+<form class="space-y-4" id="kyanotFastForm" onsubmit="handleKyanotSubmit(event)"><div>
+<label class="block text-xs uppercase tracking-wider text-emerald-300 font-semibold mb-1.5" for="formaliteSelect">
+Formalité notariale sélectionnée
+</label>
+<select class="w-full px-4 py-3 rounded-xl bg-navy-950/90 border border-emerald-500/40 text-white text-sm focus:outline-none focus:border-emerald-300" id="formaliteSelect" onchange="updateFormaliteDetails()">
+<option selected="" value="immobilier">🏡 Vente Immobilière &amp; Sécurisation ACD (Recommandé)</option>
+<option value="societe">Constitution de société (SARL, SAS, SA)</option>
+<option value="procuration">Procuration authentique</option>
+<option value="succession">Règlement de succession</option>
+<option value="donation">Donation entre vifs</option>
+<option value="famille">Contrat de mariage / Acte de famille</option>
+<option value="autre">Autre formalité notariale</option>
+</select>
+</div>
+
+<div class="space-y-3 p-3.5 rounded-xl bg-navy-950/80 border border-emerald-500/30" id="immoFieldsContainer">
+<div>
+<label class="block text-[11px] uppercase tracking-wider text-emerald-300 font-medium mb-1">
+Type d'opération immobilière
+</label>
+<select class="w-full px-3 py-2 rounded-lg bg-navy-900 border border-emerald-500/30 text-white text-xs focus:outline-none focus:border-emerald-300" id="immoOperationType">
+<option value="acquisition_acd">Sécurisation d'acquisition de terrain avec ACD définitif</option>
+<option value="vente_bati">Vente / Achat de bien bâti (Villa, Immeuble, Duplex)</option>
+<option value="verification_titre">Vérification préalable de titre foncier &amp; anti-double vente</option>
+<option value="promesse_vente">Rédaction de promesse synallagmatique de vente</option>
+</select>
+</div>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+<div>
+<label class="block text-[11px] uppercase tracking-wider text-emerald-300 font-medium mb-1">
+Localisation du bien (Commune / Ville)
+</label>
+<input class="w-full px-3 py-2 rounded-lg bg-navy-900 border border-emerald-500/30 text-white text-xs focus:outline-none focus:border-emerald-300" id="immoLocation" placeholder="Ex: Cocody Angré, Bingerville, Assinie..." type="text" value="Cocody, Abidjan">
+</div>
+<div>
+<label class="block text-[11px] uppercase tracking-wider text-emerald-300 font-medium mb-1">
+N° Arrêté ACD / Réf. Titre Foncier
+</label>
+<input class="w-full px-3 py-2 rounded-lg bg-navy-900 border border-emerald-500/30 text-white text-xs focus:outline-none focus:border-emerald-300" id="immoRefAcd" placeholder="Ex: ACD N° 2023-XXXX / TF N°..." type="text">
+</div>
+</div>
+
+<div>
+<label class="block text-[11px] uppercase tracking-wider text-emerald-300 font-medium mb-1">
+Prix de transaction estimé (FCFA)
+</label>
+<input class="w-full px-3 py-2 rounded-lg bg-navy-900 border border-emerald-500/30 text-white text-xs focus:outline-none focus:border-emerald-300" id="immoPrice" placeholder="Ex: 25 000 000" type="text" value="35 000 000 FCFA">
+</div>
+</div>
+
+<div class="p-3.5 rounded-xl bg-navy-950/90 border border-emerald-500/30 text-xs text-slate-300 space-y-2" id="formaliteDynamicBox">
+<div class="flex items-center justify-between text-emerald-300 font-semibold border-b border-white/5 pb-1.5">
+<span class="flex items-center gap-1.5" id="dynFormaliteTitle">🛡️ Sécurisation Foncière &amp; ACD</span>
+<span class="text-gold-300 font-serif font-bold text-xs" id="dynFormaliteFee">Pré-instruction : 35 000 FCFA</span>
+</div>
+<div class="text-[11px] text-slate-300 space-y-1.5 pt-1">
+<p class="font-medium text-emerald-200">Pièces requises pour l'instruction préalable :</p>
+<ul class="space-y-1 text-slate-300 list-disc list-inside">
+<li class="">Copie CNI / Passeport valide de l'acquéreur et du vendeur</li>
+<li class="">Copie de l'Arrêté d'ACD ou Titre Foncier (TF) / CMP</li>
+<li class="">Plan de bornage contradictoire ou extrait topographique visé</li>
+<li class="">Promesse ou protocole de vente signé (le cas échéant)</li>
+</ul>
+</div>
+<div class="pt-2 border-t border-white/5 flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 rounded bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 text-[10px] font-medium">✓ Contrôle anti-double vente</span>
+<span class="px-2 py-0.5 rounded bg-gold-500/15 border border-gold-400/30 text-gold-300 text-[10px] font-medium">✓ Vérification Livre Foncier &amp; Ministère</span>
+</div>
+</div>
+
+<div>
+<label class="block text-xs uppercase tracking-wider text-emerald-300 font-semibold mb-1.5">
+Votre numéro WhatsApp / Mobile Money (Côte d'Ivoire ou Diaspora)
+</label>
+<input class="w-full px-4 py-3 rounded-xl bg-navy-950/90 border border-emerald-500/40 text-white text-sm focus:outline-none focus:border-emerald-300" id="kyanotTel" placeholder="+225 07..." type="tel" value="+225 07 ">
+</div>
+
+<div class="pt-1">
+<button class="w-full kyanot-btn font-semibold py-3.5 rounded-xl text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg" type="submit">
+<span class="">Constituer mon dossier foncier &amp; ACD</span>
+<i class="w-4 h-4" data-lucide="arrow-right"></i>
+</button>
+</div></form>
+<!-- Moyens de paiement Mobile Money certifiés -->
+<div class="mt-6 pt-5 border-t border-emerald-500/20 text-center space-y-2">
+<span class="text-[11px] text-slate-400 uppercase tracking-wider block">Paiements Mobile Money acceptés :</span>
+<div class="flex items-center justify-center gap-2 flex-wrap text-xs">
+<span class="px-2.5 py-1 rounded-md bg-orange-500/10 text-orange-300 border border-orange-500/30 font-semibold">Orange Money</span>
+<span class="px-2.5 py-1 rounded-md bg-sky-500/10 text-sky-300 border border-sky-500/30 font-semibold">Wave CI</span>
+<span class="px-2.5 py-1 rounded-md bg-yellow-500/10 text-yellow-300 border border-yellow-500/30 font-semibold">MTN MoMo</span>
+<span class="px-2.5 py-1 rounded-md bg-blue-500/10 text-blue-300 border border-blue-500/30 font-semibold">Moov Money</span>
+</div>
+</div>
+</div>
+<!-- Colonne Droite : Grille des 6 Formalités du service KYANOT -->
+<div class="lg:col-span-7 space-y-4">
+<div class="flex items-center justify-between mb-2">
+<h4 class="font-serif text-2xl text-white font-semibold">Choisissez directement votre démarche</h4>
+<span class="text-xs text-emerald-300 font-medium hidden sm:inline">6 formalités disponibles</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<!-- Formalité 1 -->
+<div class="p-4 rounded-xl bg-gradient-to-br from-emerald_brand-900/40 to-navy-900/90 border-2 border-emerald-400/40 hover:border-emerald-300 transition-all cursor-pointer group shadow-lg relative" onclick="selectCardFormalite('immobilier')">
+<div class="absolute -top-2.5 right-3 px-2 py-0.5 rounded-full bg-emerald-400 text-navy-950 font-bold text-[10px] uppercase tracking-wider shadow">
+Formalité phare
+</div>
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-lg bg-emerald-500/20 text-emerald-300 flex items-center justify-center text-lg shrink-0 group-hover:scale-105 transition-transform">
+🏠
+</div>
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<h5 class="font-serif text-white group-hover:text-gold-300 font-semibold text-base">Immobilier &amp; Terrain (ACD)</h5>
+</div>
+<p class="text-xs text-slate-300">Vérification ACD, achat de parcelle, vente de villa, anti-double vente.</p>
+<span class="text-[11px] text-emerald-400 font-semibold inline-flex items-center gap-1 pt-1">
+Pré-instruire ce dossier ACD →
+</span>
+</div>
+</div>
+</div>
+<!-- Formalité 2 -->
+<div class="p-4 rounded-xl bg-navy-900/80 border border-gold-500/20 hover:border-emerald-400 transition-all cursor-pointer group" onclick="selectCardFormalite('societe')">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-lg bg-emerald-500/15 text-emerald-300 flex items-center justify-center text-lg shrink-0 group-hover:scale-105 transition-transform">
+                                    🏢
+                                </div>
+<div class="space-y-1">
+<h5 class="font-serif text-white group-hover:text-gold-300 font-semibold text-base">Constitution de Société</h5>
+<p class="text-xs text-slate-300">Création SARL, SAS, SA selon normes OHADA.</p>
+<span class="text-[11px] text-emerald-400 font-semibold inline-flex items-center gap-1 pt-1">
+                                        Pré-instruire ce dossier →
+                                    </span>
+</div>
+</div>
+</div>
+<!-- Formalité 3 -->
+<div class="p-4 rounded-xl bg-navy-900/80 border border-gold-500/20 hover:border-emerald-400 transition-all cursor-pointer group" onclick="selectCardFormalite('procuration')">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-lg bg-emerald-500/15 text-emerald-300 flex items-center justify-center text-lg shrink-0 group-hover:scale-105 transition-transform">
+                                    ✍️
+                                </div>
+<div class="space-y-1">
+<h5 class="font-serif text-white group-hover:text-gold-300 font-semibold text-base">Procuration</h5>
+<p class="text-xs text-slate-300">Donner mandat légal pour agir en votre nom.</p>
+<span class="text-[11px] text-emerald-400 font-semibold inline-flex items-center gap-1 pt-1">
+                                        Pré-instruire ce dossier →
+                                    </span>
+</div>
+</div>
+</div>
+<!-- Formalité 4 -->
+<div class="p-4 rounded-xl bg-navy-900/80 border border-gold-500/20 hover:border-emerald-400 transition-all cursor-pointer group" onclick="selectCardFormalite('succession')">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-lg bg-emerald-500/15 text-emerald-300 flex items-center justify-center text-lg shrink-0 group-hover:scale-105 transition-transform">
+                                    📜
+                                </div>
+<div class="space-y-1">
+<h5 class="font-serif text-white group-hover:text-gold-300 font-semibold text-base">Succession</h5>
+<p class="text-xs text-slate-300">Notoriété, inventaire des biens, partage légal.</p>
+<span class="text-[11px] text-emerald-400 font-semibold inline-flex items-center gap-1 pt-1">
+                                        Pré-instruire ce dossier →
+                                    </span>
+</div>
+</div>
+</div>
+<!-- Formalité 5 -->
+<div class="p-4 rounded-xl bg-navy-900/80 border border-gold-500/20 hover:border-emerald-400 transition-all cursor-pointer group" onclick="selectCardFormalite('donation')">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-lg bg-emerald-500/15 text-emerald-300 flex items-center justify-center text-lg shrink-0 group-hover:scale-105 transition-transform">
+                                    🎁
+                                </div>
+<div class="space-y-1">
+<h5 class="font-serif text-white group-hover:text-gold-300 font-semibold text-base">Donation</h5>
+<p class="text-xs text-slate-300">Transmission de biens de votre vivant en règle.</p>
+<span class="text-[11px] text-emerald-400 font-semibold inline-flex items-center gap-1 pt-1">
+                                        Pré-instruire ce dossier →
+                                    </span>
+</div>
+</div>
+</div>
+<!-- Formalité 6 -->
+<div class="p-4 rounded-xl bg-navy-900/80 border border-gold-500/20 hover:border-emerald-400 transition-all cursor-pointer group" onclick="selectCardFormalite('famille')">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-lg bg-emerald-500/15 text-emerald-300 flex items-center justify-center text-lg shrink-0 group-hover:scale-105 transition-transform">
+                                    👪
+                                </div>
+<div class="space-y-1">
+<h5 class="font-serif text-white group-hover:text-gold-300 font-semibold text-base">Actes de Famille</h5>
+<p class="text-xs text-slate-300">Contrats de mariage, régimes, reconnaissances.</p>
+<span class="text-[11px] text-emerald-400 font-semibold inline-flex items-center gap-1 pt-1">
+                                        Pré-instruire ce dossier →
+                                    </span>
+</div>
+</div>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-navy-950/60 border border-white/5 flex items-center justify-between text-xs text-slate-400">
+<span class="">Votre besoin n'apparaît pas ici ?</span>
+<button class="text-gold-300 hover:text-white underline underline-offset-2 font-medium" onclick="openModal('kyanotModal')">
+                            Soumettre un dossier spécifique
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION LE PARCOURS EN 4 ÉTAPES (ISSU DU PORTAIL KYANOT) -->
+<section class="py-16 lg:py-20 relative border-t border-gold-500/20 bg-navy-900/40" id="parcours">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center max-w-2xl mx-auto mb-14 space-y-3">
+<span class="text-xs uppercase tracking-[0.2em] text-gold-400 font-semibold">Parcours Client KYANOT</span>
+<h3 class="font-serif text-3xl sm:text-4xl gold-gradient-text font-semibold">
+                    Quatre étapes, une seule visite à l'Étude
+                </h3>
+<p class="text-slate-300 text-sm sm:text-base">
+                    Tout ce qui peut se faire à distance se fait en ligne. Le rendez-vous en présentiel à notre cabinet (Bd. VGE, Abidjan) est réservé à la signature solennelle de l'acte authentique.
+                </p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Étape 1 -->
+<div class="luxury-card rounded-2xl p-6 relative border border-gold-500/20 flex flex-col justify-between">
+<div>
+<span class="font-serif text-4xl font-bold text-gold-400 opacity-60">01</span>
+<h4 class="font-serif text-xl text-white font-semibold mt-3 mb-2">Choisissez</h4>
+<p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                            Sélectionnez votre formalité parmi les domaines proposés (immobilier, société, succession, procuration...).
+                        </p>
+</div>
+<div class="mt-6 pt-4 border-t border-white/10 flex items-center text-xs text-gold-300 gap-1.5 font-medium">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" aria-hidden="true" class="lucide lucide-check w-3.5 h-3.5"><path d="M20 6 9 17l-5-5"></path></svg>
+<span class="">En moins d'1 minute</span>
+</div>
+</div>
+<!-- Étape 2 -->
+<div class="luxury-card rounded-2xl p-6 relative border border-gold-500/20 flex flex-col justify-between">
+<div>
+<span class="font-serif text-4xl font-bold text-gold-400 opacity-60">02</span>
+<h4 class="font-serif text-xl text-white font-semibold mt-3 mb-2">Téléversez</h4>
+<p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                            Déposez vos pièces d'identité et documents justificatifs directement depuis votre smartphone ou votre ordinateur.
+                        </p>
+</div>
+<div class="mt-6 pt-4 border-t border-white/10 flex items-center text-xs text-emerald-300 gap-1.5 font-medium">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="upload-cloud" aria-hidden="true" class="lucide lucide-upload-cloud w-3.5 h-3.5"><path d="M12 13v8"></path><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path><path d="m8 17 4-4 4 4"></path></svg>
+<span class="">Coffre fort chiffré</span>
+</div>
+</div>
+<!-- Étape 3 -->
+<div class="luxury-card rounded-2xl p-6 relative border border-gold-500/20 flex flex-col justify-between">
+<div>
+<span class="font-serif text-4xl font-bold text-gold-400 opacity-60">03</span>
+<h4 class="font-serif text-xl text-white font-semibold mt-3 mb-2">Réglez</h4>
+<p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                            Payez vos frais de pré-instruction en toute simplicité par Mobile Money (Orange, Wave, MTN ou Moov).
+                        </p>
+</div>
+<div class="mt-6 pt-4 border-t border-white/10 flex items-center text-xs text-gold-300 gap-1.5 font-medium">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="smartphone" aria-hidden="true" class="lucide lucide-smartphone w-3.5 h-3.5"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect><path d="M12 18h.01"></path></svg>
+<span class="">Reçu instantané</span>
+</div>
+</div>
+<!-- Étape 4 -->
+<div class="luxury-card rounded-2xl p-6 relative border border-gold-500/20 flex flex-col justify-between">
+<div>
+<span class="font-serif text-4xl font-bold text-emerald-400 opacity-80">04</span>
+<h4 class="font-serif text-xl text-white font-semibold mt-3 mb-2">Signez</h4>
+<p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                            Les clercs instruisent et préparent la minute. Vous venez à l'Étude uniquement pour la signature solennelle.
+                        </p>
+</div>
+<div class="mt-6 pt-4 border-t border-white/10 flex items-center text-xs text-gold-300 gap-1.5 font-medium">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="award" aria-hidden="true" class="lucide lucide-award w-3.5 h-3.5"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"></path><circle cx="12" cy="8" r="6"></circle></svg>
+<span class="">Acte Authentique revêtu</span>
+</div>
+</div>
+</div>
+<!-- Mockup visuel du suivi de dossier en ligne -->
+<div class="mt-12 p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-navy-950 via-emerald_brand-900/40 to-navy-950 border border-emerald-500/30 flex flex-col lg:flex-row items-center justify-between gap-6">
+<div class="space-y-2 max-w-lg">
+<span class="text-xs uppercase tracking-wider text-emerald-300 font-semibold">Suivi d'instruction en direct</span>
+<h4 class="font-serif text-xl sm:text-2xl text-white font-semibold">Un dossier qualifié avant votre venue</h4>
+<p class="text-xs sm:text-sm text-slate-300">
+                        Votre démarche est suivie en temps réel par les clercs de l'Étude de Me Koffi. Vous êtes notifié par SMS et WhatsApp dès que l'acte est prêt pour la signature.
+                    </p>
+</div>
+<!-- Widget état du dossier -->
+<div class="w-full lg:w-96 bg-navy-950/90 rounded-xl border border-gold-500/30 p-4 space-y-2.5">
+<div class="flex items-center justify-between text-xs py-1.5 px-3 rounded-lg bg-white/5">
+<span class="text-slate-300">1. Pièces téléversées</span>
+<span class="text-emerald-400 font-semibold flex items-center gap-1">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle" aria-hidden="true" class="lucide lucide-check-circle w-3.5 h-3.5"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg> Reçues
+                        </span>
+</div>
+<div class="flex items-center justify-between text-xs py-1.5 px-3 rounded-lg bg-white/5">
+<span class="text-slate-300">2. Frais Mobile Money</span>
+<span class="text-emerald-400 font-semibold flex items-center gap-1">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle" aria-hidden="true" class="lucide lucide-check-circle w-3.5 h-3.5"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg> Validés
+                        </span>
+</div>
+<div class="flex items-center justify-between text-xs py-1.5 px-3 rounded-lg bg-emerald-500/10 border border-emerald-400/30">
+<span class="text-emerald-200">3. Examen par les clercs</span>
+<span class="text-gold-300 font-semibold animate-pulse">En cours</span>
+</div>
+<div class="py-2 px-3 rounded-lg bg-gradient-to-r from-gold-500 to-gold-600 text-navy-950 font-bold text-center text-xs tracking-wider uppercase">
+                        4. Signature solennelle à l'Étude
+                    </div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION MANIFESTE : RASSURER LES ANCIENS & ATTIRER LA NOUVELLE GÉNÉRATION -->
+<section class="py-16 lg:py-24 relative border-t border-gold-500/15 bg-navy-900/40" id="vision">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<!-- En-tête du Manifeste -->
+<div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+<span class="text-xs uppercase tracking-[0.25em] text-gold-400 font-semibold">
+                    Tradition Notariale &amp; Révolution Numérique
+                </span>
+<h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl gold-gradient-text leading-tight">
+                    À l'heure d'Internet, tout s'accélère.<br>Mais seule l'authenticité protège durablement.
+                </h2>
+<p class="text-slate-300 text-base sm:text-lg leading-relaxed">
+                    Un contrat téléchargé sur le web ou un accord conclu sur les réseaux sociaux ne remplacera jamais la sécurité du sceau de l'État. L'Étude de <strong>Me KOFFI Yassoua Alain</strong> jette un pont solide entre les générations.
+                </p>
+</div>
+<!-- Double Carte : Les Aînés vs La Nouvelle Génération -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+<!-- VOLET 1 : RASSURER LES ANCIENS & BÂTISSEURS -->
+<div class="luxury-card stitched-border rounded-2xl p-8 sm:p-10 flex flex-col justify-between">
+<div class="space-y-6">
+<div class="flex items-center justify-between">
+<span class="px-3.5 py-1 rounded-full bg-gold-500/15 border border-gold-400/30 text-gold-300 text-xs font-medium tracking-wider uppercase">
+                                Pour nos Aînés &amp; les Bâtisseurs
+                            </span>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="landmark" aria-hidden="true" class="lucide lucide-landmark w-8 h-8 text-gold-400"><path d="M10 18v-7"></path><path d="M11.119 2.205a2 2 0 0 1 1.762 0l7.84 3.846A.5.5 0 0 1 20.5 7h-17a.5.5 0 0 1-.22-.949z"></path><path d="M14 18v-7"></path><path d="M18 18v-7"></path><path d="M3 22h18"></path><path d="M6 18v-7"></path></svg>
+</div>
+<h3 class="font-serif text-2xl sm:text-3xl text-white leading-snug">
+                            La parole écoutée, le secret gardé et l'œuvre d'une vie préservée.
+                        </h3>
+<p class="text-slate-300 leading-relaxed text-sm sm:text-base">
+                            Vous avez bâti votre patrimoine à la sueur de votre front. Nous savons que pour vous, la justice et le droit reposent avant tout sur <strong>le regard, la poignée de main, l'écoute attentive et le respect de la parole donnée</strong>.
+                        </p>
+<p class="text-slate-300 leading-relaxed text-sm sm:text-base">
+                            À l'Étude de Maître KOFFI Yassoua Alain, la technologie ne remplacera jamais l'humain. Nous vous recevons dans le calme et la confidentialité absolue de notre cabinet pour organiser la transmission de vos biens, protéger votre conjoint et éviter les conflits entre vos héritiers. Vos actes sont rédigés avec la rigueur solennelle d'autrefois et conservés de manière inaltérable au rang de nos minutes.
+                        </p>
+<ul class="space-y-3 pt-2 text-sm text-slate-200">
+<li class="flex items-start gap-3">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle-2" aria-hidden="true" class="lucide lucide-check-circle-2 w-5 h-5 text-gold-400 shrink-0 mt-0.5"><circle cx="12" cy="12" r="10"></circle><path d="m16 9-5.5 5.5L8 12"></path></svg>
+<span class=""><strong>Accueil personnalisé au cabinet :</strong> prenez tout le temps nécessaire avec votre Notaire, sans barrière technologique.</span>
+</li>
+<li class="flex items-start gap-3">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle-2" aria-hidden="true" class="lucide lucide-check-circle-2 w-5 h-5 text-gold-400 shrink-0 mt-0.5"><circle cx="12" cy="12" r="10"></circle><path d="m16 9-5.5 5.5L8 12"></path></svg>
+<span class=""><strong>Paix des familles :</strong> des testaments, donations et partages limpides pour que votre héritage reste une bénédiction.</span>
+</li>
+<li class="flex items-start gap-3">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle-2" aria-hidden="true" class="lucide lucide-check-circle-2 w-5 h-5 text-gold-400 shrink-0 mt-0.5"><circle cx="12" cy="12" r="10"></circle><path d="m16 9-5.5 5.5L8 12"></path></svg>
+<span class=""><strong>Conservation perpétuelle :</strong> vos titres de propriété originaux sont protégés contre toute perte ou falsification.</span>
+</li>
+</ul>
+</div>
+<div class="mt-8 pt-6 border-t border-gold-500/20 flex items-center justify-between">
+<span class="font-serif italic text-gold-300 text-sm">« La sagesse d'hier, protégée pour demain. »</span>
+<a class="text-xs uppercase tracking-wider text-white hover:text-gold-300 flex items-center gap-1 font-semibold" href="#contact">
+                            Nous rendre visite <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-up-right" aria-hidden="true" class="lucide lucide-arrow-up-right w-4 h-4"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+</a>
+</div>
+</div>
+<!-- VOLET 2 : ATTIRER LA NOUVELLE GÉNÉRATION & LA DIASPORA -->
+<div class="luxury-card stitched-border rounded-2xl p-8 sm:p-10 flex flex-col justify-between">
+<div class="space-y-6">
+<div class="flex items-center justify-between">
+<span class="px-3.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 text-xs font-medium tracking-wider uppercase">
+                                Nouvelle Génération, Entrepreneurs &amp; Diaspora
+                            </span>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="globe-lock" aria-hidden="true" class="lucide lucide-globe-lock w-8 h-8 text-emerald-400"><path d="M15.686 15A14.5 14.5 0 0 1 12 22a14.5 14.5 0 0 1 0-20 10 10 0 1 0 9.542 13"></path><path d="M2 12h8.5"></path><path d="M20 6V4a2 2 0 1 0-4 0v2"></path><rect width="8" height="5" x="14" y="6" rx="1"></rect></svg>
+</div>
+<h3 class="font-serif text-2xl sm:text-3xl text-white leading-snug">
+                            À l'ère des faux profils et des arnaques en ligne, KYANOT est votre pare-feu juridique.
+                        </h3>
+<p class="text-slate-300 leading-relaxed text-sm sm:text-base">
+                            Sur Internet, tout semble instantané : on achète un terrain via une annonce Facebook, on télécharge des statuts gratuits, on conclut un partenariat WhatsApp. Mais <strong>le virtuel comporte d'immenses pièges</strong> : doubles ventes foncières, faux documents, associés fantômes ou contrats sans valeur.
+                        </p>
+<p class="text-slate-300 leading-relaxed text-sm sm:text-base">
+                            Avec KYANOT et l'authentification notariale, ce n'est pas ralentir vos projets : c'est les <strong>blinder juridiquement</strong>. Nous vérifions l'origine exacte des titres fonciers (ACD), certifions l'identité réelle des signataires et donnons force exécutoire à vos contrats d'affaires, avec la réactivité connectée de votre quotidien.
+                        </p>
+<ul class="space-y-3 pt-2 text-sm text-slate-200">
+<li class="flex items-start gap-3">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="shield-alert" aria-hidden="true" class="lucide lucide-shield-alert w-5 h-5 text-gold-400 shrink-0 mt-0.5"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>
+<span class=""><strong>Zéro arnaque foncière :</strong> vérification stricte au Livre Foncier et au Ministère avant le moindre versement.</span>
+</li>
+<li class="flex items-start gap-3">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="rocket" aria-hidden="true" class="lucide lucide-rocket w-5 h-5 text-gold-400 shrink-0 mt-0.5"><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09"></path><path d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z"></path><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05"></path></svg>
+<span class=""><strong>Startups &amp; PME solides :</strong> des statuts sur mesure qui rassurent vos banques et investisseurs internationaux.</span>
+</li>
+<li class="flex items-start gap-3">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="smartphone" aria-hidden="true" class="lucide lucide-smartphone w-5 h-5 text-emerald-400 shrink-0 mt-0.5"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect><path d="M12 18h.01"></path></svg>
+<span class=""><strong>Pré-étude digitale KYANOT :</strong> téléversez vos pièces, payez par Mobile Money et suivez tout à distance.</span>
+</li>
+</ul>
+</div>
+<div class="mt-8 pt-6 border-t border-gold-500/20 flex items-center justify-between">
+<span class="font-serif italic text-emerald-300 text-sm">« La vitesse du digital, la certitude de la Loi. »</span>
+<a class="text-xs uppercase tracking-wider text-emerald-300 hover:text-white flex items-center gap-1 font-semibold" href="#kyanot">
+                            Lancer sur KYANOT <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-right" aria-hidden="true" class="lucide lucide-arrow-right w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION COMPARATIVE : POURQUOI L'ACTE AUTHENTIQUE À L'HEURE D'INTERNET ? -->
+<section class="py-16 lg:py-20 border-t border-gold-500/15" id="pourquoi-authentifier">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="luxury-card rounded-2xl p-6 sm:p-10 lg:p-12">
+<div class="max-w-3xl mx-auto text-center mb-10">
+<h3 class="font-serif text-2xl sm:text-3xl gold-gradient-text font-semibold">
+                        Simple document téléchargé sur Internet vs. Acte Authentique Notarié
+                    </h3>
+<p class="text-sm sm:text-base text-slate-300 mt-2">
+                        Pourquoi la signature officielle du Notaire reste irremplaçable pour sécuriser vos investissements en Côte d'Ivoire et à l'international.
+                    </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Colonne Risques du Sous-seing privé / Internet -->
+<div class="rounded-xl bg-navy-950/70 border border-red-500/20 p-6 space-y-4">
+<div class="flex items-center gap-3 text-red-300 font-semibold">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="file-warning" aria-hidden="true" class="lucide lucide-file-warning w-6 h-6"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg>
+<h4 class="">Accord sous seing privé ou modèle téléchargé</h4>
+</div>
+<ul class="space-y-3 text-sm text-slate-300">
+<li class="flex items-start gap-2.5">
+<span class="text-red-400 font-bold">✕</span>
+<span class=""><strong>Date et identité contestables :</strong> une partie peut nier sa signature ou prétendre ne pas avoir compris son engagement.</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="text-red-400 font-bold">✕</span>
+<span class=""><strong>Inefficace pour l'immobilier :</strong> en Côte d'Ivoire, toute transaction foncière non passée devant Notaire est frappée de nullité absolue.</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="text-red-400 font-bold">✕</span>
+<span class=""><strong>Risque de perte irrémédiable :</strong> si l'original papier ou le fichier PDF est perdu, détruit ou piraté, vous perdez votre droit.</span>
+</li>
+</ul>
+</div>
+<!-- Colonne Force de l'Acte Notarié -->
+<div class="rounded-xl bg-gold-500/10 border border-gold-400/40 p-6 space-y-4">
+<div class="flex items-center gap-3 text-gold-300 font-semibold">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="award" aria-hidden="true" class="lucide lucide-award w-6 h-6"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"></path><circle cx="12" cy="8" r="6"></circle></svg>
+<h4 class="">Acte Authentique signé chez Me KOFFI Yassoua Alain</h4>
+</div>
+<ul class="space-y-3 text-sm text-slate-200">
+<li class="flex items-start gap-2.5">
+<span class="text-gold-400 font-bold">✓</span>
+<span class=""><strong>Force probante maximale :</strong> l'acte fait foi de sa date, de son contenu et de l'identité des signataires devant tous les tribunaux.</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="text-gold-400 font-bold">✓</span>
+<span class=""><strong>Force exécutoire immédiate :</strong> il a la même valeur qu'un jugement définitif, sans avoir besoin d'engager un procès.</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="text-gold-400 font-bold">✓</span>
+<span class=""><strong>Archivage officiel garanti :</strong> l'original (la minute) est conservé perpétuellement ; des copies certifiées peuvent vous être délivrées à vie.</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION FAQ KYANOT & NOTARIAT -->
+<section class="py-16 lg:py-20 border-t border-gold-500/15 bg-navy-950" id="faq">
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-12 space-y-3">
+<span class="text-xs uppercase tracking-widest text-emerald-300 font-semibold">Questions Fréquentes</span>
+<h3 class="font-serif text-3xl gold-gradient-text font-semibold">Tout comprendre avant de commencer</h3>
+</div>
+<div class="space-y-4">
+<details class="group rounded-xl bg-navy-900 border border-gold-500/20 p-5 cursor-pointer">
+<summary class="flex items-center justify-between font-serif text-white font-semibold text-base">
+<span class="">Dois-je me déplacer plusieurs fois à l'Étude notariale ?</span>
+<span class="text-gold-400 text-xl font-bold group-open:rotate-45 transition-transform">+</span>
+</summary>
+<p class="text-sm text-slate-300 mt-3 pt-3 border-t border-white/5 leading-relaxed">
+                        Non ! C'est tout l'avantage du service KYANOT : vous réalisez le choix de votre démarche, le téléversement de vos pièces d'identité et le règlement des frais de pré-instruction en ligne. Vous ne venez à l'Étude (Boulevard VGE à Abidjan) que pour le rendez-vous solennel de signature lorsque le dossier est entièrement instruit.
+                    </p>
+</details>
+<details class="group rounded-xl bg-navy-900 border border-gold-500/20 p-5 cursor-pointer">
+<summary class="flex items-center justify-between font-serif text-white font-semibold text-base">
+<span class="">Comment s'effectue le paiement par Mobile Money ?</span>
+<summary class="flex items-center justify-between font-serif text-white font-semibold text-base hidden"></summary>
+<span class="text-gold-400 text-xl font-bold group-open:rotate-45 transition-transform">+</span>
+</summary>
+<p class="text-sm text-slate-300 mt-3 pt-3 border-t border-white/5 leading-relaxed">
+                        Le paiement se fait directement depuis votre téléphone via les opérateurs de référence en Côte d'Ivoire : Orange Money, Wave CI, MTN Mobile Money et Moov Money. Vous recevez instantanément un justificatif officiel par SMS et e-mail.
+                    </p>
+</details>
+<details class="group rounded-xl bg-navy-900 border border-gold-500/20 p-5 cursor-pointer">
+<summary class="flex items-center justify-between font-serif text-white font-semibold text-base">
+<span class="">Quelles sont les pièces requises pour mon dossier ?</span>
+<span class="text-gold-400 text-xl font-bold group-open:rotate-45 transition-transform">+</span>
+</summary>
+<p class="text-sm text-slate-300 mt-3 pt-3 border-t border-white/5 leading-relaxed">
+                        La liste exacte dépend de la formalité choisie (ex : pièce d'identité CNI/Passeport, extrait d'acte de naissance, titre foncier ACD ou projet de statuts). Notre formulaire KYANOT vous guide pas à pas pour déposer chaque document au bon format.
+                    </p>
+</details>
+<details class="group rounded-xl bg-navy-900 border border-gold-500/20 p-5 cursor-pointer">
+<summary class="flex items-center justify-between font-serif text-white font-semibold text-base">
+<span class="">Qui examine et rédige les actes notariés ?</span>
+<span class="text-gold-400 text-xl font-bold group-open:rotate-45 transition-transform">+</span>
+</summary>
+<p class="text-sm text-slate-300 mt-3 pt-3 border-t border-white/5 leading-relaxed">
+                        Les clercs et juristes assermentés de l'Étude de Maître Koffi Yassoua Alain reçoivent, vérifient l'authenticité de vos pièces et procèdent aux réquisitions d'usage avant que Maître KOFFI ne reçoive personnellement les parties pour la lecture solennelle et la signature.
+                    </p>
+</details>
+</div>
+</div>
+</section>
+<!-- PIED DE PAGE AVEC LE QR CODE SIGNATURE "NOTAIRE" ET LES COORDONNÉES COMPLETES -->
+<footer class="border-t border-gold-500/30 bg-navy-950 relative overflow-hidden" id="contact">
+<!-- Reflet doré diagonal en bas à droite comme sur la maquette -->
+<div class="absolute -bottom-24 -right-24 w-80 h-80 bg-gradient-to-tl from-gold-400/20 via-gold-500/5 to-transparent rounded-full blur-2xl pointer-events-none"></div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+<!-- Bloc Gauche : Le QR Code Doré avec "NOTAIRE" au centre (5 colonnes) -->
+<div class="lg:col-span-5 flex flex-col sm:flex-row items-center gap-6 justify-center lg:justify-start">
+<!-- Carte QR Code effet cuir bleu & dorure à chaud -->
+<div class="p-3 rounded-xl luxury-card stitched-border shrink-0 shadow-2xl group cursor-pointer" onclick="downloadVCard()" title="Cliquez pour télécharger la fiche contact (vCard)">
+<!-- SVG QR Code Doré sur mesure avec "NOTAIRE" au centre -->
+<svg class="rounded-lg" fill="none" height="150" viewBox="0 0 150 150" width="150" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#071124" height="150" width="150"></rect>
+<defs>
+<linearGradient gradientUnits="userSpaceOnUse" id="qrGold" x1="0%" x2="150" y1="0%" y2="150">
+<stop offset="0%" stop-color="#F9E8B2"></stop>
+<stop offset="45%" stop-color="#DFB75A"></stop>
+<stop offset="100%" stop-color="#B38328"></stop>
+</linearGradient>
+</defs>
+<!-- Repères d'angle QR (Haut-Gauche, Haut-Droit, Bas-Gauche) -->
+<rect height="34" stroke="url(#qrGold)" stroke-width="5" width="34" x="10" y="10"></rect>
+<rect fill="url(#qrGold)" height="14" width="14" x="20" y="20"></rect>
+<rect height="34" stroke="url(#qrGold)" stroke-width="5" width="34" x="106" y="10"></rect>
+<rect fill="url(#qrGold)" height="14" width="14" x="116" y="20"></rect>
+<rect height="34" stroke="url(#qrGold)" stroke-width="5" width="34" x="10" y="106"></rect>
+<rect fill="url(#qrGold)" height="14" width="14" x="20" y="116"></rect>
+<!-- Modules de données du QR Code autour du centre -->
+<g fill="url(#qrGold)">
+<rect height="6" width="6" x="52" y="10"></rect><rect height="6" width="12" x="64" y="10"></rect><rect height="12" width="6" x="82" y="10"></rect><rect height="6" width="6" x="94" y="16"></rect>
+<rect height="6" width="12" x="52" y="22"></rect><rect height="12" width="6" x="70" y="22"></rect><rect height="6" width="12" x="88" y="28"></rect>
+<rect height="6" width="6" x="58" y="34"></rect><rect height="6" width="12" x="76" y="34"></rect>
+<rect height="6" width="12" x="10" y="52"></rect><rect height="6" width="6" x="28" y="52"></rect><rect height="6" width="12" x="40" y="46"></rect>
+<rect height="12" width="6" x="10" y="88"></rect><rect height="6" width="12" x="22" y="94"></rect><rect height="6" width="6" x="40" y="94"></rect>
+<rect height="6" width="12" x="106" y="52"></rect><rect height="6" width="6" x="124" y="52"></rect><rect height="12" width="6" x="134" y="48"></rect>
+<rect height="6" width="12" x="118" y="94"></rect><rect height="12" width="6" x="134" y="88"></rect>
+<rect height="6" width="12" x="52" y="106"></rect><rect height="6" width="12" x="70" y="100"></rect><rect height="12" width="6" x="88" y="106"></rect>
+<rect height="12" width="6" x="58" y="118"></rect><rect height="6" width="12" x="70" y="112"></rect><rect height="6" width="12" x="88" y="124"></rect>
+<rect height="6" width="18" x="52" y="134"></rect><rect height="10" width="6" x="76" y="130"></rect><rect height="6" width="12" x="94" y="134"></rect>
+<rect height="12" width="12" x="106" y="106"></rect><rect height="6" width="16" x="124" y="112"></rect><rect height="16" width="6" x="112" y="124"></rect><rect height="12" width="16" x="124" y="128"></rect>
+<rect height="6" width="8" x="14" y="64"></rect><rect height="6" width="8" x="14" y="76"></rect>
+<rect height="6" width="8" x="128" y="64"></rect><rect height="6" width="8" x="128" y="76"></rect>
+</g>
+<!-- Cartouche Central "NOTAIRE" -->
+<rect fill="#071124" height="30" rx="3" stroke="url(#qrGold)" stroke-width="2" width="98" x="26" y="60"></rect>
+<text fill="url(#qrGold)" font-family="Cinzel, serif" font-size="16" font-weight="700" letter-spacing="1.5" text-anchor="middle" x="75" y="80">NOTAIRE</text>
+</svg>
+</div>
+<div class="text-center sm:text-left space-y-2">
+<p class="text-lg sm:text-xl font-medium text-white leading-snug">
+                            Scannez pour enregistrer<br>nos coordonnées
+                        </p>
+<p class="text-xs text-slate-400 max-w-xs">
+                            Carte de visite digitale instantanée pour smartphones, ou téléchargez ci-dessous :
+                        </p>
+<button class="inline-flex items-center gap-2 text-xs font-semibold text-gold-300 hover:text-gold-200 underline underline-offset-4 pt-1" onclick="downloadVCard()">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="download" aria-hidden="true" class="lucide lucide-download w-4 h-4"><path d="M12 15V3"></path><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="m7 10 5 5 5-5"></path></svg>
+                            Télécharger la fiche contact (.vcf)
+                        </button>
+</div>
+</div>
+<!-- Séparateur Vertical Doré (1 colonne sur grand écran) -->
+<div class="hidden lg:flex lg:col-span-1 justify-center">
+<div class="h-32 w-[1px] bg-gradient-to-b from-transparent via-gold-400/60 to-transparent"></div>
+</div>
+<!-- Bloc Droit : Adresse & Coordonnées Officielles (6 colonnes) -->
+<div class="lg:col-span-6 text-center lg:text-right space-y-3">
+<div class="inline-flex items-center gap-2 text-xs text-emerald-400 font-semibold mb-1">
+<span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+<span class="">Plateforme KYANOT intégrée à l'Étude</span>
+</div>
+<h4 class="font-serif text-xl gold-gradient-text font-semibold">
+                        Étude de Maître KOFFI Yassoua Alain
+                    </h4>
+<p class="text-base sm:text-lg text-slate-100 font-medium">
+                        Bd. VGE – Immeuble Balance (face Solibra) – Abidjan, Côte d'Ivoire
+                    </p>
+<p class="text-xs text-slate-400">
+                        Adresse postale : 30 B.P. 524 Abidjan 30 / Côte d'Ivoire
+                    </p>
+<div class="pt-2 flex flex-col sm:flex-row lg:flex-col items-center lg:items-end justify-center gap-2 sm:gap-6 lg:gap-1.5 text-base sm:text-lg">
+<a class="text-white hover:text-gold-300 transition-colors font-semibold flex items-center gap-2" href="tel:+2250709341341">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="phone" aria-hidden="true" class="lucide lucide-phone w-4 h-4 text-gold-400"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"></path></svg>
+<span class="">+225 07 09 34 13 41</span>
+</a>
+<p class="text-xs text-slate-400">
+                            Tél. Fixe : +225 21 24 37 24
+                        </p>
+<a class="text-gold-300 hover:text-gold-200 transition-colors flex items-center gap-2" href="mailto:kyanot@aviso.ci">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="mail" aria-hidden="true" class="lucide lucide-mail w-4 h-4 text-gold-400"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path><rect x="2" y="4" width="20" height="16" rx="2"></rect></svg>
+<span class="">kyanot@aviso.ci</span>
+</a>
+</div>
+<div class="pt-3 flex flex-wrap justify-center lg:justify-end gap-3">
+<button class="px-3.5 py-1.5 rounded-md bg-navy-800 border border-gold-500/30 text-xs text-slate-200 hover:border-gold-400 flex items-center gap-1.5" onclick="copyContact('kyanot@aviso.ci', 'Adresse e-mail copiée !')">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="copy" aria-hidden="true" class="lucide lucide-copy w-3.5 h-3.5 text-gold-400"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg> Copier l'e-mail
+                        </button>
+<button class="px-3.5 py-1.5 rounded-md bg-navy-800 border border-gold-500/30 text-xs text-slate-200 hover:border-gold-400 flex items-center gap-1.5" onclick="copyContact('+2250709341341', 'Numéro de téléphone copié !')">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="phone-forwarded" aria-hidden="true" class="lucide lucide-phone-forwarded w-3.5 h-3.5 text-gold-400"><path d="M14 6h8"></path><path d="m18 2 4 4-4 4"></path><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"></path></svg> Copier le numéro
+                        </button>
+</div>
+</div>
+</div>
+<!-- Bas de page légal -->
+<div class="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
+<p class="">© 2026 Étude de Maître KOFFI Yassoua Alain – Notaire à Abidjan &amp; Portail KYANOT. Tous droits réservés.</p>
+<p class="text-gold-400/80">Chambre des Notaires de Côte d'Ivoire • Confidentialité &amp; Secret Professionnel</p>
+</div>
+</div>
+</footer>
+<!-- MODALE KYANOT : DÉPÔT DE PIÈCES & PAIEMENT MOBILE MONEY -->
+<div class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/85 backdrop-blur-md" id="kyanotModal">
+<div class="kyanot-card stitched-border-emerald rounded-2xl max-w-xl w-full p-6 sm:p-8 relative animate-fadeIn max-h-[90vh] overflow-y-auto">
+<button class="absolute top-5 right-5 text-slate-400 hover:text-emerald-300" onclick="closeModal('kyanotModal')">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="x" aria-hidden="true" class="lucide lucide-x w-6 h-6"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+</button>
+<div class="space-y-2 mb-6">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+<span class="text-xs uppercase tracking-widest text-emerald-300 font-semibold">Portail KYANOT • Constitution de dossier</span>
+</div>
+<h3 class="font-serif text-2xl text-white font-semibold">Téléversez vos pièces &amp; réglez la pré-instruction</h3>
+<p class="text-xs sm:text-sm text-slate-300">
+                    Nos clercs examinent la régularité de vos documents sous 24 à 48h. Vous serez convoqué à l'Étude uniquement pour la signature solennelle.
+                </p>
+</div>
+<form class="space-y-4" id="modalKyanotForm" onsubmit="submitKyanotDossier(event)"><div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block text-xs uppercase tracking-wider text-emerald-300 mb-1">Nom &amp; Prénoms du demandeur</label>
+<input class="w-full px-4 py-2.5 rounded-lg bg-navy-950 border border-emerald-500/30 text-white text-sm focus:outline-none focus:border-emerald-400" placeholder="M. / Mme ..." required="" type="text">
+</div>
+<div>
+<label class="block text-xs uppercase tracking-wider text-emerald-300 mb-1">Numéro Mobile Money / WhatsApp</label>
+<input class="w-full px-4 py-2.5 rounded-lg bg-navy-950 border border-emerald-500/30 text-white text-sm focus:outline-none focus:border-emerald-400" placeholder="+225 07..." required="" type="tel">
+</div>
+</div>
+
+<div>
+<label class="block text-xs uppercase tracking-wider text-emerald-300 mb-1">Formalité choisie</label>
+<select class="w-full px-3 py-2.5 rounded-lg bg-navy-950 border border-emerald-500/30 text-white text-sm focus:outline-none focus:border-emerald-400" id="modalFormaliteSelect">
+<option selected="" value="immobilier">🏡 Vente Immobilière &amp; Sécurisation ACD (Contrôle Foncier)</option>
+<option value="societe">Constitution de société (SARL / SAS / SA)</option>
+<option value="procuration">Procuration authentique notariée</option>
+<option value="succession">Succession &amp; Partage légal</option>
+<option value="donation">Donation entre vifs</option>
+<option value="famille">Contrat de mariage / Acte de famille</option>
+<option value="autre">Autre formalité</option>
+</select>
+</div>
+
+<div class="p-3 rounded-lg bg-navy-950/80 border border-emerald-500/30 space-y-2">
+<p class="text-xs font-semibold text-emerald-200">Pièces requises pour la formalité Vente Immobilière &amp; ACD :</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-[11px] text-slate-300">
+<span class="flex items-center gap-1">📄 CNI / Passeport des parties</span>
+<span class="flex items-center gap-1">📜 Arrêté ACD ou Titre Foncier</span>
+<span class="flex items-center gap-1">📐 Plan topographique / Bornage</span>
+<span class="flex items-center gap-1">📑 Projet ou protocole de vente</span>
+</div>
+</div>
+
+<div>
+<label class="block text-xs uppercase tracking-wider text-emerald-300 mb-1">Téléversement des pièces justificatives (ACD, Pièces d'identité, Plans)</label>
+<div class="border-2 border-dashed border-emerald-500/40 rounded-xl p-5 text-center bg-navy-950/70 hover:border-emerald-300 transition-colors cursor-pointer" onclick="document.getElementById('fileUploadInput').click()">
+<i class="w-8 h-8 text-emerald-400 mx-auto mb-2" data-lucide="cloud-upload"></i>
+<p class="text-xs text-slate-200 font-medium">Cliquez pour téléverser l'ACD, plans ou pièces d'identité</p>
+<p class="text-[11px] text-slate-400 mt-1">Formats acceptés : PDF, JPG, PNG (Max 15 Mo par fichier)</p>
+<input class="hidden" id="fileUploadInput" multiple="" onchange="handleFileSelected(this)" type="file">
+</div>
+<div class="mt-2 space-y-1 text-xs text-emerald-300 hidden" id="fileUploadList"></div>
+</div>
+
+<div>
+<label class="block text-xs uppercase tracking-wider text-emerald-300 mb-1.5">Règlement des frais de recherche et de pré-instruction foncière</label>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+<label class="flex items-center gap-2 p-2 rounded-lg bg-navy-950 border border-emerald-500/30 cursor-pointer hover:border-emerald-400 text-xs">
+<input checked="" class="text-emerald-500" name="momo_provider" type="radio" value="Orange">
+<span class="text-slate-200">Orange</span>
+</label>
+<label class="flex items-center gap-2 p-2 rounded-lg bg-navy-950 border border-emerald-500/30 cursor-pointer hover:border-emerald-400 text-xs">
+<input class="text-emerald-500" name="momo_provider" type="radio" value="Wave">
+<span class="text-slate-200">Wave CI</span>
+</label>
+<label class="flex items-center gap-2 p-2 rounded-lg bg-navy-950 border border-emerald-500/30 cursor-pointer hover:border-emerald-400 text-xs">
+<input class="text-emerald-500" name="momo_provider" type="radio" value="MTN">
+<span class="text-slate-200">MTN MoMo</span>
+</label>
+<label class="flex items-center gap-2 p-2 rounded-lg bg-navy-950 border border-emerald-500/30 cursor-pointer hover:border-emerald-400 text-xs">
+<input class="text-emerald-500" name="momo_provider" type="radio" value="Moov">
+<span class="text-slate-200">Moov Money</span>
+</label>
+</div>
+</div>
+
+<div class="p-3 rounded-lg bg-navy-950/80 border border-gold-500/20 text-xs flex items-center justify-between text-slate-300">
+<div>
+<span class="font-medium text-white">Frais de pré-instruction &amp; recherche domaniale :</span>
+<p class="text-[11px] text-slate-400">Vérification anti-double vente &amp; Livre Foncier incluse</p>
+</div>
+<span class="font-serif font-bold text-gold-300 text-sm">35 000 FCFA</span>
+</div>
+
+<button class="w-full kyanot-btn font-semibold py-3.5 rounded-lg text-sm uppercase tracking-wider flex items-center justify-center gap-2" type="submit">
+<i class="w-4 h-4 text-emerald-300" data-lucide="shield-check"></i>
+<span class="">Valider &amp; Initier le paiement Mobile Money sécurisé</span>
+</button></form>
+</div>
+</div>
+<!-- MODALE CLASSIQUE DE PRISE DE RENDEZ-VOUS EN LIGNE -->
+<div class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm" id="rdvModal">
+<div class="luxury-card stitched-border rounded-2xl max-w-lg w-full p-6 sm:p-8 relative animate-fadeIn">
+<button class="absolute top-5 right-5 text-slate-400 hover:text-gold-300" onclick="closeModal('rdvModal')">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="x" aria-hidden="true" class="lucide lucide-x w-6 h-6"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+</button>
+<div class="space-y-2 mb-6">
+<span class="text-xs uppercase tracking-widest text-gold-400 font-semibold">Consultation Notariale</span>
+<h3 class="font-serif text-2xl gold-gradient-text font-semibold">Prendre rendez-vous avec l'Étude</h3>
+<p class="text-xs sm:text-sm text-slate-300">
+                    Choisissez entre une rencontre solennelle à notre étude d'Abidjan (Bd. VGE) ou une pré-consultation digitale.
+                </p>
+</div>
+<form class="space-y-4" id="rdvForm" onsubmit="submitRdv(event)">
+<div>
+<label class="block text-xs uppercase tracking-wider text-gold-300 mb-1">Nom &amp; Prénoms</label>
+<input class="w-full px-4 py-2.5 rounded-lg bg-navy-950 border border-gold-500/30 text-white text-sm focus:outline-none focus:border-gold-400" placeholder="Ex: M. Kouassi Jean" required="" type="text">
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block text-xs uppercase tracking-wider text-gold-300 mb-1">Téléphone / WhatsApp</label>
+<input class="w-full px-4 py-2.5 rounded-lg bg-navy-950 border border-gold-500/30 text-white text-sm focus:outline-none focus:border-gold-400" placeholder="+225 07..." required="" type="tel">
+</div>
+<div>
+<label class="block text-xs uppercase tracking-wider text-gold-300 mb-1">Mode de consultation</label>
+<select class="w-full px-3 py-2.5 rounded-lg bg-navy-950 border border-gold-500/30 text-white text-sm focus:outline-none focus:border-gold-400">
+<option value="cabinet">Au Cabinet (Immeuble Balance, Bd. VGE)</option>
+<option value="visio">À distance / Visio / Téléphone</option>
+</select>
+</div>
+</div>
+<div>
+<label class="block text-xs uppercase tracking-wider text-gold-300 mb-1">Domaine concerné</label>
+<select class="w-full px-3 py-2.5 rounded-lg bg-navy-950 border border-gold-500/30 text-white text-sm focus:outline-none focus:border-gold-400">
+<option>Immobilier, Achat de terrain &amp; Vérification ACD</option>
+<option>Droit de la Famille, Succession &amp; Testament</option>
+<option>Droit des Affaires, Création de Société / Startup</option>
+<option>Authentification d'acte ou certification</option>
+</select>
+</div>
+<div>
+<label class="block text-xs uppercase tracking-wider text-gold-300 mb-1">Bref résumé de votre demande</label>
+<textarea class="w-full px-4 py-2 rounded-lg bg-navy-950 border border-gold-500/30 text-white text-sm focus:outline-none focus:border-gold-400" placeholder="Précisez vos disponibilités ou votre besoin..." rows="3"></textarea>
+</div>
+<button class="w-full gold-btn font-semibold py-3.5 rounded-lg text-sm uppercase tracking-wider" type="submit">
+                    Confirmer la demande de rendez-vous
+                </button>
+</form>
+</div>
+</div>
+<!-- NOTIFICATION TOAST PERSONNALISÉE -->
+<div class="fixed bottom-6 right-6 z-50 hidden items-center gap-3 px-5 py-3.5 rounded-xl bg-navy-900 border border-gold-400 text-white shadow-2xl" id="toast">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle" aria-hidden="true" class="lucide lucide-check-circle w-5 h-5 text-emerald-400 shrink-0"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg>
+<span class="text-sm font-medium" id="toastMessage"></span>
+</div>
+<script>
+        // Initialisation des icônes Lucide
+        lucide.createIcons();
+
+        // Gestion du menu mobile
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Données des formalités KYANOT pour feedback instantané
+        const formalitesData = {
+            immobilier: {
+                title: "Immobilier & Foncier (Vente / Acquisition / ACD)",
+                fee: "Frais de pré-instruction : 35 000 FCFA",
+                docs: "Pièces à préparer : Copie CNI/Passeport de l'acquéreur et vendeur, Titre de propriété (ACD, CMP ou lettre d'attribution), plan de situation cadastral et certificat de localisation."
+            },
+            societe: {
+                title: "Constitution de Société (SARL / SAS / SA)",
+                fee: "Frais de pré-instruction : 30 000 FCFA",
+                docs: "Pièces à préparer : Pièces d'identité des associés et gérants, projet de dénomination sociale, justificatif de siège social, déclaration de souscription de capital."
+            },
+            procuration: {
+                title: "Procuration Authentique Notariée",
+                fee: "Frais de pré-instruction : 20 000 FCFA",
+                docs: "Pièces à préparer : CNI du mandant et du mandataire, motif détaillé et portée du pouvoir confié (bancaire, foncier, représentation)."
+            },
+            succession: {
+                title: "Règlement de Succession & Partage",
+                fee: "Frais de pré-instruction : 40 000 FCFA",
+                docs: "Pièces à préparer : Extrait d'acte de décès du défunt, livret de famille, actes de naissance des héritiers, inventaire des titres de biens et comptes bancaires."
+            },
+            donation: {
+                title: "Donation entre Vifs",
+                fee: "Frais de pré-instruction : 35 000 FCFA",
+                docs: "Pièces à préparer : CNI du donateur et du donataire, titres de propriété des biens donnés, lien de parenté certifié."
+            },
+            famille: {
+                title: "Contrat de Mariage & Actes de Famille",
+                fee: "Frais de pré-instruction : 25 000 FCFA",
+                docs: "Pièces à préparer : Extraits de naissance des futurs époux (< 3 mois), CNI/Passeports, choix du régime matrimonial (séparation de biens ou communauté réduite)."
+            },
+            autre: {
+                title: "Autre formalité notariale",
+                fee: "Frais de pré-instruction : 25 000 FCFA",
+                docs: "Veuillez préciser la nature de votre acte dans votre dossier. Nos clercs vous indiqueront la liste précise."
+            }
+        };
+
+        function updateFormaliteDetails() {
+            const select = document.getElementById('formaliteSelect');
+            const val = select.value;
+            const box = document.getElementById('formaliteDynamicBox');
+            if (!val || !formalitesData[val]) {
+                box.classList.add('hidden');
+                return;
+            }
+            document.getElementById('dynFormaliteTitle').textContent = formalitesData[val].title;
+            document.getElementById('dynFormaliteFee').textContent = formalitesData[val].fee;
+            document.getElementById('dynFormaliteDocs').textContent = formalitesData[val].docs;
+            box.classList.remove('hidden');
+        }
+
+        function selectCardFormalite(key) {
+            const select = document.getElementById('formaliteSelect');
+            select.value = key;
+            updateFormaliteDetails();
+            document.getElementById('formaliteSelect').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            document.getElementById('modalFormaliteSelect').value = key;
+        }
+
+        function prefillKyanot() {
+            document.getElementById('kyanot').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Détails des domaines d'expertise
+        const servicesData = {
+            famille: {
+                title: "Droit de la Famille & Successions — Préserver l'harmonie entre les générations",
+                text: "Qu'il s'agisse de choisir votre régime matrimonial, de rédiger un testament incontestable, d'organiser une donation de votre vivant ou de régler une succession avec équité, Maître KOFFI Yassoua Alain veille à protéger vos proches et à prévenir tout litige familial."
+            },
+            immobilier: {
+                title: "Immobilier & Patrimoine — Sécuriser chaque mètre carré en Côte d'Ivoire",
+                text: "Face à la multiplication des fraudes foncières sur Internet, l'intervention du Notaire est obligatoire et salvatrice : vérification préalable de l'ACD et de l'état foncier, rédaction de l'acte authentique de vente, sécurisation des fonds et publication officielle."
+            },
+            affaires: {
+                title: "Droit des Affaires & Sociétés — Accompagner les entrepreneurs et investisseurs",
+                text: "Constitution rapide de sociétés (SARL, SA, SAS selon les normes OHADA), rédaction de pactes d'associés, cessions de parts sociales, baux à usage professionnel et authentification de vos accords stratégiques."
+            }
+        };
+
+        function showServiceDetail(key) {
+            const box = document.getElementById('serviceDetailBox');
+            const title = document.getElementById('serviceDetailTitle');
+            const text = document.getElementById('serviceDetailText');
+            title.textContent = servicesData[key].title;
+            text.textContent = servicesData[key].text;
+            box.classList.remove('hidden');
+        }
+
+        // Modales
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            lucide.createIcons();
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Gestion de formulaire direct KYANOT
+        function handleKyanotSubmit(e) {
+            e.preventDefault();
+            const formalite = document.getElementById('formaliteSelect').value;
+            const tel = document.getElementById('kyanotTel').value;
+            if(!formalite) {
+                showToast("Veuillez sélectionner un type de formalité.");
+                return;
+            }
+            document.getElementById('modalFormaliteSelect').value = formalite;
+            openModal('kyanotModal');
+        }
+
+        // Gestion upload fichier simulé
+        function handleFileSelected(input) {
+            const list = document.getElementById('fileUploadList');
+            if (input.files.length > 0) {
+                list.innerHTML = `<strong>${input.files.length} document(s) sélectionné(s) :</strong> ` + 
+                    Array.from(input.files).map(f => f.name).join(', ');
+                list.classList.remove('hidden');
+            }
+        }
+
+        // Soumission KYANOT
+        function submitKyanotDossier(e) {
+            e.preventDefault();
+            const provider = document.querySelector('input[name="momo_provider"]:checked')?.value || "Mobile Money";
+            closeModal('kyanotModal');
+            e.target.reset();
+            document.getElementById('fileUploadList').classList.add('hidden');
+            showToast(`Dossier KYANOT pré-enregistré ! Paiement de pré-instruction initié via ${provider}. Notification envoyée par SMS.`);
+        }
+
+        // Soumission RDV
+        function submitRdv(e) {
+            e.preventDefault();
+            closeModal('rdvModal');
+            e.target.reset();
+            showToast("Votre demande de rendez-vous a bien été enregistrée. L'Étude de Me KOFFI vous recontactera très rapidement.");
+        }
+
+        // Copie contact
+        function copyContact(textToCopy, successMessage) {
+            const tempInput = document.createElement('textarea');
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            showToast(successMessage);
+        }
+
+        // Téléchargement vCard
+        function downloadVCard() {
+            const vcard = [
+                "BEGIN:VCARD",
+                "VERSION:3.0",
+                "N:KOFFI;Yassoua Alain;;Me;",
+                "FN:Me KOFFI Yassoua Alain - Notaire",
+                "ORG:Étude de Me KOFFI Yassoua Alain",
+                "TITLE:Notaire",
+                "TEL;TYPE=CELL,VOICE:+2250709341341",
+                "TEL;TYPE=WORK,VOICE:+22521243724",
+                "EMAIL;TYPE=PREF,INTERNET:kyanot@aviso.ci",
+                "EMAIL;TYPE=INTERNET:kyanot.etudemaitrekoffi@gmail.com",
+                "ADR;TYPE=WORK:;;Bd. VGE - Immeuble Balance (face Solibra) - 30 B.P. 524;Abidjan;;30;Côte d'Ivoire",
+                "URL:https://kyanot.notaire.ci",
+                "END:VCARD"
+            ].join("\n");
+
+            const blob = new Blob([vcard], { type: "text/vcard;charset=utf-8" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = "Me_KOFFI_Yassoua_Alain_Notaire_KYANOT.vcf";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast("Carte de visite digitale (vCard) téléchargée !");
+        }
+
+        // Toast
+        let toastTimeout;
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            toastMessage.textContent = message;
+            toast.classList.remove('hidden');
+            toast.classList.add('flex');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add('hidden');
+                toast.classList.remove('flex');
+            }, 4500);
+        }
+    </script>
+
+
+
+
+</body></html>

@@ -1,0 +1,143 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy-950: #040914;
+  --color-navy-900: #071124;
+  --color-navy-800: #0c1b38;
+  --color-navy-700: #132852;
+
+  --color-gold-200: #F9E8B2;
+  --color-gold-300: #F0D582;
+  --color-gold-400: #DFB75A;
+  --color-gold-500: #C99B3B;
+  --color-gold-600: #AA7C23;
+
+  --color-emerald_brand-900: #07241b;
+  --color-emerald_brand-800: #0d382c;
+  --color-emerald_brand-700: #114a3a;
+  --color-emerald_brand-600: #175e4b;
+  --color-emerald_brand-500: #1e7860;
+  --color-emerald_brand-400: #2da887;
+  --color-emerald_brand-300: #5eead4;
+
+  --font-cinzel: "Cinzel", Georgia, serif;
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Texture de fond luxueuse & reflets dorés */
+body {
+  background-color: #040914;
+  color: #f8fafc;
+  background-image: 
+    radial-gradient(circle at 85% 15%, rgba(201, 155, 59, 0.08) 0%, transparent 45%),
+    radial-gradient(circle at 15% 65%, rgba(19, 40, 82, 0.45) 0%, transparent 50%),
+    linear-gradient(135deg, rgba(255,255,255,0.02) 0%, transparent 40%, rgba(201,155,59,0.03) 100%);
+  min-height: 100vh;
+}
+
+/* Texte doré métallique */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #F9E8B2 0%, #DFB75A 35%, #C99B3B 65%, #F0D582 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.emerald-gradient-text {
+  background: linear-gradient(135deg, #a7f3d0 0%, #34d399 40%, #059669 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Bouton doré avec reflet brillant diagonal */
+.gold-btn {
+  background: linear-gradient(135deg, #E5C165 0%, #C99B3B 50%, #A67921 100%);
+  color: #050c1a;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px rgba(201, 155, 59, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+}
+.gold-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(201, 155, 59, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.6);
+}
+
+.kyanot-btn {
+  background: linear-gradient(135deg, #175e4b 0%, #0f3b2e 60%, #08261e 100%);
+  border: 1px solid rgba(94, 234, 212, 0.4);
+  color: #e6fffa;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px rgba(15, 59, 46, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+.kyanot-btn:hover {
+  border-color: #5eead4;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(23, 94, 75, 0.5);
+}
+
+/* Bordures et cartes effet cuir/verre avec reflet diagonal */
+.luxury-card {
+  background: linear-gradient(145deg, rgba(12, 27, 56, 0.85) 0%, rgba(7, 17, 36, 0.95) 100%);
+  border: 1px solid rgba(201, 155, 59, 0.25);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+  position: relative;
+  overflow: hidden;
+}
+.luxury-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.04), transparent);
+  transform: skewX(-25deg);
+  transition: 0.7s;
+  pointer-events: none;
+}
+.luxury-card:hover::before {
+  left: 125%;
+}
+
+.kyanot-card {
+  background: linear-gradient(145deg, rgba(8, 38, 30, 0.85) 0%, rgba(5, 22, 17, 0.95) 100%);
+  border: 1px solid rgba(94, 234, 212, 0.25);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Effet couture sur les cartes rappelant la carte de visite en cuir */
+.stitched-border {
+  outline: 1px dashed rgba(201, 155, 59, 0.22);
+  outline-offset: -8px;
+}
+
+.stitched-border-emerald {
+  outline: 1px dashed rgba(94, 234, 212, 0.25);
+  outline-offset: -8px;
+}
+
+/* Accordion marker styling */
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #040914;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(201, 155, 59, 0.3);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(201, 155, 59, 0.6);
+}

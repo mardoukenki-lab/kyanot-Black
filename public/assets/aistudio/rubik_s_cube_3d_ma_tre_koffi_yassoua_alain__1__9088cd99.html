@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Rubik's Cube 3D - Maître KOFFI Yassoua Alain</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Three.js r128 via CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: transparent;
+            font-family: 'Inter', sans-serif;
+            touch-action: none;
+            user-select: none;
+        }
+        .font-serif-gold {
+            font-family: 'Cinzel', serif;
+        }
+        /* Style doré luxueux inspiré de la carte de visite */
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #fceabb 0%, #f8b500 50%, #d4af37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-border {
+            border-color: rgba(212, 175, 55, 0.45);
+        }
+        .btn-gold {
+            background: linear-gradient(135deg, #d4af37 0%, #aa8010 100%);
+            color: #030914;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
+            transition: all 0.2s ease;
+        }
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.45);
+            background: linear-gradient(135deg, #e5c158 0%, #c5961a 100%);
+        }
+        .btn-gold:active {
+            transform: translateY(0);
+        }
+        .btn-dark {
+            background: rgba(10, 25, 47, 0.85);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            color: #e6c665;
+            backdrop-filter: blur(8px);
+            transition: all 0.2s ease;
+        }
+        .btn-dark:hover {
+            background: rgba(212, 175, 55, 0.15);
+            border-color: #d4af37;
+            transform: translateY(-1px);
+        }
+        #canvas-container {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+        /* Scrollbar fine pour les petits écrans */
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d4af37;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body class="text-slate-100">
+
+    <!-- Conteneur 3D Three.js uniquement (Zéro écriture) -->
+    <div id="canvas-container"></div>
+
+    <script>
+        /**
+         * ============================================================================
+         * RUBIK'S CUBE 3D INTERACTIF - THREE.JS (OPTIMISÉ POUR LE WEB)
+         * Conçu avec le thème QR Code "NOTAIRE - Maître KOFFI Yassoua Alain"
+         * ============================================================================
+         */
+
+        // --- Variables Globales Three.js ---
+        let scene, camera, renderer, cubeGroup, pivotGroup;
+        let cubies = []; // Les 27 petits cubes (3x3x3)
+        const CUBIE_SIZE = 1;
+        const SPACING = 0.04; // Léger espacement esthétique entre les pièces
+        const TOTAL_STEP = CUBIE_SIZE + SPACING;
+
+        // --- État de l'application et animations ---
+        let isAnimating = false;
+        let moveQueue = [];
+        let moveHistory = []; // Permet de résoudre le cube en inversant les mouvements
+        let moveCount = 0;
+        let timerInterval = null;
+        let secondsElapsed = 0;
+        let timerRunning = false;
+        let autoRotate = true; // Rotation continue activée par défaut
+
+        // 3 Modes visuels :
+        // 0 = QR Code Or avec subtil marquage couleur par face
+        // 1 = QR Code Or & Bleu Nuit pur (comme l'image fournie)
+        // 2 = Couleurs classiques Rubik's Cube
+        let visualMode = 0;
+        const THEME_NAMES = [
+            "Mode : QR Or & Couleurs",
+            "Mode : QR Or Pur",
+            "Mode : Classique"
+        ];
+
+        // --- Gestion de l'interaction Souris / Tactile ---
+        const raycaster = new THREE.Raycaster();
+        const mouse = new THREE.Vector2();
+        let isDraggingCube = false;
+        let isDraggingFace = false;
+        let startPointer = { x: 0, y: 0 };
+        let prevPointer = { x: 0, y: 0 };
+        let intersectedCubie = null;
+        let intersectedFaceNormal = null;
+        let intersectedPoint = null;
+
+        // Suivi fluide du mouvement de la souris (sans clic)
+        let hoverTarget = { x: 0, y: 0 };
+        let hoverCurrent = { x: 0, y: 0 };
+        let autoSpinAngleY = -0.68;
+        let autoSpinAngleX = 0.48;
+        let hoveredCubie = null;
+
+        // Couleurs officielles et thème Notaire
+        const FACE_DEFINITIONS = [
+            { name: 'R', axis: 'x', layer: 1,  color: '#d4af37', accent: '#ef4444', classic: '#ef4444', label: 'NOTAIRE' }, // Droite (+X)
+            { name: 'L', axis: 'x', layer: -1, color: '#d4af37', accent: '#f97316', classic: '#f97316', label: 'NOTAIRE' }, // Gauche (-X)
+            { name: 'U', axis: 'y', layer: 1,  color: '#d4af37', accent: '#ffffff', classic: '#f8fafc', label: 'NOTAIRE' }, // Haut (+Y)
+            { name: 'D', axis: 'y', layer: -1, color: '#d4af37', accent: '#eab308', classic: '#eab308', label: 'NOTAIRE' }, // Bas (-Y)
+            { name: 'F', axis: 'z', layer: 1,  color: '#d4af37', accent: '#22c55e', classic: '#10b981', label: 'NOTAIRE' }, // Avant (+Z)
+            { name: 'B', axis: 'z', layer: -1, color: '#d4af37', accent: '#3b82f6', classic: '#3b82f6', label: 'NOTAIRE' }  // Arrière (-Z)
+        ];
+
+        // Cache des textures générées pour chaque face (6 faces x 9 tuiles)
+        let generatedTextures = {};
+
+        /**
+         * Génère dynamiquement sur un Canvas HTML5 la texture haute définition
+         * du QR Code doré "NOTAIRE" découpée en grille 3x3 pour chaque face.
+         */
+        function generateFaceTileTextures(mode) {
+            const cacheKey = `mode_${mode}`;
+            if (generatedTextures[cacheKey]) return generatedTextures[cacheKey];
+
+            const faceTextures = []; // 6 faces, chacune contenant une grille 3x3 [u][v]
+
+            for (let f = 0; f < 6; f++) {
+                const faceDef = FACE_DEFINITIONS[f];
+                // Création d'un grand canvas maître (768x768) pour la face entière
+                const masterCanvas = document.createElement('canvas');
+                masterCanvas.width = 768;
+                masterCanvas.height = 768;
+                const ctx = masterCanvas.getContext('2d');
+
+                if (mode === 2) {
+                    // --- MODE 2 : RUBIK'S CUBE CLASSIQUE ---
+                    ctx.fillStyle = faceDef.classic;
+                    ctx.fillRect(0, 0, 768, 768);
+                } else {
+                    // --- MODES 0 & 1 : QR CODE OR & BLEU NUIT "NOTAIRE" ---
+                    // Fond Bleu Nuit profond
+                    const bgGrad = ctx.createRadialGradient(384, 384, 50, 384, 384, 520);
+                    bgGrad.addColorStop(0, '#0a1d3b');
+                    bgGrad.addColorStop(1, '#040c1a');
+                    ctx.fillStyle = bgGrad;
+                    ctx.fillRect(0, 0, 768, 768);
+
+                    // Dégradé Or métallique pour le QR code
+                    const goldGrad = ctx.createLinearGradient(0, 0, 768, 768);
+                    goldGrad.addColorStop(0, '#f9e498');
+                    goldGrad.addColorStop(0.35, '#d4af37');
+                    goldGrad.addColorStop(0.7, '#aa8010');
+                    goldGrad.addColorStop(1, '#f3d37a');
+
+                    // En mode 0, léger liseré de couleur par face pour repérer l'orientation facilement
+                    const borderStroke = (mode === 0) ? faceDef.accent : goldGrad;
+
+                    // Double cadre extérieur doré (fidèle à l'image)
+                    ctx.strokeStyle = borderStroke;
+                    ctx.lineWidth = 10;
+                    ctx.strokeRect(20, 20, 728, 728);
+
+                    ctx.strokeStyle = goldGrad;
+                    ctx.lineWidth = 6;
+                    ctx.strokeRect(42, 42, 684, 684);
+
+                    // Grille du QR Code (21x21 modules dans la zone centrale)
+                    const qrStart = 68;
+                    const qrSize = 632;
+                    const modules = 21;
+                    const modSize = qrSize / modules;
+
+                    // Fonction utilitaire pour dessiner les 3 grands carrés de repérage QR (Finder Patterns)
+                    const drawFinderPattern = (gx, gy) => {
+                        const px = qrStart + gx * modSize;
+                        const py = qrStart + gy * modSize;
+                        ctx.fillStyle = goldGrad;
+                        ctx.fillRect(px, py, 7 * modSize, 7 * modSize);
+                        ctx.fillStyle = '#051022';
+                        ctx.fillRect(px + modSize, py + modSize, 5 * modSize, 5 * modSize);
+                        ctx.fillStyle = goldGrad;
+                        ctx.fillRect(px + 2 * modSize, py + 2 * modSize, 3 * modSize, 3 * modSize);
+                    };
+
+                    drawFinderPattern(0, 0);   // Haut-Gauche
+                    drawFinderPattern(14, 0);  // Haut-Droite
+                    drawFinderPattern(0, 14);  // Bas-Gauche
+
+                    // Générateur pseudo-aléatoire déterministe pour les modules du QR code
+                    let seed = (f + 1) * 1337;
+                    const rand = () => {
+                        seed = (seed * 16807) % 2147483647;
+                        return (seed - 1) / 2147483646;
+                    };
+
+                    ctx.fillStyle = goldGrad;
+                    for (let r = 0; r < modules; r++) {
+                        for (let c = 0; c < modules; c++) {
+                            // Exclure les 3 grands repères de coin
+                            const inTopLeft = (r < 8 && c < 8);
+                            const inTopRight = (r < 8 && c >= 13);
+                            const inBottomLeft = (r >= 13 && c < 8);
+                            // Exclure le rectangle central "NOTAIRE"
+                            const inCenterBox = (r >= 7 && r <= 13 && c >= 4 && c <= 16);
+
+                            if (!inTopLeft && !inTopRight && !inBottomLeft && !inCenterBox) {
+                                if (rand() > 0.44) {
+                                    ctx.fillRect(
+                                        qrStart + c * modSize + 1,
+                                        qrStart + r * modSize + 1,
+                                        modSize - 2,
+                                        modSize - 2
+                                    );
+                                }
+                            }
+                        }
+                    }
+
+                    // Petit carré d'alignement en bas à droite
+                    const ax = qrStart + 15 * modSize;
+                    const ay = qrStart + 15 * modSize;
+                    ctx.fillStyle = goldGrad;
+                    ctx.fillRect(ax, ay, 4 * modSize, 4 * modSize);
+                    ctx.fillStyle = '#051022';
+                    ctx.fillRect(ax + modSize, ay + modSize, 2 * modSize, 2 * modSize);
+
+                    // Cartouche central "NOTAIRE"
+                    const boxX = 194, boxY = 294, boxW = 380, boxH = 180;
+                    ctx.fillStyle = '#07152b';
+                    ctx.fillRect(boxX, boxY, boxW, boxH);
+                    ctx.strokeStyle = goldGrad;
+                    ctx.lineWidth = 6;
+                    ctx.strokeRect(boxX, boxY, boxW, boxH);
+
+                    // Texte "NOTAIRE" au centre
+                    ctx.fillStyle = goldGrad;
+                    ctx.font = 'bold 62px "Cinzel", "Inter", sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText('NOTAIRE', 384, 384);
+
+                    // En mode 0, petit point de couleur discret aux 4 coins pour aider à la résolution
+                    if (mode === 0) {
+                        ctx.fillStyle = faceDef.accent;
+                        ctx.beginPath();
+                        ctx.arc(384, 322, 8, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+
+                // Découpage du masterCanvas (768x768) en 9 tuiles (256x256 chacune)
+                const tiles = [];
+                for (let row = 0; row < 3; row++) {
+                    tiles[row] = [];
+                    for (let col = 0; col < 3; col++) {
+                        const tileCanvas = document.createElement('canvas');
+                        tileCanvas.width = 256;
+                        tileCanvas.height = 256;
+                        const tCtx = tileCanvas.getContext('2d');
+
+                        // Fond noir/biseau de la pièce plastique
+                        tCtx.fillStyle = '#090d16';
+                        tCtx.fillRect(0, 0, 256, 256);
+
+                        // Dessin de l'autocollant avec coins légèrement arrondis
+                        const pad = 10;
+                        tCtx.save();
+                        roundRect(tCtx, pad, pad, 256 - pad * 2, 256 - pad * 2, 18);
+                        tCtx.clip();
+
+                        tCtx.drawImage(
+                            masterCanvas,
+                            col * 256, row * 256, 256, 256,
+                            pad, pad, 256 - pad * 2, 256 - pad * 2
+                        );
+                        tCtx.restore();
+
+                        // Fine bordure dorée ou sombre autour de chaque tuile
+                        tCtx.strokeStyle = mode === 2 ? 'rgba(0,0,0,0.35)' : 'rgba(212, 175, 55, 0.35)';
+                        tCtx.lineWidth = 3;
+                        roundRect(tCtx, pad, pad, 256 - pad * 2, 256 - pad * 2, 18);
+                        tCtx.stroke();
+
+                        const texture = new THREE.CanvasTexture(tileCanvas);
+                        texture.anisotropy = 4;
+                        tiles[row][col] = texture;
+                    }
+                }
+                faceTextures.push(tiles);
+            }
+
+            generatedTextures[cacheKey] = faceTextures;
+            return faceTextures;
+        }
+
+        // Fonction utilitaire pour tracer un rectangle aux coins arrondis sur Canvas
+        function roundRect(ctx, x, y, w, h, r) {
+            ctx.beginPath();
+            ctx.moveTo(x + r, y);
+            ctx.lineTo(x + w - r, y);
+            ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+            ctx.lineTo(x + w, y + h - r);
+            ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+            ctx.lineTo(x + r, y + h);
+            ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+            ctx.lineTo(x, y + r);
+            ctx.quadraticCurveTo(x, y, x + r, y);
+            ctx.closePath();
+        }
+
+        /**
+         * Correspondance entre les coordonnées 3D (x, y, z dans {-1, 0, 1})
+         * et les indices (row, col) de la grille 3x3 sur chacune des 6 faces.
+         */
+        function getTileRowCol(faceIndex, x, y, z) {
+            switch (faceIndex) {
+                case 0: // +X (Right)
+                    return { row: 1 - y, col: 1 - z };
+                case 1: // -X (Left)
+                    return { row: 1 - y, col: z + 1 };
+                case 2: // +Y (Up)
+                    return { row: z + 1, col: x + 1 };
+                case 3: // -Y (Down)
+                    return { row: 1 - z, col: x + 1 };
+                case 4: // +Z (Front)
+                    return { row: 1 - y, col: x + 1 };
+                case 5: // -Z (Back)
+                    return { row: 1 - y, col: 1 - x };
+                default:
+                    return { row: 1, col: 1 };
+            }
+        }
+
+        /**
+         * Initialisation de la scène 3D, des lumières et du Rubik's Cube
+         */
+        function initScene() {
+            const container = document.getElementById('canvas-container');
+
+            scene = new THREE.Scene();
+
+            // Caméra Perspective adaptée aux écrans mobiles et ordinateurs
+            camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.1, 100);
+            updateCameraDistance();
+
+            // Renderer WebGL optimisé avec preserveDrawingBuffer pour permettre l'export WebP/PNG
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true, powerPreference: "high-performance" });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            container.appendChild(renderer.domElement);
+
+            // Éclairage soigné pour sublimer les reflets dorés
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.78);
+            scene.add(ambientLight);
+
+            const dirLight1 = new THREE.DirectionalLight(0xfff4d6, 0.75);
+            dirLight1.position.set(8, 12, 10);
+            scene.add(dirLight1);
+
+            const dirLight2 = new THREE.DirectionalLight(0x60a5fa, 0.35);
+            dirLight2.position.set(-10, -8, -8);
+            scene.add(dirLight2);
+
+            // Groupe principal contenant l'ensemble du Rubik's Cube
+            cubeGroup = new THREE.Group();
+            // Orientation initiale mettant en valeur les 3 faces comme sur la photo
+            cubeGroup.rotation.x = 0.48;
+            cubeGroup.rotation.y = -0.68;
+            scene.add(cubeGroup);
+
+            // Groupe pivot utilisé lors de la rotation d'une tranche de 9 cubes
+            pivotGroup = new THREE.Group();
+            cubeGroup.add(pivotGroup);
+
+            // Construction initiale des 27 petits cubes
+            buildRubiksCube();
+
+            // Écouteurs d'événements
+            setupEventListeners();
+
+            // Démarrage de la boucle d'animation
+            animate();
+        }
+
+        /**
+         * Ajuste le recul de la caméra selon le ratio de l'écran (Portrait / Paysage)
+         */
+        function updateCameraDistance() {
+            const aspect = window.innerWidth / window.innerHeight;
+            const distance = aspect < 0.8 ? 9.8 : 7.5;
+            camera.position.set(0, 0, distance);
+            camera.lookAt(0, 0, 0);
+        }
+
+        /**
+         * Construit ou reconstruit les 27 cubies à leur position résolue d'origine
+         */
+        function buildRubiksCube() {
+            // Nettoyage des anciens cubies s'ils existent
+            cubies.forEach(c => cubeGroup.remove(c));
+            cubies = [];
+
+            const faceTextures = generateFaceTileTextures(visualMode);
+            const innerMaterial = new THREE.MeshStandardMaterial({
+                color: 0x070b12,
+                roughness: 0.6,
+                metalness: 0.2
+            });
+
+            const geometry = new THREE.BoxGeometry(CUBIE_SIZE, CUBIE_SIZE, CUBIE_SIZE);
+
+            for (let x = -1; x <= 1; x++) {
+                for (let y = -1; y <= 1; y++) {
+                    for (let z = -1; z <= 1; z++) {
+                        const materials = [];
+
+                        // Ordre des matériaux BoxGeometry dans Three.js : +X, -X, +Y, -Y, +Z, -Z
+                        for (let f = 0; f < 6; f++) {
+                            const isExternal =
+                                (f === 0 && x === 1) ||
+                                (f === 1 && x === -1) ||
+                                (f === 2 && y === 1) ||
+                                (f === 3 && y === -1) ||
+                                (f === 4 && z === 1) ||
+                                (f === 5 && z === -1);
+
+                            if (isExternal) {
+                                const { row, col } = getTileRowCol(f, x, y, z);
+                                materials.push(new THREE.MeshStandardMaterial({
+                                    map: faceTextures[f][row][col],
+                                    roughness: 0.28,
+                                    metalness: visualMode === 2 ? 0.05 : 0.25
+                                }));
+                            } else {
+                                materials.push(innerMaterial);
+                            }
+                        }
+
+                        const cubie = new THREE.Mesh(geometry, materials);
+                        cubie.position.set(x * TOTAL_STEP, y * TOTAL_STEP, z * TOTAL_STEP);
+
+                        // Sauvegarde des coordonnées logiques initiales pour vérifier l'état résolu
+                        cubie.userData = {
+                            initGrid: new THREE.Vector3(x, y, z),
+                            currentGrid: new THREE.Vector3(x, y, z)
+                        };
+
+                        cubeGroup.add(cubie);
+                        cubies.push(cubie);
+                    }
+                }
+            }
+        }
+
+        /**
+         * Met à jour les textures à la volée lors d'un changement de mode visuel
+         */
+        function updateCubeTheme() {
+            const faceTextures = generateFaceTileTextures(visualMode);
+            cubies.forEach(cubie => {
+                const { x, y, z } = cubie.userData.initGrid;
+                for (let f = 0; f < 6; f++) {
+                    const isExternal =
+                        (f === 0 && x === 1) ||
+                        (f === 1 && x === -1) ||
+                        (f === 2 && y === 1) ||
+                        (f === 3 && y === -1) ||
+                        (f === 4 && z === 1) ||
+                        (f === 5 && z === -1);
+
+                    if (isExternal) {
+                        const { row, col } = getTileRowCol(f, x, y, z);
+                        cubie.material[f].map = faceTextures[f][row][col];
+                        cubie.material[f].metalness = visualMode === 2 ? 0.05 : 0.25;
+                        cubie.material[f].needsUpdate = true;
+                    }
+                }
+            });
+        }
+
+        /**
+         * Ajoute une rotation de tranche dans la file d'attente d'animation
+         * @param {string} axis - 'x', 'y' ou 'z'
+         * @param {number} layer - -1, 0 ou 1
+         * @param {number} angle - Math.PI / 2 ou -Math.PI / 2
+         * @param {boolean} recordHistory - Enregistrer ou non dans l'historique
+         * @param {number} duration - Durée de l'animation en ms
+         */
+        function enqueueMove(axis, layer, angle, recordHistory = true, duration = 220) {
+            moveQueue.push({ axis, layer, angle, recordHistory, duration });
+            if (!isAnimating) {
+                processNextMove();
+            }
+        }
+
+        /**
+         * Exécute le prochain mouvement de la file d'attente avec interpolation fluide
+         */
+        function processNextMove() {
+            if (moveQueue.length === 0) {
+                isAnimating = false;
+                checkIfSolved();
+                return;
+            }
+
+            isAnimating = true;
+            const move = moveQueue.shift();
+            const { axis, layer, angle, recordHistory, duration } = move;
+
+            if (recordHistory) {
+                moveHistory.push({ axis, layer, angle });
+                incrementMoveCounter();
+            }
+
+            // Sélectionner les 9 cubies appartenant à la couche concernée
+            const activeCubies = cubies.filter(c => Math.round(c.userData.currentGrid[axis]) === layer);
+
+            // Réinitialiser le pivot et lui attacher les 9 cubies
+            pivotGroup.rotation.set(0, 0, 0);
+            pivotGroup.position.set(0, 0, 0);
+            activeCubies.forEach(c => pivotGroup.attach(c));
+
+            const startTime = performance.now();
+
+            function stepAnimation(now) {
+                const elapsed = now - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                // Courbe d'accélération/décélération douce (easeInOutCubic)
+                const eased = progress < 0.5
+                    ? 4 * progress * progress * progress
+                    : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+
+                pivotGroup.rotation[axis] = angle * eased;
+
+                if (progress < 1) {
+                    requestAnimationFrame(stepAnimation);
+                } else {
+                    // Fin de la rotation : figer l'angle exact et rattacher au cubeGroup
+                    pivotGroup.rotation[axis] = angle;
+                    pivotGroup.updateMatrixWorld();
+
+                    activeCubies.forEach(c => {
+                        cubeGroup.attach(c);
+                        // Arrondir proprement les positions et coordonnées de grille
+                        const gx = Math.round(c.position.x / TOTAL_STEP);
+                        const gy = Math.round(c.position.y / TOTAL_STEP);
+                        const gz = Math.round(c.position.z / TOTAL_STEP);
+
+                        c.position.set(gx * TOTAL_STEP, gy * TOTAL_STEP, gz * TOTAL_STEP);
+                        c.userData.currentGrid.set(gx, gy, gz);
+
+                        // Arrondir les angles d'Euler au multiple de 90° le plus proche
+                        c.rotation.x = Math.round(c.rotation.x / (Math.PI / 2)) * (Math.PI / 2);
+                        c.rotation.y = Math.round(c.rotation.y / (Math.PI / 2)) * (Math.PI / 2);
+                        c.rotation.z = Math.round(c.rotation.z / (Math.PI / 2)) * (Math.PI / 2);
+                        c.updateMatrix();
+                    });
+
+                    processNextMove();
+                }
+            }
+
+            requestAnimationFrame(stepAnimation);
+        }
+
+        /**
+         * Déclenche la rotation standard d'une des 6 faces (U, D, L, R, F, B)
+         */
+        function triggerFaceMove(faceLetter, prime = false) {
+            const map = {
+                'R': { axis: 'x', layer: 1,  baseAngle: -Math.PI / 2 },
+                'L': { axis: 'x', layer: -1, baseAngle:  Math.PI / 2 },
+                'U': { axis: 'y', layer: 1,  baseAngle: -Math.PI / 2 },
+                'D': { axis: 'y', layer: -1, baseAngle:  Math.PI / 2 },
+                'F': { axis: 'z', layer: 1,  baseAngle: -Math.PI / 2 },
+                'B': { axis: 'z', layer: -1, baseAngle:  Math.PI / 2 }
+            };
+            const def = map[faceLetter];
+            if (!def) return;
+            const angle = prime ? -def.baseAngle : def.baseAngle;
+            enqueueMove(def.axis, def.layer, angle, true, 210);
+        }
+
+        /**
+         * Mélange aléatoire fluide de 20 mouvements
+         */
+        function scrambleCube() {
+            if (isAnimating && moveQueue.length > 5) return;
+
+            const axes = ['x', 'y', 'z'];
+            const layers = [-1, 0, 1];
+            const angles = [Math.PI / 2, -Math.PI / 2];
+
+            let lastAxis = null;
+            for (let i = 0; i < 20; i++) {
+                let axis;
+                do {
+                    axis = axes[Math.floor(Math.random() * axes.length)];
+                } while (axis === lastAxis);
+                lastAxis = axis;
+
+                const layer = layers[Math.floor(Math.random() * layers.length)];
+                const angle = angles[Math.floor(Math.random() * angles.length)];
+                enqueueMove(axis, layer, angle, true, 110);
+            }
+        }
+
+        /**
+         * Résout le cube de manière fluide en déroulant l'historique à l'envers
+         */
+        function solveCubeAnimated() {
+            if (isAnimating || moveHistory.length === 0) return;
+
+            // Simplification basique des mouvements consécutifs opposés
+            const historyCopy = [...moveHistory];
+            moveHistory = [];
+
+            while (historyCopy.length > 0) {
+                const lastMove = historyCopy.pop();
+                enqueueMove(lastMove.axis, lastMove.layer, -lastMove.angle, false, 120);
+            }
+        }
+
+        /**
+         * Réinitialise immédiatement le cube à son état résolu
+         */
+        function resetCubeImmediate() {
+            moveQueue = [];
+            moveHistory = [];
+            isAnimating = false;
+            stopTimer();
+            secondsElapsed = 0;
+            moveCount = 0;
+            buildRubiksCube();
+            updateStatusBadge(true);
+        }
+
+        /**
+         * Vérifie si chaque cubie est revenu à sa position et orientation d'origine
+         */
+        function checkIfSolved() {
+            const isSolved = cubies.every(c => {
+                const posMatch = c.userData.currentGrid.equals(c.userData.initGrid);
+                // Vérifie que la rotation est nulle (modulo 2*PI)
+                const q = c.quaternion;
+                const rotMatch = Math.abs(q.x) < 0.01 && Math.abs(q.y) < 0.01 && Math.abs(q.z) < 0.01;
+                return posMatch && rotMatch;
+            });
+
+            updateStatusBadge(isSolved);
+            if (isSolved && moveCount > 0) {
+                stopTimer();
+                moveHistory = [];
+            }
+        }
+
+        function updateStatusBadge(solved) {
+            const badge = document.getElementById('status-badge');
+            if (!badge) return;
+            if (solved) {
+                badge.textContent = 'Résolu';
+                badge.className = 'inline-block text-xs font-semibold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40';
+            } else {
+                badge.textContent = 'En cours';
+                badge.className = 'inline-block text-xs font-semibold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40';
+            }
+        }
+
+        // --- Gestion du Compteur et du Chronomètre ---
+        function incrementMoveCounter() {
+            moveCount++;
+            const counterEl = document.getElementById('move-counter');
+            if (counterEl) counterEl.textContent = moveCount;
+        }
+
+        function startTimer() {
+            if (timerRunning) return;
+            timerRunning = true;
+            timerInterval = setInterval(() => {
+                secondsElapsed++;
+                const timerEl = document.getElementById('timer-display');
+                if (timerEl) {
+                    const mins = String(Math.floor(secondsElapsed / 60)).padStart(2, '0');
+                    const secs = String(secondsElapsed % 60).padStart(2, '0');
+                    timerEl.textContent = `${mins}:${secs}`;
+                }
+            }, 1000);
+        }
+
+        function stopTimer() {
+            timerRunning = false;
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+        }
+
+        /**
+         * ============================================================================
+         * INTERACTION SOURIS & TACTILE (Rotation des tranches en 3D ou du cube entier)
+         * ============================================================================
+         */
+        function getNormalizedPointer(clientX, clientY) {
+            return {
+                x: (clientX / window.innerWidth) * 2 - 1,
+                y: -(clientY / window.innerHeight) * 2 + 1
+            };
+        }
+
+        function onPointerDown(clientX, clientY, button = 0) {
+            startPointer = { x: clientX, y: clientY };
+            prevPointer = { x: clientX, y: clientY };
+
+            // Clic droit = toujours tourner l'ensemble du cube
+            if (button === 2) {
+                isDraggingCube = true;
+                return;
+            }
+
+            const norm = getNormalizedPointer(clientX, clientY);
+            mouse.set(norm.x, norm.y);
+            raycaster.setFromCamera(mouse, camera);
+
+            const intersects = raycaster.intersectObjects(cubies);
+
+            if (intersects.length > 0 && !isAnimating) {
+                // L'utilisateur a cliqué sur une pièce du cube
+                isDraggingFace = true;
+                intersectedCubie = intersects[0].object;
+                intersectedPoint = intersects[0].point.clone();
+
+                // Normale de la face touchée dans le repère local du cubeGroup
+                const worldNormal = intersects[0].face.normal.clone();
+                worldNormal.transformDirection(intersectedCubie.matrixWorld);
+                const invCubeRot = new THREE.Matrix4().extractRotation(cubeGroup.matrixWorld).invert();
+                intersectedFaceNormal = worldNormal.applyMatrix4(invCubeRot).round();
+            } else {
+                // L'utilisateur a cliqué à l'extérieur du cube -> rotation de la vue
+                isDraggingCube = true;
+            }
+        }
+
+        function onPointerMove(clientX, clientY) {
+            const dx = clientX - prevPointer.x;
+            const dy = clientY - prevPointer.y;
+            prevPointer = { x: clientX, y: clientY };
+
+            // Mise à jour de la cible d'inclinaison au simple survol de la souris (-1 à 1)
+            const norm = getNormalizedPointer(clientX, clientY);
+            hoverTarget.x = norm.y * 0.95; // Inclinaison haut/bas suivant la souris
+            hoverTarget.y = norm.x * 1.35; // Rotation gauche/droite suivant la souris
+
+            if (isDraggingCube) {
+                // Rotation libre de l'ensemble du Rubik's Cube
+                autoSpinAngleY += dx * 0.008;
+                autoSpinAngleX += dy * 0.008;
+                autoSpinAngleX = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, autoSpinAngleX));
+                return;
+            }
+
+            if (isDraggingFace && intersectedCubie && !isAnimating) {
+                const totalDragX = clientX - startPointer.x;
+                const totalDragY = clientY - startPointer.y;
+                const dragDist = Math.hypot(totalDragX, totalDragY);
+
+                // Seuil minimum de glissement (en pixels) pour déclencher la rotation d'une face
+                if (dragDist > 22) {
+                    triggerSliceRotationFromDrag(totalDragX, totalDragY);
+                    isDraggingFace = false;
+                    intersectedCubie = null;
+                }
+                return;
+            }
+
+            // Effet réactif au survol d'une pièce du cube (curseur et mise en relief subtile)
+            mouse.set(norm.x, norm.y);
+            raycaster.setFromCamera(mouse, camera);
+            const intersects = raycaster.intersectObjects(cubies);
+
+            if (hoveredCubie && (!intersects.length || intersects[0].object !== hoveredCubie)) {
+                hoveredCubie.scale.set(1, 1, 1);
+                hoveredCubie = null;
+            }
+
+            if (intersects.length > 0 && !isAnimating) {
+                document.body.style.cursor = 'grab';
+                hoveredCubie = intersects[0].object;
+                hoveredCubie.scale.set(1.035, 1.035, 1.035);
+            } else {
+                document.body.style.cursor = 'default';
+            }
+        }
+
+        function onPointerUp() {
+            isDraggingCube = false;
+            isDraggingFace = false;
+            intersectedCubie = null;
+        }
+
+        /**
+         * Détermine quelle tranche (X, Y ou Z) et dans quel sens faire tourner
+         * en projetant les axes tangents de la face touchée sur l'écran 2D.
+         */
+        function triggerSliceRotationFromDrag(dragX, dragY) {
+            const dragVec2D = new THREE.Vector2(dragX, -dragY).normalize(); // Y écran inversé
+            const normal = intersectedFaceNormal;
+
+            // Les deux axes unitaires du cube perpendiculaires à la normale de la face touchée
+            const axes = [
+                { name: 'x', vec: new THREE.Vector3(1, 0, 0) },
+                { name: 'y', vec: new THREE.Vector3(0, 1, 0) },
+                { name: 'z', vec: new THREE.Vector3(0, 0, 1) }
+            ];
+
+            const tangentAxes = axes.filter(a => Math.abs(a.vec.dot(normal)) < 0.1);
+
+            let bestMatch = null;
+            let maxDot = -1;
+
+            // Projeter chaque axe tangent sur l'écran pour trouver celui qui correspond au mouvement de la souris
+            tangentAxes.forEach(tangent => {
+                const p1 = intersectedPoint.clone();
+                const worldTangent = tangent.vec.clone().applyQuaternion(cubeGroup.quaternion);
+                const p2 = p1.clone().add(worldTangent);
+
+                p1.project(camera);
+                p2.project(camera);
+
+                const screenDir = new THREE.Vector2(p2.x - p1.x, p2.y - p1.y).normalize();
+                const dot = dragVec2D.dot(screenDir);
+
+                if (Math.abs(dot) > maxDot) {
+                    maxDot = Math.abs(dot);
+                    bestMatch = {
+                        tangentVec: tangent.vec,
+                        sign: Math.sign(dot)
+                    };
+                }
+            });
+
+            if (bestMatch) {
+                // L'axe de rotation est le produit vectoriel : Normale x DirectionTangente
+                const rotAxisVec = new THREE.Vector3().crossVectors(normal, bestMatch.tangentVec);
+                let rotAxisName = 'x';
+                let axisSign = 1;
+
+                if (Math.abs(rotAxisVec.x) > 0.5) { rotAxisName = 'x'; axisSign = Math.sign(rotAxisVec.x); }
+                else if (Math.abs(rotAxisVec.y) > 0.5) { rotAxisName = 'y'; axisSign = Math.sign(rotAxisVec.y); }
+                else if (Math.abs(rotAxisVec.z) > 0.5) { rotAxisName = 'z'; axisSign = Math.sign(rotAxisVec.z); }
+
+                const layer = Math.round(intersectedCubie.userData.currentGrid[rotAxisName]);
+                const angle = (Math.PI / 2) * bestMatch.sign * axisSign;
+
+                enqueueMove(rotAxisName, layer, angle, true, 200);
+            }
+        }
+
+        /**
+         * Configuration de tous les événements (Souris, Tactile, Clavier, Boutons UI)
+         */
+        function setupEventListeners() {
+            const dom = renderer.domElement;
+
+            // Souris
+            dom.addEventListener('mousedown', e => onPointerDown(e.clientX, e.clientY, e.button));
+            window.addEventListener('mousemove', e => onPointerMove(e.clientX, e.clientY));
+            window.addEventListener('mouseup', onPointerUp);
+            dom.addEventListener('contextmenu', e => e.preventDefault());
+
+            // Tactile (Mobile / Tablette)
+            dom.addEventListener('touchstart', e => {
+                if (e.touches.length === 1) {
+                    onPointerDown(e.touches[0].clientX, e.touches[0].clientY, 0);
+                }
+            }, { passive: true });
+
+            window.addEventListener('touchmove', e => {
+                if (e.touches.length === 1) {
+                    onPointerMove(e.touches[0].clientX, e.touches[0].clientY);
+                }
+            }, { passive: true });
+
+            window.addEventListener('touchend', onPointerUp);
+
+            // Clavier (U, D, L, R, F, B + Flèches directionnelles pour tourner le cube)
+            window.addEventListener('keydown', e => {
+                const key = e.key.toUpperCase();
+                if (['U', 'D', 'L', 'R', 'F', 'B'].includes(key)) {
+                    triggerFaceMove(key, e.shiftKey);
+                } else if (e.key === 'ArrowLeft') {
+                    cubeGroup.rotation.y -= 0.15;
+                } else if (e.key === 'ArrowRight') {
+                    cubeGroup.rotation.y += 0.15;
+                } else if (e.key === 'ArrowUp') {
+                    cubeGroup.rotation.x -= 0.15;
+                } else if (e.key === 'ArrowDown') {
+                    cubeGroup.rotation.x += 0.15;
+                }
+            });
+
+            // Redimensionnement de la fenêtre
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                updateCameraDistance();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+
+        /**
+         * Boucle de rendu Three.js
+         */
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Interpolation douce (inertie) pour suivre le mouvement de la souris
+            hoverCurrent.x += (hoverTarget.x - hoverCurrent.x) * 0.08;
+            hoverCurrent.y += (hoverTarget.y - hoverCurrent.y) * 0.08;
+
+            // Rotation continue fluide combinée à la position en temps réel de la souris
+            if (autoRotate && !isDraggingCube && !isDraggingFace) {
+                autoSpinAngleY += 0.0055;
+            }
+
+            cubeGroup.rotation.x = autoSpinAngleX - hoverCurrent.x;
+            cubeGroup.rotation.y = autoSpinAngleY + hoverCurrent.y;
+
+            // Léger flottement réactif de la caméra selon le curseur (effet parallaxe 3D)
+            camera.position.x = hoverCurrent.y * 0.45;
+            camera.position.y = hoverCurrent.x * 0.45;
+            camera.lookAt(0, 0, 0);
+
+            renderer.render(scene, camera);
+        }
+
+        // Lancement au chargement complet de la page
+        window.onload = function () {
+            initScene();
+        };
+    </script>
+</body>
+</html>

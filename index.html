@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="fr" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function() {
+        try {
+          var originalFetch = window.fetch ? window.fetch.bind(window) : null;
+          var activeFetch = originalFetch;
+          Object.defineProperty(window, 'fetch', {
+            get: function() {
+              return activeFetch;
+            },
+            set: function(fn) {
+              activeFetch = fn;
+            },
+            configurable: true,
+            enumerable: true
+          });
+        } catch (e) {
+          try {
+            if (window.Window && window.Window.prototype) {
+              var protoFetch = window.Window.prototype.fetch;
+              Object.defineProperty(window.Window.prototype, 'fetch', {
+                get: function() { return protoFetch; },
+                set: function(fn) { protoFetch = fn; },
+                configurable: true,
+                enumerable: true
+              });
+            }
+          } catch (e2) {}
+        }
+      })();
+    </script>
+    <title>Étude de Me KOFFI Yassoua Alain | Notaire à Abidjan &amp; Portail KYANOT</title>
+    <meta name="description" content="Cabinet notarial à Abidjan (Boulevard VGE) et portail officiel KYANOT de pré-instruction 100% en ligne, sécurisation d'actes fonciers (ACD), droit des affaires et des successions." />
+    <meta property="og:title" content="Étude de Me KOFFI Yassoua Alain | Notaire à Abidjan &amp; Portail KYANOT" />
+    <meta property="og:description" content="Cabinet notarial à Abidjan (Boulevard VGE) et portail officiel KYANOT de pré-instruction 100% en ligne, sécurisation d'actes fonciers (ACD), droit des affaires et des successions." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- Google Fonts: Cinzel & Playfair Display pour la tradition, Plus Jakarta Sans pour la modernité -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-[#040914] text-[#f8fafc] font-sans antialiased selection:bg-[#C99B3B] selection:text-[#040914]">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
